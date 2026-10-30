@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ana García · Portfolio</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+body{margin:0;background:#fafafa}
+a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#fafafa;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-style:italic}
+.sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
+.wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;box-sizing:border-box}
+
+/* Desktop side navigation */
+.side{flex:0 0 208px;width:208px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24.84px 20.7px;border-left:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column}
+.side-logo{font-style:italic;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{height:auto;box-sizing:border-box;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-nav a{font-size:20px;line-height:30px}
+.side-social{height:auto;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-social a{font-size:20px;line-height:30px}
+/* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:20px;line-height:30px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email:hover{color:#706f69}
+.side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
+.side-email-fallback[hidden]{display:none}
+.side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+
+/* Mobile / tablet header */
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(250,250,250,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:italic;font-size:24px;line-height:36px}
+.mnav{display:flex;gap:13.6px}
+.mnav a{font-size:12px;line-height:18px}
+
+/* Shared text styles */
+.eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+
+/* Hero */
+.hero h1{margin:0;padding:24px 0;font-style:italic;font-size:100px;line-height:.75514em;letter-spacing:-.06458em;white-space:nowrap}
+.intro{max-width:604px;padding:20px 0}
+.intro p{margin:0;font-size:20px;line-height:23.07px}
+.intro p + p{padding-top:20px}
+.avail-wrap{padding:24px 0}
+.avail{display:inline-flex;align-items:center;gap:8.8px;padding-bottom:2.4px;border-bottom:1px solid var(--ink);font-size:16px;line-height:24.69px}
+.dot{flex:none;width:8.8px;height:8.8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3.2px rgba(32,167,90,.13)}
+.avail-arrow{font-size:16px;line-height:24px}
+
+/* Selected work */
+.work-head{display:flex;gap:6px;padding-top:32px}
+.work-head .eyebrow{line-height:18px}
+.cards{display:flex;flex-direction:column;gap:32px}
+.card{display:block;color:var(--ink)}
+.card:hover{color:var(--ink)}
+.card-head{display:flex;align-items:flex-end;padding:14px 0 28px}
+.card-title{margin:0;font-size:40px;line-height:37.26px;transition:opacity .25s ease}
+.card:hover .card-title{opacity:.6}
+.media{position:relative;overflow:hidden;aspect-ratio:812/352;background:#000}
+.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.card:hover .media img,.card:hover .media video{transform:scale(1.04)}
+.shade,.tint{display:none}
+.phone-slot{position:absolute;top:110%;left:50%;transform:translate(-50%,-51%);width:31.6%;aspect-ratio:240/523;border-radius:13% / 5.966%;overflow:hidden;background:#000;z-index:1}
+/* Crop the recording to the phone screen only: the frame is 520x1080 and the screen sits at x30 y32, 460x1002, which matches the slot's 240:523 ratio */
+.phone-slot video{position:absolute;left:-6.52%;top:-3.19%;width:113.04%;height:107.74%;max-width:none;object-fit:fill;transition:none}
+.card:hover .phone-slot video{transform:none}
+.tags{position:absolute;left:24px;right:24px;top:38px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-block;background:var(--pill);color:var(--ink);border-radius:999px;padding:4px 8px;font-size:12px;line-height:18px;letter-spacing:.84px;text-transform:uppercase;white-space:nowrap}
+.pill.dark{background:var(--pill-dark);color:var(--pill)}
+
+/* Sections */
+.sec{padding-top:128px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--ink);padding:13.6px 0;min-height:44.5px;box-sizing:border-box}
+
+/* Experience */
+.exp{display:flex;align-items:flex-start;gap:24px;padding-top:41.4px}
+.exp-quote{margin:0;flex:0 0 185px;font-style:italic;font-size:32px;line-height:35.2px}
+.exp-list{flex:1 1 auto;min-width:0}
+.exp-row{display:grid;grid-template-columns:186px 185px minmax(0,1fr);gap:24px;padding:16px 0;border-top:1px solid var(--line)}
+.exp-row:last-child{border-bottom:1px solid var(--line)}
+.exp-row p{margin:0;font-size:16px;line-height:24.14px}
+.exp-row p.date{font-size:12px;line-height:16.32px;letter-spacing:1px;text-transform:uppercase}
+
+/* Notes */
+.note{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20.8px 0;border-top:1px solid var(--line);color:var(--ink)}
+.note-title{font-size:16px;line-height:23.47px}
+.note-meta{display:flex;align-items:center;gap:24px;flex:none}
+.note-time{font-size:12px;line-height:18px;color:var(--muted)}
+.note-arrow{font-size:16px;line-height:24px}
+
+/* Footer */
+.foot{padding:144px 0 16px}
+.foot-q,.foot-copy{margin:0;padding-bottom:14px;font-size:16px;line-height:20.57px;color:var(--muted)}
+.talk-wrap{height:202.5px}
+.talk{display:inline-block;font-style:italic;font-size:80px;line-height:74.52px;letter-spacing:-.0569em;white-space:nowrap}
+/* Let's talk: a button that copies the email address and briefly confirms */
+.talk-wrap{container-type:inline-size}
+.talk-btn{appearance:none;-webkit-appearance:none;display:block;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.talk-btn:hover .talk{color:#706f69}
+.talk-done{display:flex;flex-direction:column;gap:8px}
+.talk[hidden],.talk-done[hidden],.talk-fallback[hidden]{display:none}
+.talk-done-1{font-style:italic;font-size:min(80px,12.2cqw);line-height:.9315em;letter-spacing:-.0569em;white-space:nowrap}
+.talk-done-2{font-size:28px;line-height:1.2;font-weight:600;color:var(--ink)}
+.talk-fallback{margin:0;padding-top:8px;font-size:16px;line-height:1.4;color:var(--muted)}
+.talk-fallback span{color:var(--ink);-webkit-user-select:all;user-select:all;overflow-wrap:anywhere}
+
+/* Large desktop: use more of the available width */
+@media (min-width:1600px){
+.wrap{max-width:min(92vw,1920px)}
+.main{max-width:1180px;padding-left:48px;padding-right:48px}
+.side{width:168px;flex:0 0 168px}
+/* Experience rows: share the wider list evenly across the three columns */
+.exp-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* Tablet: header nav replaces the side column */
+@media (max-width:1079px){
+.wrap{display:block}
+.side{display:none}
+.mhead{display:flex;padding:13.6px 24px}
+.main{max-width:none}
+}
+
+/* Experience stacks when the three-column table no longer fits */
+@media (max-width:899px){
+.exp{flex-direction:column;gap:24px;padding-top:41.6px}
+.exp-quote{flex:none;max-width:207px}
+.exp-row{display:flex;flex-direction:column;gap:3.2px}
+.exp-row p{line-height:21px}
+}
+
+/* Mobile: matches the 402px Figma frame */
+@media (max-width:767px){
+.mhead{padding:13.6px 20px}
+.main{padding:20px}
+.hero{padding:32px 0}
+.hero .eyebrow{white-space:normal}
+.hero h1{padding:28.8px 0;font-size:clamp(48px,20vw,80px);line-height:.75931em;letter-spacing:-.062em}
+.intro{max-width:none}
+.intro p{font-size:20px;line-height:24px}
+.avail-wrap{padding:24px 0}
+.avail{gap:9px;font-size:12px;line-height:18.48px}
+.avail-arrow{font-family:'DM Sans',system-ui,sans-serif;font-size:12px;line-height:18.48px}
+.work-head{padding-top:0}
+.work-years{display:none}
+.cards{gap:24px}
+.card-head{min-height:99px;box-sizing:border-box}
+.card-title{font-size:36px;line-height:35.28px}
+.exp{align-items:stretch}
+.exp-quote{max-width:none}
+.media{aspect-ratio:auto;height:288px}
+.media .img-film{object-fit:none;object-position:55.6% 0}
+.media .img-banking{object-position:0 50%}
+.phone-slot{width:36.8%;border-radius:16% / 7.343%;top:50% !important}
+.shade{display:block;position:absolute;inset:0;background:rgba(0,0,0,.2)}
+.tint{display:block;position:absolute;inset:0;background:linear-gradient(to top,rgba(12,53,112,.82),rgba(12,53,112,0) 65%)}
+.tags{left:16px;right:16px;top:16px;gap:12px}
+.pills{gap:5.6px}
+.pill{padding:3.2px 6.4px;font-size:8px;line-height:12px;letter-spacing:.848px}
+.sec{padding-top:96px}
+.sec-head{min-height:45.9px}
+.sec-head .eyebrow{line-height:18px}
+.note{gap:11.2px}
+.note-title{font-size:16px;line-height:24px}
+.note-time{display:none}
+.note-arrow{font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:24px}
+.foot-q,.foot-copy{padding-bottom:0;line-height:21px}
+.talk-wrap{height:128px}
+.talk{line-height:74.4px}
+}
+</style>
+</head>
+<body>
+
+<div class="site">
+  <header class="mhead">
+    <a class="mhead-logo serif" href="#top" aria-label="Ana García, home">AG</a>
+    <nav class="mnav sans" aria-label="Mobile navigation">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#notes">Notes</a>
+    </nav>
+  </header>
+
+  <div class="wrap" id="top">
+    <main class="main">
+
+      <section class="hero">
+        <p class="eyebrow">DESIGNING DIGITAL EXPERIENCES · SPAIN / UK / GLOBAL</p>
+        <h1 class="serif">Ana García</h1>
+        <div class="intro">
+          <p style="line-height: 1.45">I design digital experiences that that turn ambitious ideas into useful solutions.</p>
+          <p style="line-height: 1.5">From exploring new opportunities to improving existing products, I work with teams to turn user needs and business goals into experiences that deliver.</p>
+        </div>
+        <div class="avail-wrap">
+          <span class="avail"><span class="dot" aria-hidden="true"></span><span>Open to selected projects and collaborations</span></span>
+        </div>
+      </section>
+
+      <section id="work" aria-labelledby="work-label">
+        <div class="work-head" style="padding-bottom: 8px">
+          <p class="eyebrow" id="work-label">Selected work</p>
+          <p class="eyebrow work-years">(2022—26)</p>
+        </div>
+        <div class="cards" style="gap: 40px">
+
+          <article>
+            <a class="card" href="case-study-film-tv.html">
+              <div class="card-head"><h2 class="card-title serif">AI Matching for film &amp; TV</h2></div>
+              <div class="media">
+                <video class="img-film" src="assets/4535732eef12e130ac1feb3e35d417fa.mp4" autoplay="" muted="" loop="" playsinline="" aria-label="Film crew silhouetted behind a camera rig on a lit stage"></video>
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">Product Strategy</span><span class="pill">AI Experience Design</span><span class="pill">Design System</span></div>
+                  <span class="pill dark">Film &amp; TV</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article>
+            <a class="card" href="case-study-utopia.html">
+              <div class="card-head"><h2 class="card-title serif">Utopia Adventures · Brand &amp; Booking</h2></div>
+              <div class="media">
+                <img src="assets/bcff8757ad38916a5c79094b5ac4081d.webp" alt="Traveller stepping out of a stone house in Zanskar" style="object-position: 50% 66%">
+                <div class="shade" aria-hidden="true"></div>
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">Brand Strategy</span><span class="pill">Brand Identity</span><span class="pill">Digital Experiences</span></div>
+                  <span class="pill dark">Hospitality &amp; Travel</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article>
+            <a class="card" href="case-study-ohai.html">
+              <div class="card-head"><h2 class="card-title serif">Ohai.ai · AI family assistant</h2></div>
+              <div class="media">
+                <div class="phone-slot" style="width: 227px; height: 495px; top: 357px; left: 417px; position: absolute">
+                  <video src="assets/54e546d3fb3069652166d1ca0eb10411.mp4" autoplay="" muted="" loop="" playsinline="" aria-label="Ohai app screen, I'm O, your AI household assistant" style="border-radius: 0px"></video>
+                </div>
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">Product Transformation</span><span class="pill">AI Experience Design</span><span class="pill">Design System</span></div>
+                  <span class="pill dark">AI &amp; Enterprise Software</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article>
+            <a class="card" href="case-study-digital-banking.html">
+              <div class="card-head"><h2 class="card-title serif">Digital banking strategy</h2></div>
+              <div class="media">
+                <img class="img-banking" src="assets/b52825ad929a11c8da791966712f7fba.webp" alt="Young woman smiling in the street, titled Financial wellbeing evolution" width="2752" height="1536" style="width: 850px; height: auto; aspect-ratio: 2752 / 1536; top: -26px; left: -10px">
+                <div class="tint" aria-hidden="true"></div>
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">Digital Strategy</span><span class="pill">Prototyping</span><span class="pill">Storytelling</span></div>
+                  <span class="pill dark">Retail &amp; Business Banking</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article>
+            <a class="card" href="case-study-data-capture.html">
+              <div class="card-head"><h2 class="card-title serif">Transforming data capture across the business</h2></div>
+              <div class="media">
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">PRODUCT DESIGN</span><span class="pill">DIGITAL TRANSFORMATION</span><span class="pill">ENTERPRISE UX</span></div>
+                  <span class="pill dark">ENERGY</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article>
+            <a class="card" href="case-study-dsit.html">
+              <div class="card-head"><h2 class="card-title serif">Digital Verification Services Register · GOV.UK</h2></div>
+              <div class="media">
+                <img src="assets/38b4631074ec528218b9f19d2753288c.webp" alt="Synthesis board comparing three iterations of the register's application flow" style="top: 0px">
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">Service Design</span><span class="pill">User Research</span><span class="pill">Product Design</span></div>
+                  <span class="pill dark">Public Sector</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="sec" id="experience" aria-labelledby="exp-label">
+        <div class="sec-head">
+          <p class="eyebrow" id="exp-label">Experience</p>
+          <a class="eyebrow" href="#">Resume</a>
+        </div>
+        <div class="exp" style="padding-top: 40px; gap: 40px">
+          
+          <p class="exp-quote serif" style="line-height: 1.3">Partnering with ambitious founders and teams from first thought to final detail.</p><div class="exp-list" style="height: 335px">
+            <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px; border-width: 1px; border-style: solid; border-color: rgba(17, 17, 15, 0.22); border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px"><p>Formak Estudio</p><p>Founder</p><p class="date">Nov 2025–now</p></div>
+            <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px"><p>Cámara de Comercio de Bilbao</p><p>UX &amp; Design Strategy Mentor</p><p class="date">Apr 2026–Present</p></div><div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px"><p>AI Village Community</p><p>Director</p><p class="date">JUN 2026–PRESENT</p></div>
+            <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px"><p>Capco</p><p>Lead Product &amp; Experience Designer</p><p class="date">Feb 2023—Jun 2023</p></div>
+            <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px; border-width: 1px; border-style: solid; border-color: rgba(17, 17, 15, 0.22); border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px"><p>EY Seren</p><p>Senior Product &amp; Experience Design Consultant</p><p class="date">Jan 2022—Feb 2023</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="notes" aria-labelledby="notes-label">
+        <div class="sec-head">
+          <p class="eyebrow" id="notes-label">Notes</p>
+          <p class="eyebrow">Occasionally updated</p>
+        </div>
+        <a class="note" href="https://lnkd.in/p/e7ygg7Vt" target="_blank" rel="noopener" style="padding-top: 24px; padding-bottom: 24px; border-width: 1px; border-style: solid; border-color: rgba(17, 17, 15, 0.22); border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px"><span class="note-title">On why the future of AI needs human connection</span><span class="note-meta"><span class="note-time">1 min</span><span class="note-arrow sans" aria-hidden="true">↗</span></span></a>
+        <a class="note" href="https://lnkd.in/p/eMrqUyfA" target="_blank" rel="noopener" style="padding-top: 24px; padding-bottom: 24px"><span class="note-title">Less auditing. More accessible experiences</span><span class="note-meta"><span class="note-time">1 min</span><span class="note-arrow sans" aria-hidden="true">↗</span></span></a><a class="note" href="https://lnkd.in/p/eZNEfr36" target="_blank" rel="noopener" style="padding-top: 24px; padding-bottom: 24px"><span class="note-title">A few thoughts from B-Venture</span><span class="note-meta"><span class="note-time">2 min</span><span class="note-arrow sans" aria-hidden="true">↗</span></span></a>
+      </section>
+
+      <footer class="foot" id="contact">
+        <p class="foot-q">Have a good project in mind?</p>
+        <div class="talk-wrap">
+          <button type="button" class="talk-btn" data-copy-talk="Anagvpersonal@gmail.com" aria-describedby="talk-hint"><span class="talk serif" data-talk-label="">Let’s talk</span><span class="talk-done" hidden="" data-talk-done=""><span class="talk-done-1 serif">Email address copied!</span><span class="talk-done-2 sans">Paste it into your email to say hello.</span></span></button>
+          <span class="side-email-sr" id="talk-hint">Copies my email address to your clipboard</span>
+          <span class="side-email-sr" role="status" aria-live="polite" data-talk-status=""></span>
+          <p class="talk-fallback" hidden="" data-talk-fallback="">Couldn’t copy automatically. Select and copy: <span>Anagvpersonal@gmail.com</span></p>
+        </div>
+        <p class="foot-copy">© 2025 Ana García</p>
+      </footer>
+
+    </main>
+
+    <aside class="side sans" aria-label="Site navigation">
+      <a class="side-logo serif" href="#top" aria-label="Ana García, home">AG</a>
+      <nav class="side-nav" aria-label="Sections">
+        <a href="#work" style="font-size: 20px">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#notes">Notes</a>
+      </nav>
+      <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
+        <span class="side-email-sr" id="side-email-hint">Copies my email address to your clipboard</span>
+        <span class="side-email-sr" role="status" aria-live="polite" data-copy-email-status=""></span>
+        <p class="side-email-fallback" hidden="" data-copy-email-fallback="">Couldn’t copy automatically. Select and copy:<span class="side-email-address">Anagvpersonal@gmail.com</span></p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/dc-shim.js"></script>
+<script>
+
+class Component extends DCLogic {
+  // Let's talk: copies the address, shows the confirmation for 3s, then restores the CTA; falls back to a selectable address if copying is blocked.
+  setupTalkCopy() {
+    if (window.__agTalkCopy) return;
+    window.__agTalkCopy = true;
+    let timer = null;
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-talk]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const wrap = btn.parentNode;
+      const label = btn.querySelector('[data-talk-label]'), done = btn.querySelector('[data-talk-done]');
+      const status = wrap.querySelector('[data-talk-status]'), fallback = wrap.querySelector('[data-talk-fallback]');
+      const say = (msg) => { if (!status) return; status.textContent = ''; setTimeout(() => { status.textContent = msg; }, 60); };
+      clearTimeout(timer);
+      copy(btn.getAttribute('data-copy-talk')).then(() => {
+        if (fallback) fallback.hidden = true;
+        label.hidden = true; done.hidden = false;
+        say('Email address copied! Paste it into your email to say hello.');
+        timer = setTimeout(() => { done.hidden = true; label.hidden = false; }, 3000);
+      }, () => {
+        done.hidden = true; label.hidden = false;
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('span');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        say('Couldn’t copy automatically. The email address is shown below and selected, ready to copy.');
+      });
+    });
+  }
+  // Email me: copies the address to the clipboard, confirms for 2s, and falls back to a selectable address if copying is blocked.
+  setupEmailCopy() {
+    if (window.__agEmailCopy) return;
+    window.__agEmailCopy = true;
+    const timers = new WeakMap();
+    const setLabel = (btn, text) => { const n = btn.firstChild; if (n && n.nodeType === 3) n.nodeValue = text; else btn.textContent = text; };
+    const announce = (btn, msg) => {
+      const s = btn.parentNode.querySelector('[data-copy-email-status]');
+      if (!s) return;
+      s.textContent = '';
+      setTimeout(() => { s.textContent = msg; }, 60);
+    };
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-email]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const email = btn.getAttribute('data-copy-email');
+      const label = btn.getAttribute('data-label') || btn.textContent.trim();
+      btn.setAttribute('data-label', label);
+      const fallback = btn.parentNode.querySelector('[data-copy-email-fallback]');
+      clearTimeout(timers.get(btn));
+      copy(email).then(() => {
+        if (fallback) fallback.hidden = true;
+        setLabel(btn, 'Email copied!');
+        announce(btn, 'Email address copied to clipboard');
+        timers.set(btn, setTimeout(() => setLabel(btn, label), 2000));
+      }, () => {
+        setLabel(btn, label);
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('.side-email-address');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        announce(btn, 'Couldn’t copy automatically. The email address, ' + email + ', is shown below the button and selected, ready to copy.');
+      });
+    });
+  }
+  componentDidMount() {
+    this.setupEmailCopy();
+    this.setupTalkCopy();
+  }
+renderVals() {
+return {};
+}
+}
+
+(function(){ var c=new Component(); function go(){ c.__mount(); } if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go(); })();
+</script>
+</body>
+</html>

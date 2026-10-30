@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ohai.ai · AI family assistant · Case Study</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+body{margin:0;background:#fafafa}
+a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#fafafa;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-style:italic}
+.sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
+.eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+img{display:block;width:100%;height:auto}
+strong,b{font-weight:600}
+
+/* Same page-frame rules as the homepage and the other case studies */
+.wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;padding-bottom:96px;box-sizing:border-box}
+
+.side{flex:0 0 208px;width:208px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24.84px 20.7px;border-left:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column}
+.side-logo{font-style:italic;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{height:auto;box-sizing:border-box;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-nav a{font-size:20px;line-height:30px}
+.side-social{height:auto;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-social a{font-size:20px;line-height:30px}
+/* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:20px;line-height:30px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email:hover{color:#706f69}
+.side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
+.side-email-fallback[hidden]{display:none}
+.side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(250,250,250,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:italic;font-size:24px;line-height:36px}
+
+/* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
+.back-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:999px;background:var(--pill);color:var(--ink);font-size:12px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+.back-pill:hover{background:var(--pill-dark);color:var(--pill);transform:translateX(-3px)}
+.back-pill:active{transform:translateX(-1px) scale(.97)}
+
+/* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
+.cs-hero{display:flex;flex-direction:column;gap:56px;padding:88px 0 0}
+.cs-hero-lead{display:flex;flex-direction:column;gap:32px}
+.cs-meta{margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:24px 32px;padding-top:24px}
+.cs-meta > div{display:flex;flex-direction:column;gap:6px}
+.cs-meta dd{line-height:1.5}
+
+/* Case-study section rhythm, reusing the homepage's .sec / .sec-head components */
+.sec{padding-top:64px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--ink);padding:13.6px 0;min-height:44.5px;box-sizing:border-box}
+.cs-body{padding-top:32px;display:flex;flex-direction:column;gap:24px}
+/* Every section title, secondary heading and body block spans the full content column; no element sets its own width. */
+.cs-body > :is(h2,h3,h4,p,ul,ol),.cs-body > div > :is(h2,h3,h4,p,ul,ol){width:100%;max-width:none}
+
+/* Case-specific: hero video (native portrait 834×1682, shown at natural ratio, not upscaled), contained colour-block galleries */
+.cs-hero-media{position:relative;width:min(100%,320px);aspect-ratio:834/1682;margin:0 auto;overflow:hidden;border-radius:12px;background:#0b0d0e}
+.cs-hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.cs-hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,10,11,.05) 0%,rgba(8,10,11,.35) 100%);pointer-events:none}
+.oh-block{position:relative;overflow:hidden;border-radius:16px;padding:clamp(24px,4.5vw,64px)}
+.oh-glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+.oh-pair{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,3vw,48px);max-width:640px;margin:0 auto}
+.oh-row{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.oh-phone{aspect-ratio:9/19.5;border-radius:16px;overflow:hidden;background:#0b0d0e}
+.oh-phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+.oh-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.oh-stat{display:flex;flex-direction:column;gap:6px}
+.oh-stat-num{font-size:44px;line-height:1.05;letter-spacing:-.02em}
+.oh-stat-label{font-size:16px;line-height:1.5;color:var(--muted)}
+
+/* Large desktop: use more of the available width, exactly as the homepage does */
+@media (min-width:1600px){
+.wrap{max-width:min(92vw,1920px)}
+.main{max-width:1180px;padding-left:48px;padding-right:48px}
+.side{width:168px;flex:0 0 168px}
+}
+
+/* Large monitors (1440px and up): section dividers and media keep the full content width; titles, body text and text-led blocks keep an 812px reading measure, and the top section keeps its standard-desktop proportions. Left alignment is unchanged. */
+@media (min-width:1440px){
+.site{--cs-measure:812px}
+.cs-hero{max-width:var(--cs-measure)}
+.cs-body > :not(figure):not(:has(img,video,iframe,figure)){max-width:var(--cs-measure)}
+}
+
+/* Tablet: header nav replaces the side column */
+@media (max-width:1079px){
+.wrap{display:block}
+.side{display:none}
+.mhead{display:flex;padding:13.6px 24px}
+.main{max-width:none}
+}
+
+/* Mobile: matches the homepage's 402px Figma frame breakpoint */
+@media (max-width:767px){
+.cs-hero{padding:56px 0 0;gap:40px}
+.cs-meta{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+.mhead{padding:13.6px 20px}
+.main{padding:20px;padding-bottom:64px}
+.sec-head{min-height:45.9px}
+.cs-section{display:flex!important;flex-direction:column!important;width:100%!important}
+.cs-card-grid{display:flex!important;flex-direction:column!important;gap:24px!important}
+.oh-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.oh-pair{gap:12px!important}
+.oh-stats{grid-template-columns:minmax(0,1fr)!important;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="site">
+  <header class="mhead">
+    <a class="mhead-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+  </header>
+
+  <div class="wrap" id="top">
+    <main class="main">
+
+      <a href="index.html" class="back-pill sans">Back</a>
+
+      <header class="cs-hero">
+        <div class="cs-hero-lead">
+          <h1 class="serif" style="margin: 0; font-style: italic; font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400">Designing an AI-first experience for family&nbsp;life</h1>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <p style="margin: 0; font-size: 20px; line-height: 1.5; color: #11110f; max-width: 48ch; text-wrap: pretty;"><span style="text-wrap-mode: initial">OHAI is an AI household assistant that turns scattered household information into coordinated plans. We designed the experience to bring messages, voice notes and everyday requests together, making it easier to manage meal planning, schedules and reminders in one shared place.</span></p>
+          </div>
+        </div>
+        <dl class="cs-meta">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Client</dt>
+            <dd style="margin: 0; font-size: 16px;"><a href="https://www.ohai.ai/" target="_blank" rel="noopener" style="border-bottom: 1px solid currentColor;">Ohai.ai</a></dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Industry</dt>
+            <dd style="margin: 0; font-size: 16px;">AI &amp; Enterprise Software</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Disciplines</dt>
+            <dd style="margin: 0; font-size: 16px;">Product Transformation · AI Experience Design · Design System</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Role</dt>
+            <dd style="margin: 0; font-size: 16px;">Lead Product Designer</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Year</dt>
+            <dd style="margin: 0; font-size: 16px;">2025</dd>
+          </div>
+        </dl>
+      </header>
+
+      
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">01 — Challenge</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500">Making everyday coordination easier</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Family life involves a constant flow of messages, appointments, reminders and daily decisions, often spread across multiple tools. Keeping everything organised creates a hidden workload, leaving families to manage the coordination rather than focus on what matters.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">OHAI set out to bring household planning into one shared experience, reducing the effort required to keep everyday life running smoothly.</p>
+          <figure style="margin: 8px 0 0;">
+            <div class="oh-block" style="background: #0b0d0e;">
+              <div class="oh-glow" aria-hidden="true" style="left: -10%; top: -40%; width: 60%; aspect-ratio: 1; background: #1F6F9C; opacity: .4;"></div>
+              <div class="oh-glow" aria-hidden="true" style="right: -10%; bottom: -50%; width: 60%; aspect-ratio: 1; background: #FF6A3D; opacity: .28;"></div>
+              <div class="oh-pair">
+                <div class="oh-phone"><img src="assets/76336937e2db006fee7577ac12ff7c3c.webp" alt="Chat with O: a request for healthy restaurants nearby returns delivery options"></div>
+                <div class="oh-phone" style="margin-top: 10%;"><img src="assets/0ffae391f2644288d0f37c4362acaad0.webp" alt="Weekly meal planner with breakfast and lunch for Monday"></div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">02 — Approach</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500">Turning scattered information into actionable plans</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We designed an AI-first experience that transforms unstructured information into a coordinated household plan. Voice notes, messages and everyday requests could become tasks, calendar events, reminders and schedules, bringing information together in one shared place.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The experience was designed around how families naturally communicate and organise their lives, reducing manual input and the need to switch between tools.</p>
+          <figure style="margin: 8px 0 0;">
+            <div class="oh-block" style="background: #FFF1E4;">
+              <div class="oh-row">
+                <div class="oh-phone"><img src="assets/3cada4d63d8c6ebb600dbb37e0ea97c9.webp" alt="O preparing a weekly meal plan"></div>
+                <div class="oh-phone"><img src="assets/0ffae391f2644288d0f37c4362acaad0.webp" alt="Weekly planner view"></div>
+                <div class="oh-phone"><img src="assets/cabdfd21655c1254ee37df347a983e8d.webp" alt="Editing a day's meals with quick suggestions from O"></div>
+                <div class="oh-phone"><img src="assets/f59604ae8bb29141f00e7b72e5d674a8.webp" alt="Recipe detail with an Easy tag added"></div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">03 — Outcome</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">From everyday requests to coordinated action</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The resulting experience brought planning, scheduling, reminders and meal coordination into a single ecosystem, with an AI assistant helping users move from everyday requests to practical next steps. Meal planning extended into food delivery integrations, connecting decisions with action.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Alongside the product experience, we streamlined the design-to-development handoff, supporting a more consistent, scalable product foundation.</p>
+          <div class="oh-stats serif">
+            <div class="oh-stat"><span class="oh-stat-num">40%</span><span class="oh-stat-label sans">Less handoff time</span></div>
+            <div class="oh-stat"><span class="oh-stat-num">25%</span><span class="oh-stat-label sans">Less manual planning</span></div>
+            <div class="oh-stat"><span class="oh-stat-num">30%</span><span class="oh-stat-label sans">Lower cognitive load</span></div>
+          </div>
+          <figure style="margin: 8px 0 0;">
+            <div class="oh-block" style="background: #0b0d0e;">
+              <div class="oh-glow" aria-hidden="true" style="right: -6%; top: -35%; width: 62%; aspect-ratio: 1; background: #FF6A3D; opacity: .62;"></div>
+              <div class="oh-pair">
+                <div class="oh-phone" style="margin-top: 10%;"><img src="assets/7a7a17c33a5b90aefdf887dce2f82588.webp" alt="Grocery list with items selected to shop on Instacart"></div>
+                <div class="oh-phone"><img src="assets/cabdfd21655c1254ee37df347a983e8d.webp" alt="Daily meal plan with dine-out and Grubhub options"></div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section><figure class="cs-hero-media" style="margin: 0 0 8px;">
+        <video src="assets/30993c09d52f4f694cbf12c2e910d8e0.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" aria-hidden="true"></video>
+      </figure>
+
+    </main>
+
+    <aside class="side sans" aria-label="Site navigation">
+      <a class="side-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+      <nav class="side-nav" aria-label="Sections">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#notes">Notes</a>
+      </nav>
+      <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
+        <span class="side-email-sr" id="side-email-hint">Copies my email address to your clipboard</span>
+        <span class="side-email-sr" role="status" aria-live="polite" data-copy-email-status=""></span>
+        <p class="side-email-fallback" hidden="" data-copy-email-fallback="">Couldn’t copy automatically. Select and copy:<span class="side-email-address">Anagvpersonal@gmail.com</span></p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/dc-shim.js"></script>
+<script>
+
+class Component extends DCLogic {
+  // Email me: copies the address to the clipboard, confirms for 2s, and falls back to a selectable address if copying is blocked.
+  setupEmailCopy() {
+    if (window.__agEmailCopy) return;
+    window.__agEmailCopy = true;
+    const timers = new WeakMap();
+    const setLabel = (btn, text) => { const n = btn.firstChild; if (n && n.nodeType === 3) n.nodeValue = text; else btn.textContent = text; };
+    const announce = (btn, msg) => {
+      const s = btn.parentNode.querySelector('[data-copy-email-status]');
+      if (!s) return;
+      s.textContent = '';
+      setTimeout(() => { s.textContent = msg; }, 60);
+    };
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-email]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const email = btn.getAttribute('data-copy-email');
+      const label = btn.getAttribute('data-label') || btn.textContent.trim();
+      btn.setAttribute('data-label', label);
+      const fallback = btn.parentNode.querySelector('[data-copy-email-fallback]');
+      clearTimeout(timers.get(btn));
+      copy(email).then(() => {
+        if (fallback) fallback.hidden = true;
+        setLabel(btn, 'Email copied!');
+        announce(btn, 'Email address copied to clipboard');
+        timers.set(btn, setTimeout(() => setLabel(btn, label), 2000));
+      }, () => {
+        setLabel(btn, label);
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('.side-email-address');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        announce(btn, 'Couldn’t copy automatically. The email address, ' + email + ', is shown below the button and selected, ready to copy.');
+      });
+    });
+  }
+  componentDidMount() {
+    this.setupEmailCopy();
+    const v = document.querySelector('.cs-hero-media video');
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {});
+  }
+  renderVals() {
+    return {};
+  }
+}
+
+(function(){ var c=new Component(); function go(){ c.__mount(); } if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go(); })();
+</script>
+</body>
+</html>

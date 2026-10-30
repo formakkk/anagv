@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Verification Services Register · Case Study</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+body{margin:0;background:#fafafa}
+a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#fafafa;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;--panel:#efefec;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-style:italic}
+.sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
+.eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+img{display:block;width:100%;height:auto}
+strong,b{font-weight:600}
+
+/* Same page-frame rules as the homepage and the other case studies */
+.wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;padding-bottom:96px;box-sizing:border-box}
+
+.side{flex:0 0 208px;width:208px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24.84px 20.7px;border-left:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column}
+.side-logo{font-style:italic;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{height:auto;box-sizing:border-box;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-nav a{font-size:20px;line-height:30px}
+.side-social{height:auto;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-social a{font-size:20px;line-height:30px}
+/* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:20px;line-height:30px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email:hover{color:#706f69}
+.side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
+.side-email-fallback[hidden]{display:none}
+.side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(250,250,250,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:italic;font-size:24px;line-height:36px}
+
+/* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
+.back-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:999px;background:var(--pill);color:var(--ink);font-size:12px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+.back-pill:hover{background:var(--pill-dark);color:var(--pill);transform:translateX(-3px)}
+.back-pill:active{transform:translateX(-1px) scale(.97)}
+
+/* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
+.cs-hero{display:flex;flex-direction:column;gap:56px;padding:88px 0 0}
+.cs-hero-lead{display:flex;flex-direction:column;gap:32px}
+.cs-meta{margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:24px 32px;padding-top:24px}
+.cs-meta > div{display:flex;flex-direction:column;gap:6px}
+.cs-meta dd{line-height:1.5}
+
+/* Case-study section rhythm, reusing the homepage's .sec / .sec-head components */
+.sec{padding-top:64px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--ink);padding:13.6px 0;min-height:44.5px;box-sizing:border-box}
+.cs-body{padding-top:32px;display:flex;flex-direction:column;gap:24px}
+/* Every section title, secondary heading and body block spans the full content column; no element sets its own width. */
+.cs-body > :is(h2,h3,h4,p,ul,ol),.cs-body > div > :is(h2,h3,h4,p,ul,ol){width:100%;max-width:none}
+.cs-body > h3{margin-top:16px!important}
+
+/* Case-specific: platform cards, service blueprint, research figures, phase outputs and results */
+.ds-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.ds-phases{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.ds-card{background:#fff;padding:28px;display:flex;flex-direction:column;gap:12px}
+.ds-card h4{margin:0;font-size:20px;line-height:1.25;font-weight:400}
+.ds-card p{margin:0;font-size:16px;line-height:1.6;color:var(--muted)}
+.ds-figs{margin:8px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ds-figs.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ds-figs > div{display:flex;flex-direction:column;gap:6px}
+.ds-figs dt{font-size:32px;line-height:1.05;letter-spacing:-.02em}
+.ds-figs dd{margin:0;font-size:16px;line-height:1.5;color:var(--muted)}
+.ds-flow-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.ds-flow-wrap:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.ds-flow{display:grid;grid-template-columns:1.3fr repeat(6,.7833fr);min-width:720px;border:1px solid #c4c4c4}
+.ds-row{display:contents}
+.ds-row > div{padding:8px 12px;border-right:1px solid #c4c4c4;border-bottom:1px solid #c4c4c4;font-size:12px;line-height:1.4}
+.ds-row > div:last-child{border-right:0}
+.ds-row:last-child > div{border-bottom:0}
+.ds-h{background:#fafafa;font-weight:600}
+.ds-actor{background:#fff;display:flex;flex-direction:column;gap:2px}
+.ds-actor span{font-weight:600}
+.ds-actor small{font-size:12px;line-height:1.3;color:var(--muted)}
+.ds-c.sp{background:#fdecef;color:#8a3b4c}
+.ds-c.cab{background:#fdf6e0;color:#8a6d1f}
+.ds-c.gov{background:#e9f5ea;color:#2f6b3c}
+.ds-c.idle{background:#fafafa;color:var(--muted);font-style:italic}
+.ds-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.ds-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.ds-pair figure{margin:0;display:flex;flex-direction:column;gap:10px}
+.ds-crop{aspect-ratio:4/3;overflow:hidden}
+.ds-crop img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.ds-fig{margin:0;display:flex;flex-direction:column;gap:12px}
+.ds-fig img{width:100%;height:auto}
+.ds-cap{font-size:16px;line-height:1.5;color:var(--muted)}
+.ds-link{border-bottom:1px solid currentColor;padding-bottom:2px}
+.ds-results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.ds-result{background:#fff;padding:28px;display:flex;flex-direction:column;gap:10px}
+.ds-result-num{font-size:44px;line-height:1.05;letter-spacing:-.02em}
+.ds-result h3{margin:0;font-size:16px;line-height:1.45;font-weight:400;color:var(--muted)}
+.ds-live{background:var(--ink);color:var(--bg);padding:40px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.ds-live .eyebrow{color:#b1b4b6}
+.ds-live h3{margin:0;font-size:24px;line-height:1.25;font-weight:500}
+.ds-live a{color:var(--bg);border-bottom:1px solid currentColor;padding-bottom:2px}
+.ds-live a:hover{color:#d6d4cd}
+
+/* Mid widths: four-up grids drop to two columns */
+@media (max-width:1100px){
+.ds-results,.ds-figs.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Large desktop: use more of the available width, exactly as the homepage does */
+@media (min-width:1600px){
+.wrap{max-width:min(92vw,1920px)}
+.main{max-width:1180px;padding-left:48px;padding-right:48px}
+.side{width:168px;flex:0 0 168px}
+}
+
+/* Large monitors (1440px and up): section dividers and media keep the full content width; titles, body text and text-led blocks keep an 812px reading measure, and the top section keeps its standard-desktop proportions. Left alignment is unchanged. */
+@media (min-width:1440px){
+.site{--cs-measure:812px}
+.cs-hero{max-width:var(--cs-measure)}
+.cs-body > :not(figure):not(:has(img,video,iframe,figure)){max-width:var(--cs-measure)}
+}
+
+/* Tablet: header nav replaces the side column */
+@media (max-width:1079px){
+.wrap{display:block}
+.side{display:none}
+.mhead{display:flex;padding:13.6px 24px}
+.main{max-width:none}
+}
+
+/* Mobile: matches the homepage's 402px Figma frame breakpoint */
+@media (max-width:767px){
+.cs-hero{padding:56px 0 0;gap:40px}
+.cs-meta{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+.mhead{padding:13.6px 20px}
+.main{padding:20px;padding-bottom:64px}
+.sec-head{min-height:45.9px}
+.ds-cards,.ds-pair{grid-template-columns:minmax(0,1fr)}
+.ds-figs,.ds-figs.four{grid-template-columns:minmax(0,1fr);gap:16px}
+.ds-card,.ds-result{padding:20px}
+.ds-live{padding:28px}
+}
+</style>
+</head>
+<body>
+
+<div class="site">
+  <header class="mhead">
+    <a class="mhead-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+  </header>
+
+  <div class="wrap" id="top">
+    <main class="main">
+
+      <a href="index.html" class="back-pill sans">Back</a>
+
+      <header class="cs-hero">
+        <div class="cs-hero-lead">
+          
+          <h1 class="serif" style="margin: 0; font-style: italic; font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400">Digital Verification Services&nbsp;Register</h1>
+          <p style="margin: 0; font-size: 20px; line-height: 1.5; color: #11110f; max-width: 48ch; text-wrap: pretty;">Turning legislation into a four-platform regulatory service: independent certification, provider onboarding, back-office audit and the public register.</p>
+        </div>
+        <dl class="cs-meta">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Role</dt>
+            <dd style="margin: 0; font-size: 16px;">Service, Research &amp; Product Designer</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Client</dt>
+            <dd style="margin: 0; font-size: 16px;">Department for Science, Innovation and Technology (DSIT)</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Disciplines</dt>
+            <dd style="margin: 0; font-size: 16px;">Service design · User research · Product design · Content design</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Phases</dt>
+            <dd style="margin: 0; font-size: 16px;">Alpha, Beta, Live</dd>
+          </div>
+        </dl>
+      </header>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">01 — Context</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Strategic context and legislative challenge</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The UK Digital Identity and Attributes Trust Framework sets the rules by which private companies may be certified to provide digital identity and attribute verification services. It is dense and written for legal and policy audiences. Before, the register was a manual, document-driven process: certificates arrived by email, evidence was assessed in spreadsheets and the public record of who was registered lived outside any system.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Our mission was to make the framework operable. That meant reading the legislation as a set of decisions, obligations and evidence requirements, then designing the service that carries them out. Every screen in the service traces back to a clause someone has to comply with.</p>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">02 — Architecture</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500; font-style: normal">End-to-end service architecture</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The service is one process running across four platforms. Designing them as a single system kept status, terminology and evidence consistent from submission through to public listing.</p>
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 500; font-style: normal">The four platforms</h3>
+          <div class="ds-cards">
+            <div class="ds-card"><h4 class="sans">CAB portal</h4><p>Accredited auditors lodge certificates of conformity and trigger pre-populated application links for providers.</p></div>
+            <div class="ds-card"><h4 class="sans">Provider portal</h4><p>A task-list submission route with inline guidance, replacing the 40-page guidance document providers worked from.</p></div>
+            <div class="ds-card"><h4 class="sans">DSIT operator portal</h4><p>A high-density review tool for auditing certificates, working decision trees and recording determinations.</p></div>
+            <div class="ds-card"><h4 class="sans">Public register</h4><p>The live public directory, stating exactly what is registered and what registration does not imply.</p></div>
+          </div>
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 500;">The join between platforms</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">One status model runs end to end. What an operator records as a determination is what the provider sees in their tracker and what the public register publishes — with no manual re-entry between the four surfaces.</p>
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 500;">How the four platforms connect, step by step</h3>
+          <div class="ds-flow-wrap" role="region" aria-label="Service blueprint: how the four platforms connect, step by step" tabindex="0">
+            <div class="ds-flow" role="table" aria-label="Service blueprint">
+              <div role="row" class="ds-row">
+                <div role="columnheader" class="ds-h"><span class="ds-sr">Actor</span></div>
+                <div role="columnheader" class="ds-h">Initiate Contact</div>
+                <div role="columnheader" class="ds-h">Issue Certificate</div>
+                <div role="columnheader" class="ds-h">Upload Certificate</div>
+                <div role="columnheader" class="ds-h">Apply to Register</div>
+                <div role="columnheader" class="ds-h">Review Application</div>
+                <div role="columnheader" class="ds-h">Publish Listing</div>
+              </div>
+              <div role="row" class="ds-row">
+                <div role="rowheader" class="ds-actor"><span>Service Provider</span></div>
+                <div role="cell" class="ds-c sp">Initiates outreach to accredited CAB to begin audit</div>
+                <div role="cell" class="ds-c sp">Undergoes audit and receives official certificate</div>
+                <div role="cell" class="ds-c idle">Awaits verification</div>
+                <div role="cell" class="ds-c sp">Completes portal profile &amp; submits formal application</div>
+                <div role="cell" class="ds-c idle">Awaits government review</div>
+                <div role="cell" class="ds-c sp">Receives approval &amp; appears on live register</div>
+              </div>
+              <div role="row" class="ds-row">
+                <div role="rowheader" class="ds-actor"><span>CAB</span><small>Conformity Assessment Body</small></div>
+                <div role="cell" class="ds-c cab">Receives request and scopes assessment</div>
+                <div role="cell" class="ds-c cab">Conducts compliance evaluation &amp; issues certificate</div>
+                <div role="cell" class="ds-c cab">Logs into portal &amp; directly uploads valid certificate</div>
+                <div role="cell" class="ds-c idle">Completed</div>
+                <div role="cell" class="ds-c idle">Available for queries</div>
+                <div role="cell" class="ds-c idle">Completed</div>
+              </div>
+              <div role="row" class="ds-row">
+                <div role="rowheader" class="ds-actor"><span>DSIT</span><small>Government / Ops</small></div>
+                <div role="cell" class="ds-c idle">Inactive</div>
+                <div role="cell" class="ds-c idle">Inactive</div>
+                <div role="cell" class="ds-c gov">System receives verified audit record</div>
+                <div role="cell" class="ds-c gov">System flags complete application for queue</div>
+                <div role="cell" class="ds-c gov">Cross-references submission with CAB certificate</div>
+                <div role="cell" class="ds-c gov">Approves entry &amp; publishes provider on public register</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">03 — Research</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Research, co-design and facilitation</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Research ran continuously from Alpha into Live, with four participant groups. I led the research alongside design, which meant findings landed directly in the next iteration rather than in a report.</p>
+          <div class="ds-pair">
+            <figure>
+              <div class="ds-crop"><img src="assets/42acc26c5b2d195bd77e7a8fc91c1c4b.webp" alt="Annotated research session board showing participant comments on GOV.UK guidance content"></div>
+              <figcaption class="ds-cap">Live annotation during a usability session.</figcaption>
+            </figure>
+            <figure>
+              <div class="ds-crop"><img src="assets/9b1c6d16e7e3a0688132159510b103a6.webp" alt="Synthesis board comparing three iterations of the application flow with participant feedback clusters"></div>
+              <figcaption class="ds-cap">Mapping where participants converged or diverged between rounds.</figcaption>
+            </figure>
+          </div>
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 500;">Research outputs by phase</h3>
+          <div class="ds-phases">
+            <div class="ds-card">
+              <h4 class="sans">Discovery — understanding the manual process</h4>
+              <p>Formulated initial concepts to address pain points in the manual workflow, establishing a core framework of assumptions and hypotheses alongside a clear roadmap to test them in the next phase.</p>
+              <dl class="ds-figs">
+                <div><dt class="serif">40+</dt><dd>Research sessions using mixed methods: 1:1 interviews, focus groups and site visits observing operators day to day</dd></div>
+                <div><dt class="serif">9</dt><dd>As-is journeys mapping how providers, CABs and operators worked before the register existed</dd></div>
+                <div><dt class="serif">5</dt><dd>Synthesis sessions after each research round, translating patterns into user needs in the GDS structure</dd></div>
+              </dl>
+            </div>
+            <div class="ds-card">
+              <h4 class="sans">Alpha — defining the service and its users</h4>
+              <p>Executed rapid prototyping alongside end-to-end service workshops to develop and test core propositions. Conducted bi-weekly alignment sessions and "show and tells" to ensure policy, legal and delivery teams shared a unified understanding of the problem. Defined the implementation plan for the subsequent phase.</p>
+              <dl class="ds-figs">
+                <div><dt class="serif">14</dt><dd>GDS Service Standards evidenced as met</dd></div>
+                <div><dt class="serif">100+</dt><dd>User needs catalogued and aligned to service scope across user groups</dd></div>
+                <div><dt class="serif">12</dt><dd>Personas covering every user type interacting with the service, civil servants included</dd></div>
+              </dl>
+            </div>
+            <div class="ds-card">
+              <h4 class="sans">Beta — building and testing the platforms</h4>
+              <p>Concluded testing for each platform by generating dedicated quality assurance reports, ensuring functional and usability findings remained traceable per individual service rather than pooled across the broader ecosystem.</p>
+              <dl class="ds-figs four">
+                <div><dt class="serif">3</dt><dd>Platform services fully functional and tested</dd></div>
+                <div><dt class="serif">47</dt><dd>User flows designed across the three services</dd></div>
+                <div><dt class="serif">7</dt><dd>Personas refined against how users actually behaved in testing</dd></div>
+                <div><dt class="serif">3</dt><dd>Quality Assurance reports completed</dd></div>
+              </dl>
+            </div>
+          </div>
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 500;">What changed as a result</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Providers were not failing at form filling, they were failing to predict what government would accept. Every iteration moved effort earlier — declaring scope before uploading evidence — cutting the return-for-clarification loop that had dominated the manual process.</p>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">04 — Human factors</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Human factors, accessibility and content</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Errors in this domain carry serious compliance risks, not just user frustration. To prevent them, the service was built on the GOV.UK Design System.<br>We secured a minimum of 86% on external accessibility audits.</p>
+          <figure class="ds-fig">
+            <img src="assets/d4d231070808943e3b9befb2f1d541e4.webp" alt="GOV.UK Accessibility in government blog post: Using persona profiles to test accessibility">
+            <figcaption class="ds-cap">GDS's persona profiles, used across the register's accessibility testing.</figcaption>
+          </figure>
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.25; font-weight: 500;">Testing with GOV.UK persona profiles</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We used the access-needs persona profiles published by GDS. Each profile is a pre-configured machine account carrying one persona's real assistive technology set-up, so a designer signs in as that persona and completes the journey under their conditions. We walked the provider submission, the operator review and the public register as each profile and every issue was logged against the persona who hit it, which made the fix specific rather than generic.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6;"><a class="ds-link" href="https://accessibility.blog.gov.uk/2019/02/11/using-persona-profiles-to-test-accessibility/" target="_blank" rel="noopener">Read how GDS built the persona profiles (opens in a new tab)</a></p>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">05 — Outcomes</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Key outcomes and results</h2>
+          <div class="ds-results">
+            <div class="ds-result"><span class="ds-result-num serif">1</span><h3 class="sans">Statutory framework operationalised</h3></div>
+            <div class="ds-result"><span class="ds-result-num serif">2</span><h3 class="sans">GDS assessments passed first time</h3></div>
+            <div class="ds-result"><span class="ds-result-num serif">4</span><h3 class="sans">Interconnected platforms as one end-to-end service</h3></div>
+            <div class="ds-result"><span class="ds-result-num serif">86%+</span><h3 class="sans">Minimum score on external accessibility audits</h3></div>
+          </div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The register moved from a manual, email-and-spreadsheet process to a live digital service, passing both GDS assessments first time with the service blueprint and research trail cited as the basis of the panel's confidence. Operators were ready at launch, reducing dependence on a small number of specialists. We presented the work to the wider government design community at <a href="https://cddo.blog.gov.uk/2024/02/28/services-week-2024/" target="_blank" rel="noopener" style="border-bottom: 1px solid currentColor;">Services Week 2024</a>.</p>
+          <div class="ds-live">
+            <span class="eyebrow">Now live</span>
+            <h3 class="sans">Find registered digital identity and attribute services</h3>
+            <a href="https://www.gov.uk/guidance/find-registered-digital-identity-and-attribute-services" target="_blank" rel="noopener">View the live register (opens in a new tab)</a>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <aside class="side sans" aria-label="Site navigation">
+      <a class="side-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+      <nav class="side-nav" aria-label="Sections">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#notes">Notes</a>
+      </nav>
+      <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
+        <span class="side-email-sr" id="side-email-hint">Copies my email address to your clipboard</span>
+        <span class="side-email-sr" role="status" aria-live="polite" data-copy-email-status=""></span>
+        <p class="side-email-fallback" hidden="" data-copy-email-fallback="">Couldn’t copy automatically. Select and copy:<span class="side-email-address">Anagvpersonal@gmail.com</span></p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/dc-shim.js"></script>
+<script>
+
+class Component extends DCLogic {
+  // Email me: copies the address to the clipboard, confirms for 2s, and falls back to a selectable address if copying is blocked.
+  setupEmailCopy() {
+    if (window.__agEmailCopy) return;
+    window.__agEmailCopy = true;
+    const timers = new WeakMap();
+    const setLabel = (btn, text) => { const n = btn.firstChild; if (n && n.nodeType === 3) n.nodeValue = text; else btn.textContent = text; };
+    const announce = (btn, msg) => {
+      const s = btn.parentNode.querySelector('[data-copy-email-status]');
+      if (!s) return;
+      s.textContent = '';
+      setTimeout(() => { s.textContent = msg; }, 60);
+    };
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-email]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const email = btn.getAttribute('data-copy-email');
+      const label = btn.getAttribute('data-label') || btn.textContent.trim();
+      btn.setAttribute('data-label', label);
+      const fallback = btn.parentNode.querySelector('[data-copy-email-fallback]');
+      clearTimeout(timers.get(btn));
+      copy(email).then(() => {
+        if (fallback) fallback.hidden = true;
+        setLabel(btn, 'Email copied!');
+        announce(btn, 'Email address copied to clipboard');
+        timers.set(btn, setTimeout(() => setLabel(btn, label), 2000));
+      }, () => {
+        setLabel(btn, label);
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('.side-email-address');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        announce(btn, 'Couldn’t copy automatically. The email address, ' + email + ', is shown below the button and selected, ready to copy.');
+      });
+    });
+  }
+  componentDidMount() {
+    this.setupEmailCopy();
+  }
+  renderVals() {
+    return {};
+  }
+}
+
+(function(){ var c=new Component(); function go(){ c.__mount(); } if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go(); })();
+</script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utopia Adventures · Brand &amp; Booking · Case Study</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+body{margin:0;background:#fafafa}
+a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#fafafa;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-style:italic}
+.sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
+.eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+img{display:block;width:100%;height:auto}
+strong,b{font-weight:600}
+
+/* Same page-frame rules as the homepage and the Film & TV case study */
+.wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;padding-bottom:96px;box-sizing:border-box}
+
+.side{flex:0 0 208px;width:208px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24.84px 20.7px;border-left:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column}
+.side-logo{font-style:italic;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{height:auto;box-sizing:border-box;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-nav a{font-size:20px;line-height:30px}
+.side-social{height:auto;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
+.side-social a{font-size:20px;line-height:30px}
+/* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:20px;line-height:30px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email:hover{color:#706f69}
+.side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
+.side-email-fallback[hidden]{display:none}
+.side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(250,250,250,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:italic;font-size:24px;line-height:36px}
+
+/* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
+.back-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:999px;background:var(--pill);color:var(--ink);font-size:12px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+.back-pill:hover{background:var(--pill-dark);color:var(--pill);transform:translateX(-3px)}
+.back-pill:active{transform:translateX(-1px) scale(.97)}
+
+/* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
+.cs-hero{display:flex;flex-direction:column;gap:56px;padding:88px 0 0}
+.cs-hero-lead{display:flex;flex-direction:column;gap:32px}
+.cs-meta{margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:24px 32px;padding-top:24px}
+.cs-meta > div{display:flex;flex-direction:column;gap:6px}
+.cs-meta dd{line-height:1.5}
+
+/* Case-study section rhythm, reusing the homepage's .sec / .sec-head components */
+.sec{padding-top:64px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--ink);padding:13.6px 0;min-height:44.5px;box-sizing:border-box}
+.cs-body{padding-top:32px;display:flex;flex-direction:column;gap:24px}
+/* Every section title, secondary heading and body block spans the full content column; no element sets its own width. */
+.cs-body > :is(h2,h3,h4,p,ul,ol),.cs-body > div > :is(h2,h3,h4,p,ul,ol){width:100%;max-width:none}
+
+/* Case-specific: hero video strip, device frames, phone carousel, drift photography */
+.cs-hero-media{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:#0b0d0e}
+.cs-hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cs-hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,10,11,.05) 0%,rgba(8,10,11,.35) 100%)}
+.u-phone{position:relative;isolation:isolate;box-shadow:0 0 0 1.5px #0e0f10,0 1px 2px rgba(20,28,18,.08),0 22px 38px -22px rgba(20,32,18,.38)}
+.u-phone::before{content:"";position:absolute;inset:-3.5px;border-radius:29.5px;z-index:-1;background:linear-gradient(150deg,#eceeef 0%,#a7abae 20%,#f6f7f8 44%,#8f9397 68%,#d9dbdd 100%);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.75)}
+.u-phone::after{content:"";position:absolute;inset:0;border-radius:26px;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.04) 26%,rgba(255,255,255,0) 40%)}
+.u-phone img{border-radius:26px}
+.u-four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.2vw,32px)}
+
+/* Large desktop: use more of the available width, exactly as the homepage does */
+@media (min-width:1600px){
+.wrap{max-width:min(92vw,1920px)}
+.main{max-width:1180px;padding-left:48px;padding-right:48px}
+.side{width:168px;flex:0 0 168px}
+}
+
+/* Large monitors (1440px and up): section dividers and media keep the full content width; titles, body text and text-led blocks keep an 812px reading measure, and the top section keeps its standard-desktop proportions. Left alignment is unchanged. */
+@media (min-width:1440px){
+.site{--cs-measure:812px}
+.cs-hero{max-width:var(--cs-measure)}
+.cs-body > :not(figure):not(:has(img,video,iframe,figure)){max-width:var(--cs-measure)}
+}
+
+/* Tablet: header nav replaces the side column */
+@media (max-width:1079px){
+.wrap{display:block}
+.side{display:none}
+.mhead{display:flex;padding:13.6px 24px}
+.main{max-width:none}
+}
+
+/* Mobile: matches the homepage's 402px Figma frame breakpoint */
+@media (max-width:767px){
+.cs-hero{padding:56px 0 0;gap:40px}
+.cs-meta{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+.mhead{padding:13.6px 20px}
+.main{padding:20px;padding-bottom:64px}
+.sec-head{min-height:45.9px}
+.cs-section{display:flex!important;flex-direction:column!important;width:100%!important}
+.cs-card-grid{display:flex!important;flex-direction:column!important;gap:24px!important}
+.u-four{display:flex!important;gap:16px!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:4px 20px 12px;margin:0 -20px;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab;overscroll-behavior-x:contain}
+.u-four::-webkit-scrollbar{display:none}
+.u-four.is-dragging{cursor:grabbing;scroll-snap-type:none}
+.u-four > .u-phone{flex:0 0 76%;max-width:280px;scroll-snap-align:start}
+.u-four img{-webkit-user-drag:none;user-select:none;pointer-events:none}
+}
+</style>
+</head>
+<body>
+
+<div class="site">
+  <header class="mhead">
+    <a class="mhead-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+  </header>
+
+  <div class="wrap" id="top">
+    <main class="main">
+
+      <a href="index.html" class="back-pill sans">Back</a>
+
+      <header class="cs-hero">
+        <div class="cs-hero-lead">
+          <h1 class="serif" style="margin: 0; font-style: italic; font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400">Utopia Adventures<br>Brand &amp; Booking</h1>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <p style="margin: 0; font-size: 20px; line-height: 1.5; color: #11110f; max-width: 48ch; text-wrap: pretty;">Utopia Adventures runs motorcycle expeditions across the Himalayas, from Leh and Zanskar to Nepal and Bhutan. We developed a cohesive brand identity, website and booking platform that bring the spirit of the expeditions to life and make it easier for riders to discover destinations and book their next adventure.</p>
+          </div>
+        </div>
+        <dl class="cs-meta">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Client</dt>
+            <dd style="margin: 0; font-size: 16px;">Utopia Adventures</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Industry</dt>
+            <dd style="margin: 0; font-size: 16px;">Hospitality &amp; Travel</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Disciplines</dt>
+            <dd style="margin: 0; font-size: 16px;">Brand Strategy · Brand Identity · Digital Experiences</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Role</dt>
+            <dd style="margin: 0; font-size: 16px;">Lead Product Designer</dd>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Year</dt>
+            <dd style="margin: 0; font-size: 16px;">2026</dd>
+          </div>
+        </dl>
+      </header>
+
+      
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">01 — Challenge</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">An adventure brand ready for its next stage</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Despite a loyal community built through word of mouth, Utopia's brand and booking process had fallen behind the quality of its expeditions. The opportunity was to create a more consistent identity and a smoother path from trip discovery to booking.</p>
+          <figure style="margin: 8px 0 0; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center">
+            <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 16px">
+              <div style="position: relative; width: 90%; padding: 5px; border-radius: 10px 10px 0 0; background: #111214; box-shadow: 0 0 0 1px rgba(0,0,0,0.12);">
+                <div style="position: relative; width: 100%; aspect-ratio: 1600 / 905; overflow: hidden; border-radius: 5px; background: #000">
+                  <img src="assets/36f16e73e455a0faab03052be502e298.webp" alt="Utopia booking experience on desktop" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;">
+                </div>
+              </div>
+              <div style="position: relative; width: 100%; height: 7px; border-radius: 1px 1px 8px 8px / 1px 1px 5px 5px; background: linear-gradient(180deg, #e9eaed 0%, #c9cbd0 100%);">
+                <span style="position: absolute; left: 50%; top: 0; width: 13%; height: 3px; transform: translateX(-50%); border-radius: 0 0 4px 4px; background: #b4b7bd;"></span>
+              </div>
+              <div style="width: 92%; height: 14px; margin-top: -3px; border-radius: 50%; background: radial-gradient(ellipse at 50% 20%, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0) 70%);"></div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">02 — Approach</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">One identity, across every touchpoint</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Through user interviews, we identified three pillars at the heart of Utopia Adventures: <b>culture, community and conquest</b>. These shaped a distinctive brand identity inspired by the Himalayan landscape, balancing the atmosphere of an expedition journal with the clarity required for a functional booking experience.</p>
+          <div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+            <img src="assets/b7ab414d773f1169c912c2180e847da5.webp" alt="Culture: prayer flags over a motorcycle's handlebars" style="aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px;">
+            <img src="assets/2f26791edfcf091ea29b77cfaf4386d7.webp" alt="Community: riders gathered on monastery steps in Ladakh" style="aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px;">
+            <img src="assets/b3b79be5f92802316225ded765c0da50.webp" alt="Conquest: riders on a high-altitude road" style="aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px;">
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">03 — Brand system</span></div>
+        <div class="cs-body">
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 500;">A brand shaped by the landscape</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The palette combines pine and moss greens, warm cream and sharp lime accents drawn from the terrain. Cormorant Garamond gives headlines the character of an expedition journal, while Lato keeps essential information clear and readable.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The result balances the ruggedness of adventure with a considered, recognisable visual identity.</p>
+
+          <div class="cs-card-grid" style="display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; margin-top: 8px;">
+            <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 1fr 1fr; gap: 0; border-radius: 16px; overflow: hidden; min-height: 260px;">
+              <div style="grid-row: 1 / 3; background: rgb(32,50,28); padding: 18px; display: flex; align-items: flex-end;"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(253,255,237);">#20321C</span></div>
+              <div style="background: rgb(55,77,51); padding: 18px; display: flex; align-items: flex-end;"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(253,255,237);">#374D33</span></div>
+              <div style="background: rgb(70,110,63); padding: 18px; display: flex; align-items: flex-end;"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(253,255,237);">#466E3F</span></div>
+              <div style="background: rgb(100,115,11); padding: 18px; display: flex; align-items: flex-end;"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(253,255,237);">#64730B</span></div>
+              <div style="background: rgb(197,226,0); padding: 18px; display: flex; align-items: flex-end;"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(32,50,28);">#C5E200</span></div>
+              <div style="background: rgb(241,255,147); padding: 18px; display: flex; align-items: flex-end;"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(32,50,28);">#F1FF93</span></div>
+              <div style="background: rgb(253,255,237); padding: 18px; display: flex; align-items: flex-end"><span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(32,50,28);">#FDFFED</span></div>
+            </div>
+            <div style="border-radius: 16px; background: rgb(253,255,237); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 260px;">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(99,118,96);">Headings · Cormorant Garamond</span>
+                <span style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(32px, 3.6vw, 44px); line-height: 1; color: rgb(32,50,28);">Ride the roof of the world</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: 'DM Sans', system-ui, sans-serif; font-variation-settings: 'opsz' 14; font-size: 12px; color: rgb(99,118,96);">Body · Lato</span>
+                <span style="font-size: 16px; line-height: 1.5; color: rgb(55,77,51);">Batch 3 · 14–26 July · Leh to Zanskar · 2 riders, 1 companion</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; min-height: 260px;">
+              <img src="assets/7e1a3f07f758f7227cf387683e227e8c.svg" alt="Utopia Adventures logo" style="width: 78%; max-width: 230px; height: auto;">
+            </div>
+          </div>
+
+          <div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+            <div style="aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden;"><img src="assets/937ca8165391be630bd43ddc1f0fc56b.webp" alt="Himalayan landscape photography used across the Utopia brand" style="width: 100%; height: 100%; object-fit: cover;"></div>
+            <div style="aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden;"><img src="assets/31d0c0af3e097f5e663fdea58231ea16.webp" alt="Riders on a mountain route in Utopia's brand photography" style="width: 100%; height: 100%; object-fit: cover;"></div>
+            <div style="aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden;"><img src="assets/1dab5e350e64d44f9139cb6746cb5dba.webp" alt="Expedition landscape from Utopia's destination stories" style="width: 100%; height: 100%; object-fit: cover;"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">04 — Outcome</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">From expedition brand to connected experience</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Utopia gained a unified brand identity and digital experience designed to reflect the quality of its expeditions and support the full journey from discovery to booking.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The identity, website and booking platform work as one system, bringing the company's personality into every touchpoint while giving riders a clearer way to explore and book their next adventure.</p>
+
+          <div style="border-radius: 16px; padding: clamp(24px, 4vw, 48px); background-color: #374D33;">
+            <div class="u-four">
+              <div class="u-phone" style="aspect-ratio: 375 / 812; border-radius: 26px;"><img src="assets/fef325390691f4002378fb2dafdb70ab.webp" alt="Utopia mobile landing page" style="width: 100%; height: 100%; object-fit: cover; object-position: top;"></div>
+              <div class="u-phone" style="aspect-ratio: 375 / 812; border-radius: 26px;"><img src="assets/d4239d1fec09446a0ca9b7c4398300d4.webp" alt="Trip details page on mobile" style="width: 100%; height: 100%; object-fit: cover; object-position: top;"></div>
+              <div class="u-phone" style="aspect-ratio: 375 / 812; border-radius: 26px;"><img src="assets/287a0a2ef023c5459c73feb65b720431.webp" alt="Select batch step on mobile" style="width: 100%; height: 100%; object-fit: cover; object-position: top;"></div>
+              <div class="u-phone" style="aspect-ratio: 375 / 812; border-radius: 26px;"><img src="assets/9262a2cd37bdd54a889e50889cd12364.webp" alt="Booking confirmed screen on mobile" style="width: 100%; height: 100%; object-fit: cover; object-position: top;"></div>
+            </div>
+          </div>
+
+          <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+            <div style="position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 16px; background: #1c1f1b; box-shadow: 0 0 0 1px rgba(0,0,0,0.06);">
+              <div data-zscroll="1" style="position: absolute; inset: 0; overflow: hidden;"><img src="assets/66c21229a194f25383a0ea60a2b0b7d9.webp" alt="Scrolling through the Zanskar destination page on the Utopia Adventures website" style="position: absolute; left: 0; top: 0; width: 100%; height: auto; display: block; will-change: transform; transition: opacity 500ms ease;"></div>
+            </div>
+            <figcaption style="font-size: 16px; color: #706f69;">Zanskar destination page — scroll walkthrough.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec">
+        <div class="sec-head"><span class="cs-label eyebrow">05 — Deliverables</span></div>
+        <div class="cs-body">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 500;">A connected brand system</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f;">Brand guidelines, social media templates, brochures and visiting cards.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 500;">A responsive digital experience</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f;">Website and booking platform designed for desktop and mobile.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 500;">An end-to-end booking flow</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f;">From choosing a destination and departure batch to adding companions and paying.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="side sans" aria-label="Site navigation">
+      <a class="side-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+      <nav class="side-nav" aria-label="Sections">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#notes">Notes</a>
+      </nav>
+      <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
+        <span class="side-email-sr" id="side-email-hint">Copies my email address to your clipboard</span>
+        <span class="side-email-sr" role="status" aria-live="polite" data-copy-email-status=""></span>
+        <p class="side-email-fallback" hidden="" data-copy-email-fallback="">Couldn’t copy automatically. Select and copy:<span class="side-email-address">Anagvpersonal@gmail.com</span></p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/dc-shim.js"></script>
+<script>
+
+class Component extends DCLogic {
+  // Email me: copies the address to the clipboard, confirms for 2s, and falls back to a selectable address if copying is blocked.
+  setupEmailCopy() {
+    if (window.__agEmailCopy) return;
+    window.__agEmailCopy = true;
+    const timers = new WeakMap();
+    const setLabel = (btn, text) => { const n = btn.firstChild; if (n && n.nodeType === 3) n.nodeValue = text; else btn.textContent = text; };
+    const announce = (btn, msg) => {
+      const s = btn.parentNode.querySelector('[data-copy-email-status]');
+      if (!s) return;
+      s.textContent = '';
+      setTimeout(() => { s.textContent = msg; }, 60);
+    };
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-email]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const email = btn.getAttribute('data-copy-email');
+      const label = btn.getAttribute('data-label') || btn.textContent.trim();
+      btn.setAttribute('data-label', label);
+      const fallback = btn.parentNode.querySelector('[data-copy-email-fallback]');
+      clearTimeout(timers.get(btn));
+      copy(email).then(() => {
+        if (fallback) fallback.hidden = true;
+        setLabel(btn, 'Email copied!');
+        announce(btn, 'Email address copied to clipboard');
+        timers.set(btn, setTimeout(() => setLabel(btn, label), 2000));
+      }, () => {
+        setLabel(btn, label);
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('.side-email-address');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        announce(btn, 'Couldn’t copy automatically. The email address, ' + email + ', is shown below the button and selected, ready to copy.');
+      });
+    });
+  }
+  heroVideo = React.createRef();
+  componentWillUnmount() { this.offDrag && this.offDrag(); this.stopPingPong && this.stopPingPong(); this.zRaf && cancelAnimationFrame(this.zRaf); this.offZ && this.offZ(); }
+  bindZanskar() {
+    const vp = document.querySelector('[data-zscroll]'), img = vp && vp.querySelector('img');
+    if (!img) return;
+    const stops = [0, 0.648, 1.297, 1.945, 2.594, 99], PAUSE = 1700, MOVE = 2600, END = 1600;
+    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    let plan = [], start = null;
+    const build = () => {
+      const w = img.clientWidth, max = Math.max(0, img.clientHeight - vp.clientHeight);
+      let ys = stops.map(s => Math.min(max, s * w));
+      ys = ys.filter((y, i) => i === 0 || y > ys[i - 1] + 4);
+      plan = []; let t = 0;
+      ys.forEach((y, i) => {
+        const last = i === ys.length - 1, d = last ? END : PAUSE;
+        plan.push({ a: t, b: t + d, from: y, to: y }); t += d;
+        if (!last) { plan.push({ a: t, b: t + MOVE, from: y, to: ys[i + 1] }); t += MOVE; }
+      });
+      plan.total = t;
+    };
+    const frame = now => {
+      if (!plan.total) build();
+      if (start === null) start = now;
+      const t = (now - start) % plan.total; let y = 0;
+      for (const p of plan) { if (t >= p.a && t < p.b) { y = p.from + (p.to - p.from) * ease((t - p.a) / (p.b - p.a)); break; } }
+      img.style.opacity = (plan.total - t < 450 || t < 250) ? 0.0001 + (t < 250 ? t / 250 : (plan.total - t) / 450) : 1;
+      img.style.transform = 'translate3d(0,' + (-y).toFixed(2) + 'px,0)';
+      this.zRaf = requestAnimationFrame(frame);
+    };
+    const go = () => { build(); this.zRaf = requestAnimationFrame(frame); };
+    if (img.complete && img.naturalWidth) go(); else img.addEventListener('load', go, { once: true });
+    window.addEventListener('resize', build);
+    this.offZ = () => window.removeEventListener('resize', build);
+  }
+  bindCarousel() {
+    const el = document.querySelector(".u-four");
+    if (!el || el.dataset.drag) return;
+    el.dataset.drag = "1";
+    let down = false, sx = 0, sl = 0, moved = false;
+    const start = (e) => {
+      if (e.pointerType === "touch" || el.scrollWidth <= el.clientWidth + 2) return;
+      down = true; moved = false; sx = e.clientX; sl = el.scrollLeft;
+      el.classList.add("is-dragging");
+    };
+    const move = (e) => {
+      if (!down) return;
+      const dx = e.clientX - sx;
+      if (Math.abs(dx) > 3) moved = true;
+      el.scrollLeft = sl - dx;
+    };
+    const end = () => {
+      if (!down) return;
+      down = false;
+      el.classList.remove("is-dragging");
+      const w = el.firstElementChild ? el.firstElementChild.getBoundingClientRect().width + 16 : el.clientWidth;
+      el.scrollTo({ left: Math.round(el.scrollLeft / w) * w, behavior: "smooth" });
+    };
+    el.addEventListener("pointerdown", start);
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", end);
+    this.offDrag = () => {
+      el.removeEventListener("pointerdown", start);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", end);
+    };
+  }
+  componentDidMount() {
+    this.setupEmailCopy();
+    this.bindCarousel();
+    this.bindZanskar();
+    const v = this.heroVideo.current;
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    v.loop = false;
+    v.removeAttribute("loop");
+    v.playsInline = true;
+    let raf = 0, last = 0, seeking = false;
+    const back = (ts) => {
+      if (!last) last = ts;
+      if (!seeking) {
+        last = ts;
+        const dt = Math.min((ts - last) / 1000, 0.1);
+        const t = v.currentTime - dt;
+        if (t <= 0.05) {
+          cancelAnimationFrame(raf); raf = 0; last = 0;
+          v.currentTime = 0;
+          v.play().catch(() => {});
+          return;
+        }
+        seeking = true;
+        v.currentTime = t;
+      }
+      raf = requestAnimationFrame(back);
+    };
+    v.addEventListener("seeked", () => { seeking = false; });
+    v.addEventListener("ended", () => {
+      v.pause();
+      last = 0; seeking = false;
+      raf = requestAnimationFrame(back);
+    });
+    this.stopPingPong = () => raf && cancelAnimationFrame(raf);
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {});
+  }
+  renderVals() {
+    return { heroVideo: this.heroVideo };
+  }
+}
+
+(function(){ var c=new Component(); function go(){ c.__mount(); } if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go(); })();
+</script>
+</body>
+</html>
