@@ -39,8 +39,9 @@ strong{font-weight:600}
 .mhead-logo{font-style:italic;font-size:24px;line-height:36px}
 
 /* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
-.back-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:999px;background:var(--pill);color:var(--ink);font-size:12px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
-.back-pill:hover{background:var(--pill-dark);color:var(--pill);transform:translateX(-3px)}
+.back-pill{display:inline-flex;align-items:center;padding:16px 36px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font-size:16px;line-height:24px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1)}
+.back-pill:hover,.back-pill:focus-visible{background:var(--ink);color:var(--bg);transform:translateX(-3px)}
+.back-pill:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .back-pill:active{transform:translateX(-1px) scale(.97)}
 
 /* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
@@ -91,6 +92,29 @@ strong{font-weight:600}
 .cs-section{display:flex!important;flex-direction:column!important;width:100%!important}
 .cs-card-grid{display:flex!important;flex-direction:column!important;gap:24px!important}
 }
+
+/* More case studies */
+.cs-next{padding-bottom:40px}
+.cs-next-list{list-style:none;margin:0;padding:24px 0 0}
+.cs-next-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:24px;padding:28px 0;border-top:1px solid var(--line);color:var(--ink);transition:opacity .35s ease}
+.cs-next-list li:last-child .cs-next-item{border-bottom:1px solid var(--line)}
+.cs-next-item:hover,.cs-next-item:focus-visible{color:var(--ink)}
+.cs-next-title{display:inline;justify-self:start;font-size:40px;line-height:1.1;padding-bottom:2px;background:linear-gradient(currentColor,currentColor) no-repeat 0 100% / 0 1px;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-size .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-meta{display:flex;align-items:baseline;gap:24px}
+.cs-next-meta .eyebrow{white-space:nowrap}
+.cs-next-arrow{display:inline-block;font-family:'DM Sans',system-ui,sans-serif;font-size:24px;line-height:24px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-list:hover .cs-next-item:not(:hover),.cs-next-list:focus-within .cs-next-item:not(:focus-visible):not(:hover){opacity:.35}
+.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title{transform:translateX(14px);background-size:100% 1px}
+.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:translate(4px,-4px)}
+.cs-next-item:focus-visible,.cs-next .sec-head a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media (max-width:767px){
+.cs-next-item{grid-template-columns:minmax(0,1fr) 24px;column-gap:12px;row-gap:8px;padding:22px 0;align-items:start}
+.cs-next-title{font-size:28px;grid-column:1}
+.cs-next-meta{display:contents}
+.cs-next-meta .eyebrow{grid-column:1;grid-row:2;white-space:normal}
+.cs-next-arrow{grid-column:2;grid-row:1;justify-self:end}
+}
+@media (prefers-reduced-motion:reduce){.cs-next-title,.cs-next-arrow{transition:none}.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title,.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:none}}
 </style>
 </head>
 <body>
@@ -113,18 +137,21 @@ strong{font-weight:600}
       </div>
       <dl class="cs-meta" style="border-style: none">
         <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Client</dt>
+            <dd style="margin: 0; font-size: 16px;">Confidential</dd>
+          </div><div style="display: flex; flex-direction: column; gap: 6px;">
+          <dt class="eyebrow" style="margin:0">Industry</dt>
+          <dd style="margin: 0; font-size: 16px;">Film<br></dd>
+        </div><div style="display: flex; flex-direction: column; gap: 6px;">
           <dt class="eyebrow" style="margin:0">Role</dt>
           <dd style="margin: 0; font-size: 16px;">Lead Product Designer<br></dd>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 6px;">
-          <dt class="eyebrow" style="margin:0">Industry</dt>
-          <dd style="margin: 0; font-size: 16px;">Film<br></dd>
-        </div>
+        
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <dt class="eyebrow" style="margin:0">Disciplines</dt>
           <dd style="margin: 0; font-size: 16px;">Product Strategy · AI Experience Design · Design System</dd>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 6px;">
+        <div style="display: none; flex-direction: column; gap: 6px">
           <dt class="eyebrow" style="margin:0">Year</dt>
           <dd style="margin: 0; font-size: 16px;">2026</dd>
         </div>
@@ -135,11 +162,11 @@ strong{font-weight:600}
       <div class="sec-head"><span class="cs-label eyebrow">01 — Challenge</span></div>
       <div class="cs-body">
         <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">The gap between the technology and the product</h2>
-        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The client approached us at seed stage with an initial MVP and the ambition to prove product-market fit. The product connected two sides of the film and TV industry: Creators, who submit projects, and Buyers, who represent networks looking for specific types of content.</p>
-        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;"><span style="text-wrap-mode: initial;">Our assessment showed that the challenge went well beyond a visual redesign. The MVP had gaps across both sides of the experience, from how creators submitted and protected their work to how buyers reviewed and matched projects. There were also operational and business risks behind the interface: manual processes, noisy matches, unclear project statuses, limited IP protection and transactions happening outside the platform.</span></p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The client approached me at seed stage with an initial MVP and the ambition to prove product-market fit. The product connected two sides of the film and TV industry: Creators, who submit projects, and Buyers, who represent networks looking for specific types of content.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;"><span style="text-wrap-mode: initial;">My assessment showed that the challenge went well beyond a visual redesign. The MVP had gaps across both sides of the experience, from how creators submitted and protected their work to how buyers reviewed and matched projects. There were also operational and business risks behind the interface: manual processes, noisy matches, unclear project statuses, limited IP protection and transactions happening outside the platform.</span></p>
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.3; font-weight: 500;">Reframing the problem</h3>
-          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We reframed the work around making the product viable as a two-sided platform: improving the experience for both users, reducing operational friction and creating a stronger foundation for proving the business model.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I reframed the work around making the product viable as a two-sided platform: improving the experience for both users, reducing operational friction and creating a stronger foundation for proving the business model.</p>
         </div>
       </div>
     </section>
@@ -148,7 +175,7 @@ strong{font-weight:600}
       <div class="sec-head"><span class="cs-label eyebrow">02 — Analysis</span></div>
       <div class="cs-body">
         <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Auditing the MVP</h2>
-        <div style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We audited the browser-based MVP in parallel: manually reviewing the product and using an AI agent to navigate and stress-test the same flows.<br></div><strong style="font-size: 16px; line-height: 1.6; color: #11110f;">MANUAL AUDIT —Product &amp; UX review</strong><div style="display: flex; flex-direction: column; gap: 8px;"><div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;"><div style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We walked through the Creator and Buyer journeys, annotating the live product and documenting issues across UX, operations and the business model.</div><div style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f; display: flex; flex-direction: column;"><span style="font-weight: 600; color: #11110f;">Output</span><ul style="margin: 0; padding: 0 0 0 20px;"><li>Prioritised pain points and risks</li><li>Unhappy paths and edge cases</li><li>Product risks &amp; opportunities</li></ul></div></div></div>
+        <div style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I audited the browser-based MVP in parallel, manually reviewing the product and using an AI agent to navigate and stress-test the same flows.<br></div><strong style="font-size: 16px; line-height: 1.6; color: #11110f;">MANUAL AUDIT —Product &amp; UX review</strong><div style="display: flex; flex-direction: column; gap: 8px;"><div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;"><div style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I walked through the Creator and Buyer journeys, annotating the live product and documenting issues across UX, operations and the business model.</div><div style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f; display: flex; flex-direction: column;"><span style="font-weight: 600; color: #11110f;">Output</span><ul style="margin: 0; padding: 0 0 0 20px;"><li>Prioritised pain points and risks</li><li>Unhappy paths and edge cases</li><li>Product risks &amp; opportunities</li></ul></div></div></div>
         
         <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
           <div data-ref="auditRef" style="" data-tpl='{"style": "position: relative; width: 100%; height: {{ auditHeight }}; overflow: hidden; background: var(--pill);"}'>
@@ -159,7 +186,7 @@ strong{font-weight:600}
           <figcaption style="font-size: 16px; color: #706f69;">Manual audit: unhappy paths, pain points, risks and usability issues</figcaption>
         </figure>
         <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
-          <strong style="font-size: 16px; line-height: 1.6; color: #11110f;">AI AGENT — Automated product audit</strong><div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;"><p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We gave the agent defined tasks and asked it to navigate the product independently, flagging friction, unclear states, dead ends and unexpected behaviour.</p><div style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f; display: flex; flex-direction: column;"><span style="font-weight: 600; color: #11110f;">Output</span><ul style="margin: 0; padding: 0 0 0 20px;"><li>Task-level usability findings</li><li>Friction points and broken flows</li><li>Patterns to investigate further</li></ul></div></div><div data-om-raster="1" style="background: #ffffff; border: 1px solid #e2dfd9;">
+          <strong style="font-size: 16px; line-height: 1.6; color: #11110f;">AI AGENT — Automated product audit</strong><div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;"><p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I gave the agent defined tasks and asked it to navigate the product independently, flagging friction, unclear states, dead ends and unexpected behaviour.</p><div style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f; display: flex; flex-direction: column;"><span style="font-weight: 600; color: #11110f;">Output</span><ul style="margin: 0; padding: 0 0 0 20px;"><li>Task-level usability findings</li><li>Friction points and broken flows</li><li>Patterns to investigate further</li></ul></div></div><div data-om-raster="1" style="background: #ffffff; border: 1px solid #e2dfd9;">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 28px; background: #fafbfa;">
               <span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(107, 103, 100);">AGENT REPORT</span>
               <span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-size: 12px; color: rgb(107, 103, 100);">Buyer journey</span>
@@ -173,7 +200,7 @@ strong{font-weight:600}
               <div style="display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 16px; font-weight: 600; color: #11110f;"><span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-weight: 400; color: #706f69;">03 — </span>Match evaluation</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>A 72% match suggests relevance, but does not explain what drove the score</span></li><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>No clear indication of missing or conflicting criteria</span></li></ul></div>
             </div>
           </div>
-          <figcaption style="font-size: 16px; color: #706f69;">Excerpt from the agent’s report, tracking completion and friction step by step.</figcaption><p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">AI helped us cover the surface quickly while focalized manual research helped us understand what was underneath it. The analysis revealed gaps across the product: fragmented journeys, unclear matching, inconsistent design and communication risks.</p>
+          <figcaption style="font-size: 16px; color: #706f69;">Excerpt from the agent’s report, tracking completion and friction step by step.</figcaption><p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">AI helped me cover the surface quickly, while focused manual research helped me understand what was underneath it. The analysis revealed gaps across the product: fragmented journeys, unclear matching, inconsistent design and communication risks.</p>
         </figure>
       </div>
     </section>
@@ -182,7 +209,7 @@ strong{font-weight:600}
       <div class="sec-head"><span class="cs-label eyebrow">03 — Approach</span></div>
       <div class="cs-body">
         <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Fixing the foundations</h2>
-        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We prioritised broken flows and missing feedback first, then addressed trust in the matching and visual consistency. We restructured the experience around Creator and Buyer journeys, replaced fragmented AI-generated screens with a unified design system, and redesigned matching around three principles:</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I prioritised broken flows and missing feedback first, then addressed trust in the matching and visual consistency. I restructured the experience around Creator and Buyer journeys, replaced fragmented AI-generated screens with a unified design system, and redesigned matching around three principles:</p>
         <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;"><strong>1. Show why.</strong> Every match connects mandate criteria to supporting evidence, so users can understand and verify the result.<br></p>
         
         <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -195,7 +222,7 @@ strong{font-weight:600}
         </div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
           
-          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We reviewed each step with the client team, keeping product, brand and investor materials aligned throughout.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I reviewed each step with the client team, keeping product, brand and investor materials aligned throughout.</p>
         </div>
       </div>
     </section>
@@ -205,19 +232,18 @@ strong{font-weight:600}
       <div class="cs-body">
         <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">From fragmented MVP to a credible product</h2>
         
-        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;"><span style="text-wrap-mode: initial;">Much of the MVP had been generated by AI tools, and it showed. Screens were inconsistent, states contradicted each other, and nothing looked like a product a network executive would trust with a slate decision. For an industry that runs on taste and relationships, that was a real problem.</span><span style="text-wrap-mode: initial; display: block; margin-top: 16px;">We cut the journeys back to what Creators and Buyers actually needed to do, made every match explain itself and gave the platform one coherent visual language.</span></p><figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
-          <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: var(--pill); display: flex; align-items: center; justify-content: center; border: 1px dashed var(--line);">
-            <span class="eyebrow" style="text-align:center">Interactive demo reserved — redesigned platform screens<br>(to be added when connecting the case studies)</span>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;"><span style="text-wrap-mode: initial;">Much of the MVP had been generated by AI tools, and it showed. Screens were inconsistent, states contradicted each other, and nothing looked like a product a network executive would trust with a slate decision. For an industry that runs on taste and relationships, that was a real problem.</span><span style="text-wrap-mode: initial; display: block; margin-top: 16px;">I cut the journeys back to what Creators and Buyers actually needed to do, made every match explain itself and gave the platform one coherent visual language.</span></p><figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
+          <div style="position: relative; width: 100%; aspect-ratio: 4785 / 3014; overflow: hidden; border-radius: 12px; background: var(--pill); display: flex; align-items: center; justify-content: center; border: 1px dashed var(--line);"><img src="assets/f24b8cf69bcb7044943afdff6f48e903.webp" alt="Redesigned platform screens: onboarding, project dashboards, AI-generated project details, buyer matching and verification flows" width="4785" height="3014" style="max-width: 100%; height: auto; display: block; object-fit: cover; width: 4785px; aspect-ratio: 4785 / 3014">
           </div>
           <figcaption style="font-size: 16px; color: #706f69;">Redesigned platform screens — walkthrough to be embedded here.</figcaption>
         </figure>
         <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
           <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.3; font-weight: 500;">Building a credible brand</h3>
-          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The redesign went beyond the interface. Through interviews and brand strategy workshops, we defined the brand’s positioning, personality and visual direction. We translated this into a bespoke identity, including the logo, typography, colour palette and brand guidelines, bringing a more distinctive and human feel to the platform and its communications.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The redesign went beyond the interface. Through interviews and brand strategy workshops with the client, I helped define the brand’s positioning, personality and visual direction. I translated this into a bespoke identity, including the logo, typography, colour palette and brand guidelines, bringing a more distinctive and human feel to the platform and its communications.</p>
         </div>
         <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
           <div style="position: relative; width: 100%; aspect-ratio: 1680 / 952; overflow: hidden; border-radius: 16px; background: #15100A;">
-            <video class="lp-walk" autoplay muted loop playsinline preload="auto" poster="assets/8fa3bb84a004335ee8a331b12a7e35eb.webp" aria-label="Landing page scroll walkthrough" style="position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; display: block;"><source src="assets/fc9c29dc95fb6889d4edababa2350018.webm" type="video/webm"><source src="assets/832febb8e50cb1bc73646cd1573945cf.mp4" type="video/mp4"></video>
+            <video class="lp-walk" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/8fa3bb84a004335ee8a331b12a7e35eb.webp" aria-label="Landing page scroll walkthrough" style="position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; display: block;"><source src="assets/fc9c29dc95fb6889d4edababa2350018.webm" type="video/webm"><source src="assets/832febb8e50cb1bc73646cd1573945cf.mp4" type="video/mp4"></video>
           </div>
           <figcaption style="font-size: 16px; color: #706f69;">Landing page: the new visual language in motion.</figcaption>
         </figure>
@@ -243,6 +269,17 @@ strong{font-weight:600}
         <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The work gave the company a stronger foundation for conversations with enterprise stakeholders and investors, bringing the product closer to the level of polish and consistency expected of an enterprise-ready platform.</p>
       </div>
     </section>
+      <section class="cs-section sec cs-next" aria-labelledby="cs-next-label">
+        <div class="sec-head"><span class="cs-label eyebrow" id="cs-next-label">More case studies</span><a class="eyebrow" href="index.html#work">All work</a></div>
+        <nav aria-label="More case studies"><ul class="cs-next-list">
+          <li><a class="cs-next-item" href="case-study-digital-banking.html"><span class="cs-next-title serif">Digital banking strategy</span><span class="cs-next-meta"><span class="eyebrow">Retail &amp; Business Banking</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-data-capture.html"><span class="cs-next-title serif">Transforming data capture across the business</span><span class="cs-next-meta"><span class="eyebrow">Energy</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-ohai.html"><span class="cs-next-title serif">Ohai.ai · AI family assistant</span><span class="cs-next-meta"><span class="eyebrow">AI &amp; Enterprise Software</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-dsit.html"><span class="cs-next-title serif">Digital Verification Services Register · GOV.UK</span><span class="cs-next-meta"><span class="eyebrow">Public Sector</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-utopia.html"><span class="cs-next-title serif">Utopia Adventures · Brand &amp; Booking</span><span class="cs-next-meta"><span class="eyebrow">Hospitality &amp; Travel</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+        </ul></nav>
+      </section>
+
     </main>
 
     <aside class="side sans" aria-label="Site navigation">

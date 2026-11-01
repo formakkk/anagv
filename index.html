@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
 body{margin:0;background:#fafafa}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#fafafa;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
 .serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-style:italic}
@@ -65,6 +67,11 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 /* Crop the recording to the phone screen only: the frame is 520x1080 and the screen sits at x30 y32, 460x1002, which matches the slot's 240:523 ratio */
 .phone-slot video{position:absolute;left:-6.52%;top:-3.19%;width:113.04%;height:107.74%;max-width:none;object-fit:fill;transition:none}
 .card:hover .phone-slot video{transform:none}
+/* Large monitors: the phone sits centred and fully visible inside the card */
+@media (min-width:1600px){.phone-slot{top:50%;transform:translate(-50%,-50%);width:auto;height:88%}
+.phone-slot ~ .tags{right:calc(50% + 111px)}}
+/* Banking thumbnail: crop is expressed in percentages of the card so it scales with it, never stretched */
+.media .img-banking{inset:auto;left:-1.23%;top:-7.39%;width:135.7%;height:143.8%;max-width:none;object-fit:cover}
 .tags{position:absolute;left:24px;right:24px;top:38px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{display:inline-block;background:var(--pill);color:var(--ink);border-radius:999px;padding:4px 8px;font-size:12px;line-height:18px;letter-spacing:.84px;text-transform:uppercase;white-space:nowrap}
@@ -101,8 +108,8 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .talk-btn:hover .talk{color:#706f69}
 .talk-done{display:flex;flex-direction:column;gap:8px}
 .talk[hidden],.talk-done[hidden],.talk-fallback[hidden]{display:none}
-.talk-done-1{font-style:italic;font-size:min(80px,12.2cqw);line-height:.9315em;letter-spacing:-.0569em;white-space:nowrap}
-.talk-done-2{font-size:28px;line-height:1.2;font-weight:600;color:var(--ink)}
+.talk-done-1{font-style:italic;font-size:min(32px,12.2cqw);line-height:.9315em;letter-spacing:-.0569em;white-space:nowrap}
+.talk-done-2{font-size:20px;line-height:1.2;font-weight:600;color:var(--ink)}
 .talk-fallback{margin:0;padding-top:8px;font-size:16px;line-height:1.4;color:var(--muted)}
 .talk-fallback span{color:var(--ink);-webkit-user-select:all;user-select:all;overflow-wrap:anywhere}
 
@@ -151,11 +158,10 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .exp{align-items:stretch}
 .exp-quote{max-width:none}
 .media{aspect-ratio:auto;height:288px}
-.media .img-film{object-fit:none;object-position:55.6% 0}
-.media .img-banking{object-position:0 50%}
-.phone-slot{width:36.8%;border-radius:16% / 7.343%;top:50% !important}
+.media .img-film{object-fit:cover;object-position:55.6% 50%}
+.media .img-banking{inset:0;left:0;top:0;width:100%;height:100%;object-position:0 50%}
+.phone-slot{width:auto;height:130%;border-radius:16% / 7.343%;top:33.333% !important;transform:translateX(-50%)}
 .shade{display:block;position:absolute;inset:0;background:rgba(0,0,0,.2)}
-.tint{display:block;position:absolute;inset:0;background:linear-gradient(to top,rgba(12,53,112,.82),rgba(12,53,112,0) 65%)}
 .tags{left:16px;right:16px;top:16px;gap:12px}
 .pills{gap:5.6px}
 .pill{padding:3.2px 6.4px;font-size:8px;line-height:12px;letter-spacing:.848px}
@@ -219,25 +225,36 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
             </a>
           </article>
 
+          
+
+          
+
           <article>
-            <a class="card" href="case-study-utopia.html">
-              <div class="card-head"><h2 class="card-title serif">Utopia Adventures · Brand &amp; Booking</h2></div>
+            <a class="card" href="case-study-digital-banking.html">
+              <div class="card-head"><h2 class="card-title serif">Digital banking strategy</h2></div>
               <div class="media">
-                <img src="assets/bcff8757ad38916a5c79094b5ac4081d.webp" alt="Traveller stepping out of a stone house in Zanskar" style="object-position: 50% 66%">
-                <div class="shade" aria-hidden="true"></div>
+                <img class="img-banking" src="assets/b52825ad929a11c8da791966712f7fba.webp" alt="Young woman smiling in the street, titled Financial wellbeing evolution" width="2752" height="1536">
                 <div class="tags sans">
-                  <div class="pills"><span class="pill">Brand Strategy</span><span class="pill">Brand Identity</span><span class="pill">Digital Experiences</span></div>
-                  <span class="pill dark">Hospitality &amp; Travel</span>
+                  <div class="pills"><span class="pill">Digital Strategy</span><span class="pill">Prototyping</span><span class="pill">Storytelling</span></div>
+                  <span class="pill dark">Retail &amp; Business Banking</span>
                 </div>
               </div>
             </a>
-          </article>
-
-          <article>
+          </article><article>
+            <a class="card" href="case-study-data-capture.html">
+              <div class="card-head"><h2 class="card-title serif">Transforming data capture across the business</h2></div>
+              <div class="media">
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">PRODUCT DESIGN</span><span class="pill">DIGITAL TRANSFORMATION</span><span class="pill">ENTERPRISE UX</span></div>
+                  <span class="pill dark">ENERGY</span>
+                </div>
+              <img src="assets/f85c31d6ba951de9bea105c1ee1f4272.jpg" alt="Two engineers reviewing a data dashboard on a monitor in an industrial plant" width="1536" height="1024" style="object-position: 50% 35%"></div>
+            </a>
+          </article><article>
             <a class="card" href="case-study-ohai.html">
               <div class="card-head"><h2 class="card-title serif">Ohai.ai · AI family assistant</h2></div>
               <div class="media">
-                <div class="phone-slot" style="width: 227px; height: 495px; top: 357px; left: 417px; position: absolute">
+                <div class="phone-slot">
                   <video src="assets/54e546d3fb3069652166d1ca0eb10411.mp4" autoplay="" muted="" loop="" playsinline="" aria-label="Ohai app screen, I'm O, your AI household assistant" style="border-radius: 0px"></video>
                 </div>
                 <div class="tags sans">
@@ -248,31 +265,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
             </a>
           </article>
 
-          <article>
-            <a class="card" href="case-study-digital-banking.html">
-              <div class="card-head"><h2 class="card-title serif">Digital banking strategy</h2></div>
-              <div class="media">
-                <img class="img-banking" src="assets/b52825ad929a11c8da791966712f7fba.webp" alt="Young woman smiling in the street, titled Financial wellbeing evolution" width="2752" height="1536" style="width: 850px; height: auto; aspect-ratio: 2752 / 1536; top: -26px; left: -10px">
-                <div class="tint" aria-hidden="true"></div>
-                <div class="tags sans">
-                  <div class="pills"><span class="pill">Digital Strategy</span><span class="pill">Prototyping</span><span class="pill">Storytelling</span></div>
-                  <span class="pill dark">Retail &amp; Business Banking</span>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article>
-            <a class="card" href="case-study-data-capture.html">
-              <div class="card-head"><h2 class="card-title serif">Transforming data capture across the business</h2></div>
-              <div class="media">
-                <div class="tags sans">
-                  <div class="pills"><span class="pill">PRODUCT DESIGN</span><span class="pill">DIGITAL TRANSFORMATION</span><span class="pill">ENTERPRISE UX</span></div>
-                  <span class="pill dark">ENERGY</span>
-                </div>
-              </div>
-            </a>
-          </article>
+          
 
           <article>
             <a class="card" href="case-study-dsit.html">
@@ -282,6 +275,18 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
                 <div class="tags sans">
                   <div class="pills"><span class="pill">Service Design</span><span class="pill">User Research</span><span class="pill">Product Design</span></div>
                   <span class="pill dark">Public Sector</span>
+                </div>
+              </div>
+            </a>
+          </article><article>
+            <a class="card" href="case-study-utopia.html">
+              <div class="card-head"><h2 class="card-title serif">Utopia Adventures · Brand &amp; Booking</h2></div>
+              <div class="media">
+                <img src="assets/bcff8757ad38916a5c79094b5ac4081d.webp" alt="Traveller stepping out of a stone house in Zanskar" style="object-position: 50% 66%">
+                <div class="shade" aria-hidden="true"></div>
+                <div class="tags sans">
+                  <div class="pills"><span class="pill">Brand Strategy</span><span class="pill">Brand Identity</span><span class="pill">Digital Experiences</span></div>
+                  <span class="pill dark">Hospitality &amp; Travel</span>
                 </div>
               </div>
             </a>
@@ -297,7 +302,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
         </div>
         <div class="exp" style="padding-top: 40px; gap: 40px">
           
-          <p class="exp-quote serif" style="line-height: 1.3">Partnering with ambitious founders and teams from first thought to final detail.</p><div class="exp-list" style="min-height: 335px">
+          <p class="exp-quote serif" style="line-height: 1.3">Partnering with ambitious founders and teams from first thought to final detail.</p><div class="exp-list">
             <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px; border-width: 1px; border-style: solid; border-color: rgba(17, 17, 15, 0.22); border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px"><p>Formak Estudio</p><p>Founder</p><p class="date">Nov 2025–now</p></div>
             <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px"><p>Cámara de Comercio de Bilbao</p><p>UX &amp; Design Strategy Mentor</p><p class="date">Apr 2026–Present</p></div><div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px"><p>AI Village Community</p><p>Director</p><p class="date">JUN 2026–PRESENT</p></div>
             <div class="exp-row" style="gap: 24px; padding-top: 24px; padding-bottom: 24px"><p>Capco</p><p>Lead Product &amp; Experience Designer</p><p class="date">Feb 2023—Jun 2023</p></div>
@@ -444,7 +449,25 @@ class Component extends DCLogic {
       });
     });
   }
+  // Smooth scrolling for the in-page links (Work, Experience, Notes, logo). Plain jump when the visitor prefers reduced motion.
+  setupSmoothAnchors() {
+    if (window.__agSmoothAnchors) return;
+    window.__agSmoothAnchors = true;
+    document.addEventListener('click', (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      const id = decodeURIComponent((a.getAttribute('href') || '').slice(1));
+      const target = id && document.getElementById(id);
+      if (!target) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      try { history.replaceState(null, '', '#' + id); } catch (err) {}
+    });
+  }
   componentDidMount() {
+    this.setupSmoothAnchors();
     this.setupEmailCopy();
     this.setupTalkCopy();
   }

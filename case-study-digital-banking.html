@@ -39,8 +39,9 @@ strong,b{font-weight:600}
 .mhead-logo{font-style:italic;font-size:24px;line-height:36px}
 
 /* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
-.back-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:999px;background:var(--pill);color:var(--ink);font-size:12px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
-.back-pill:hover{background:var(--pill-dark);color:var(--pill);transform:translateX(-3px)}
+.back-pill{display:inline-flex;align-items:center;padding:16px 36px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font-size:16px;line-height:24px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1)}
+.back-pill:hover,.back-pill:focus-visible{background:var(--ink);color:var(--bg);transform:translateX(-3px)}
+.back-pill:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .back-pill:active{transform:translateX(-1px) scale(.97)}
 
 /* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
@@ -173,6 +174,29 @@ strong,b{font-weight:600}
 .db-slides{grid-template-columns:1fr!important}
 .db-stats{grid-template-columns:1fr!important;gap:16px}
 }
+
+/* More case studies */
+.cs-next{padding-bottom:40px}
+.cs-next-list{list-style:none;margin:0;padding:24px 0 0}
+.cs-next-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:24px;padding:28px 0;border-top:1px solid var(--line);color:var(--ink);transition:opacity .35s ease}
+.cs-next-list li:last-child .cs-next-item{border-bottom:1px solid var(--line)}
+.cs-next-item:hover,.cs-next-item:focus-visible{color:var(--ink)}
+.cs-next-title{display:inline;justify-self:start;font-size:40px;line-height:1.1;padding-bottom:2px;background:linear-gradient(currentColor,currentColor) no-repeat 0 100% / 0 1px;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-size .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-meta{display:flex;align-items:baseline;gap:24px}
+.cs-next-meta .eyebrow{white-space:nowrap}
+.cs-next-arrow{display:inline-block;font-family:'DM Sans',system-ui,sans-serif;font-size:24px;line-height:24px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-list:hover .cs-next-item:not(:hover),.cs-next-list:focus-within .cs-next-item:not(:focus-visible):not(:hover){opacity:.35}
+.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title{transform:translateX(14px);background-size:100% 1px}
+.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:translate(4px,-4px)}
+.cs-next-item:focus-visible,.cs-next .sec-head a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media (max-width:767px){
+.cs-next-item{grid-template-columns:minmax(0,1fr) 24px;column-gap:12px;row-gap:8px;padding:22px 0;align-items:start}
+.cs-next-title{font-size:28px;grid-column:1}
+.cs-next-meta{display:contents}
+.cs-next-meta .eyebrow{grid-column:1;grid-row:2;white-space:normal}
+.cs-next-arrow{grid-column:2;grid-row:1;justify-self:end}
+}
+@media (prefers-reduced-motion:reduce){.cs-next-title,.cs-next-arrow{transition:none}.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title,.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:none}}
 </style>
 </head>
 <body>
@@ -194,7 +218,7 @@ strong,b{font-weight:600}
           <h1 class="serif" style="margin: 0; font-style: italic; font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400">Making a digital banking strategy tangible</h1>
           <div style="display: flex; flex-direction: column; gap: 16px;">
             
-            <p style="margin: 0; font-size: 20px; line-height: 1.5; color: #11110f; max-width: 48ch; text-wrap: pretty;"><span style="text-wrap-mode: initial">We brought a major retail and business bank’s three-horizon digital strategy to life in a 30-day proposal, using working prototypes and a board-ready narrative to show how youth, everyday and business banking could look and feel in the future.</span></p>
+            <p style="margin: 0; font-size: 20px; line-height: 1.5; color: #11110f; max-width: 48ch; text-wrap: pretty;"><span style="text-wrap-mode: initial">A major retail and business bank’s three-horizon digital strategy came to life in a 30-day proposal, built on working prototypes and a board-ready narrative that show how youth, everyday and business banking could look and feel in the future.</span></p>
           </div>
         </div>
         <dl class="cs-meta">
@@ -207,13 +231,13 @@ strong,b{font-weight:600}
             <dd style="margin: 0; font-size: 16px;">Retail &amp; Business Banking</dd>
           </div>
           <div style="display: flex; flex-direction: column; gap: 6px;">
+            <dt class="eyebrow" style="margin:0">Role</dt>
+            <dd style="margin: 0; font-size: 16px;">Lead Product Designer</dd>
+          </div><div style="display: flex; flex-direction: column; gap: 6px;">
             <dt class="eyebrow" style="margin:0">Disciplines</dt>
             <dd style="margin: 0; font-size: 16px;">Digital Strategy · Prototyping · Storytelling</dd>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 6px;">
-            <dt class="eyebrow" style="margin:0">Role</dt>
-            <dd style="margin: 0; font-size: 16px;">Lead Product Designer</dd>
-          </div>
+          
           <div style="display: flex; flex-direction: column; gap: 6px;">
             <dt class="eyebrow" style="margin:0">Timeline</dt>
             <dd style="margin: 0; font-size: 16px;">30 days</dd>
@@ -258,7 +282,7 @@ strong,b{font-weight:600}
         <div class="sec-head"><span class="cs-label eyebrow">02 — Approach</span></div>
         <div class="cs-body">
           <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 600;">Three customers, three horizons each</h2>
-          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">We translated the strategy into three customer journeys: a young saver gaining independence, an everyday customer facing major life decisions, and a sole trader growing a business. Each followed the same customer across all three horizons.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The strategy was translated into three customer journeys: a young saver gaining independence, an everyday customer facing major life decisions, and a sole trader growing a business. Each followed the same customer across all three horizons.</p>
           <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
             <div class="db-mx">
               <div aria-hidden="true" style="position: absolute; right: -120px; top: -160px; width: 420px; height: 420px; border-radius: 50%; background: #0000FF; opacity: 0.35; filter: blur(120px); pointer-events: none;"></div>
@@ -375,6 +399,17 @@ strong,b{font-weight:600}
       </section>
 
       </div>
+
+      <section class="cs-section sec cs-next" aria-labelledby="cs-next-label">
+        <div class="sec-head"><span class="cs-label eyebrow" id="cs-next-label">More case studies</span><a class="eyebrow" href="index.html#work">All work</a></div>
+        <nav aria-label="More case studies"><ul class="cs-next-list">
+          <li><a class="cs-next-item" href="case-study-film-tv.html"><span class="cs-next-title serif">AI Matching for film &amp; TV</span><span class="cs-next-meta"><span class="eyebrow">Film &amp; TV</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-data-capture.html"><span class="cs-next-title serif">Transforming data capture across the business</span><span class="cs-next-meta"><span class="eyebrow">Energy</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-ohai.html"><span class="cs-next-title serif">Ohai.ai · AI family assistant</span><span class="cs-next-meta"><span class="eyebrow">AI &amp; Enterprise Software</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-dsit.html"><span class="cs-next-title serif">Digital Verification Services Register · GOV.UK</span><span class="cs-next-meta"><span class="eyebrow">Public Sector</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="case-study-utopia.html"><span class="cs-next-title serif">Utopia Adventures · Brand &amp; Booking</span><span class="cs-next-meta"><span class="eyebrow">Hospitality &amp; Travel</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+        </ul></nav>
+      </section>
 
     </main>
 
