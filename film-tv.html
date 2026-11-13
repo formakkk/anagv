@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Democratising the Film &amp; TV Industry · Case Study</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=Forum&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Univers';src:url(assets/69cf2f3ba9108901963ca83699d9c30d.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0;background:#ffffff}
+a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#ffffff;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Univers',Helvetica,Arial,sans-serif;font-weight:400;font-style:normal}
+.sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
+.eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+img{display:block;width:100%;height:auto}
+strong{font-weight:600}
+
+/* Same page-frame rules as the homepage: identical wrap/main/side/mhead so margins, width and the sidebar line up exactly */
+.wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;box-sizing:border-box}
+
+.side{flex:0 0 160px;width:160px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24px;border-left:1px solid var(--line);background:var(--bg);display:grid;grid-template-rows:auto minmax(16px,1fr) auto minmax(48px,5fr) auto;justify-items:start}
+.side-logo{grid-row:1;font-style:normal;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{grid-row:3;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.side-nav a{font-size:16px;line-height:24px}
+.side-social{grid-row:5;align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.side-social a{font-size:16px;line-height:24px}
+/* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:16px;line-height:24px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email:hover{color:#706f69}
+.side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
+.side-email-fallback[hidden]{display:none}
+.side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:normal;font-size:24px;line-height:36px}
+
+/* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
+.back-pill{display:inline-flex;align-items:center;padding:16px 36px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font-size:16px;line-height:24px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1)}
+.back-pill:hover,.back-pill:focus-visible{background:var(--ink);color:var(--bg);transform:translateX(-3px)}
+.back-pill:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.back-pill:active{transform:translateX(-1px) scale(.97)}
+
+/* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
+.cs-hero{display:flex;flex-direction:column;gap:56px;padding:88px 0}
+.cs-hero-lead{display:flex;flex-direction:column;gap:32px}
+.cs-meta{margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:24px 32px;padding-top:24px;border-top:1px solid var(--line)}
+.cs-meta > div{display:flex;flex-direction:column;gap:6px}
+.cs-meta dd{line-height:1.5}
+
+/* Case-study section rhythm, reusing the homepage's .sec / .sec-head components */
+.sec{padding-top:128px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--ink);padding:13.6px 0;min-height:44.5px;box-sizing:border-box}
+.cs-body{padding-top:32px;display:flex;flex-direction:column;gap:24px}
+/* Every section title, secondary heading and body block spans the full content column; no element sets its own width. */
+.cs-body > :is(h2,h3,h4,p,ul,ol),.cs-body > div > :is(h2,h3,h4,p,ul,ol){width:100%;max-width:none}
+.main{padding-bottom:96px}
+
+/* Large desktop: use more of the available width, exactly as the homepage does */
+@media (min-width:1600px){
+.wrap{max-width:min(92vw,1920px)}
+.main{max-width:1180px;padding-left:48px;padding-right:48px}
+.side{width:160px;flex:0 0 160px}
+}
+
+/* Large monitors (1440px and up): section dividers and media keep the full content width; titles, body text and text-led blocks keep an 812px reading measure, and the top section keeps its standard-desktop proportions. Left alignment is unchanged. */
+@media (min-width:1440px){
+.site{--cs-measure:812px}
+.cs-hero{max-width:var(--cs-measure)}
+.cs-body > :not(figure):not(:has(img,video,iframe,figure)){max-width:var(--cs-measure)}
+}
+
+/* Tablet: header nav replaces the side column */
+@media (max-width:1079px){
+.wrap{display:block}
+.side{display:none}
+.mhead{display:flex;padding:13.6px 24px}
+.main{max-width:none}
+}
+
+/* Mobile: matches the homepage's 402px Figma frame breakpoint */
+@media (max-width:767px){
+.cs-hero{padding:56px 0 64px;gap:40px}
+.cs-meta{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+.mhead{padding:13.6px 20px}
+.main{padding:20px}
+.sec{padding-top:96px}
+.sec-head{min-height:45.9px}
+.cs-section{display:flex!important;flex-direction:column!important;width:100%!important}
+.cs-card-grid{display:flex!important;flex-direction:column!important;gap:24px!important}
+}
+
+/* Case-study storytelling kit, shared by every case study so the structure scales.
+   Page order: hero, lead visual, At a glance, AI in this project, Delivery speed, then the narrative sections.
+   .cs-tbc, .cs-tag.tbc and .cs-visual-todo mark information still to be provided: remove each one before export. */
+.cs-visual{margin:0;display:flex;flex-direction:column;gap:12px}
+.cs-visual-stage{position:relative;overflow:hidden;border-radius:16px;background:var(--pill)}
+.cs-visual-stage > img,.cs-visual-stage > video{display:block;width:100%;height:auto}
+.cs-visual-todo{display:flex;align-items:center;justify-content:center;min-height:280px;padding:32px;border:1px dashed #b45309;border-radius:16px;background:#fff7e6;color:#8a3b00;font-size:16px;line-height:1.5;text-align:center}
+.cs-cap{font-size:16px;line-height:1.5;color:var(--muted)}
+.cs-impact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.cs-impact > div{display:flex;flex-direction:column;gap:12px;padding-top:20px}
+.cs-impact h3{margin:0;font-size:24px;line-height:1.25;font-weight:500}
+.cs-impact p{margin:0;font-size:16px;line-height:1.6}
+.cs-evidence{margin:0;font-size:16px;line-height:1.6;color:var(--muted)}
+.cs-rows{list-style:none;margin:0;padding:0}
+.cs-rows li{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.8fr) minmax(120px,auto);gap:24px;align-items:start;padding:20px 0}
+.cs-row-t{font-size:16px;line-height:1.5;font-weight:600}
+.cs-row-d{font-size:16px;line-height:1.6}
+.cs-row-x{justify-self:end;text-align:right;font-size:16px;line-height:1.5}
+.cs-time{font-weight:600;white-space:nowrap}
+/* Workflow labels: one soft tint per category, with a matching dot; text passes 4.5:1 on every tint */
+.cs-tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px;line-height:18px;letter-spacing:.84px;text-transform:uppercase;white-space:nowrap;border:1px solid transparent;color:var(--ink);background:var(--pill)}
+.cs-tag::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:currentColor}
+.cs-tag.ai-first{background:#ecebfa;border-color:#dcd9f5;color:#423ca0}
+.cs-tag.ai-assisted{background:#e2f1ea;border-color:#cfe6db;color:#1d6a4c}
+.cs-tag.human{background:#f5ebe1;border-color:#ecdccd;color:#8c4a26}
+.cs-tag.tbc{border-style:dashed;border-color:#b45309;color:#8a3b00;background:#fff7e6}
+.cs-tag.tbc::before{content:none}
+.cs-ai{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.cs-ai > div{display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.cs-ai h3{margin:0;font-size:20px;line-height:1.3;font-weight:500}
+.cs-ai p{margin:0;font-size:16px;line-height:1.6}
+.cs-tbc{padding:1px 6px;border:1px dashed #b45309;border-radius:4px;background:#fff7e6;color:#8a3b00;font-size:14px;line-height:1.7;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (max-width:767px){
+.cs-impact,.cs-ai{grid-template-columns:1fr;gap:24px}
+.cs-rows li{grid-template-columns:1fr;gap:8px}
+.cs-row-x{justify-self:start;text-align:left}
+}
+
+/* Case-study sidebar: links to this page's own sections; the one in view is underlined */
+.cs-section[id]{scroll-margin-top:24px}
+.side-nav a.is-active{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+
+/* Laptops walkthrough: transferred from the Case studies project (mosaic/laptops.html). A fixed 1920x820 stage, scaled to the column width. */
+.lw-frame{position:relative;width:100%;aspect-ratio:1920/820;overflow:hidden;border-radius:16px;background:#0c0a10}
+.lw-stage{position:absolute;left:0;top:0;width:1920px;height:820px;overflow:hidden;background:#0c0a10;transform-origin:0 0;font-family:'Raleway',sans-serif}
+.lw-glow{position:absolute;border-radius:50%;filter:blur(150px);pointer-events:none}
+.lw-grain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.2;mix-blend-mode:overlay}
+.lw-row{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:center;gap:56px}
+.lw-device{position:relative;display:flex;flex-direction:column;align-items:center;width:880px}
+.lw-lid{position:relative;width:780px;padding:3px;border-radius:22px 22px 0 0;background:linear-gradient(180deg,#c9cbd1 0%,#9ea1a8 100%);box-shadow:0 0 0 1px rgba(0,0,0,.45)}
+.lw-lid::before{content:"";position:absolute;inset:3px;border-radius:19px 19px 0 0;background:#050506}
+.lw-lid > *{position:relative}
+.lw-cam{position:absolute!important;left:50%;top:3px;width:124px;height:15px;margin-left:-62px;border-radius:0 0 9px 9px;background:#050506;z-index:3}
+.lw-cam::after{content:"";position:absolute;left:50%;top:4px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#2c3a52 0%,#0b0d12 70%)}
+.lw-screen{position:relative;margin:11px 11px 16px;width:752px;height:404.49px;overflow:hidden;border-radius:10px;background:#000}
+.lw-screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(115deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 38%)}
+.lw-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;display:block;pointer-events:none}
+.lw-hinge{width:760px;height:5px;background:linear-gradient(180deg,#2b2c30 0%,#6b6d73 100%)}
+.lw-base{position:relative;width:880px;height:17px;border-radius:3px 3px 22px 22px / 3px 3px 12px 12px;background:linear-gradient(180deg,#e4e6ea 0%,#c3c6cc 35%,#9a9da4 75%,#6e7178 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 1px 0 rgba(0,0,0,.5)}
+.lw-notch{position:absolute;left:50%;top:0;width:132px;height:7px;margin-left:-66px;border-radius:0 0 10px 10px;background:linear-gradient(180deg,#8e9198 0%,#b9bcc2 100%)}
+.lw-shadow{width:840px;height:26px;margin-top:-6px;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,rgba(0,0,0,.75) 0%,rgba(0,0,0,0) 70%)}
+.lw-cap{display:flex;flex-direction:column;align-items:center;gap:14px;color:#fff;margin-top:22px}
+.lw-t{font-size:22px;font-weight:500;letter-spacing:.01em}
+.lw-steps{display:flex;gap:10px}
+.lw-steps i{width:28px;height:3px;border-radius:3px;transition:background 400ms ease}
+
+/* More case studies */
+.cs-next{padding-bottom:40px}
+.cs-next-list{list-style:none;margin:0;padding:24px 0 0}
+.cs-next-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:24px;padding:28px 0;border-top:1px solid var(--line);color:var(--ink);transition:opacity .35s ease}
+.cs-next-list li:last-child .cs-next-item{border-bottom:1px solid var(--line)}
+.cs-next-item:hover,.cs-next-item:focus-visible{color:var(--ink)}
+.cs-next-title{display:inline;justify-self:start;font-size:28px;line-height:1.2;padding-bottom:2px;background:linear-gradient(currentColor,currentColor) no-repeat 0 100% / 0 1px;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-size .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-meta{display:flex;align-items:baseline;gap:24px}
+.cs-next-meta .eyebrow{white-space:nowrap}
+.cs-next-arrow{display:inline-block;font-family:'DM Sans',system-ui,sans-serif;font-size:24px;line-height:24px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-list:hover .cs-next-item:not(:hover),.cs-next-list:focus-within .cs-next-item:not(:focus-visible):not(:hover){opacity:.35}
+.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title{transform:translateX(14px);background-size:100% 1px}
+.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:translate(4px,-4px)}
+.cs-next-item:focus-visible,.cs-next .sec-head a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media (max-width:767px){
+.cs-next-item{grid-template-columns:minmax(0,1fr) 24px;column-gap:12px;row-gap:8px;padding:22px 0;align-items:start}
+.cs-next-title{font-size:24px;grid-column:1}
+.cs-next-meta{display:contents}
+.cs-next-meta .eyebrow{grid-column:1;grid-row:2;white-space:normal}
+.cs-next-arrow{grid-column:2;grid-row:1;justify-self:end}
+}
+@media (prefers-reduced-motion:reduce){.cs-next-title,.cs-next-arrow{transition:none}.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title,.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:none}}
+</style>
+</helmet>
+<div class="site">
+  <header class="mhead">
+    <a class="mhead-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+  </header>
+
+  <div class="wrap" id="top">
+    <main class="main">
+
+      <a href="index.html" class="back-pill sans">Back</a>
+
+      <header class="cs-hero" style="padding-bottom: 0px">
+        <div class="cs-hero-lead">
+          <h1 class="serif" style="margin: 0; font-style: normal; font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400">Democratising the Film&nbsp;&amp;&nbsp;TV Industry</h1>
+          <p class="lead" style="margin: 0; font-size: 18px; line-height: 1.5; color: #11110f; max-width: 46ch; text-wrap: pretty;">An AI-powered platform that lets creators around the world take their projects directly to major film and TV networks, without relying on traditional intermediaries. I helped the founder strengthen the proposition behind her fundraising, set up an AI-first design process she can run on her own, and move the product from proof of concept to MVP.</p>
+        </div>
+        <dl class="cs-meta" style="border-style: none">
+          <div><dt class="eyebrow" style="margin:0">Client</dt><dd style="margin: 0; font-size: 16px;">Confidential</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Industry</dt><dd style="margin: 0; font-size: 16px;">Film &amp; TV</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Role</dt><dd style="margin: 0; font-size: 16px;">Lead Product Designer</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Disciplines</dt><dd style="margin: 0; font-size: 16px;">Product Strategy · AI-first Design Process · AI-assisted Development · Brand</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Timeline</dt><dd style="margin: 0; font-size: 16px;">4 weeks</dd></div>
+        </dl>
+      </header>
+
+      <figure class="cs-visual" style="margin-top: 56px">
+        <div class="cs-visual-stage"><img src="assets/f24b8cf69bcb7044943afdff6f48e903.webp" alt="Redesigned platform screens: onboarding, project dashboards, AI-generated project details, buyer matching and verification flows" width="4785" height="3014"></div>
+      </figure>
+
+    <section class="cs-section sec" id="key-takeaways" style="padding-top: 64px">
+      <div class="sec-head"><span class="cs-label eyebrow">Key takeaways</span></div>
+      <div class="cs-body">
+        <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Three contributions, one integrated approach</h2>
+        <div class="cs-impact">
+          <div>
+            <span class="eyebrow">01</span>
+            <h3 class="sans">Strategic design &amp; fundraising</h3>
+            <p>I helped the founder strengthen the product proposition, aligning product, brand and investor materials around a coherent vision for the platform.</p>
+            <p>I worked with her to clarify the positioning, shape the brand and communicate the product’s potential. This work also supported her fundraising efforts, contributing to a successful round with a business angel.</p>
+          </div>
+          <div>
+            <span class="eyebrow">02</span>
+            <h3 class="sans">AI-first design process</h3>
+            <p>I established an AI-first design process and stack, giving the founder a practical framework to:</p>
+            <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6;">
+              <li>Define user journeys for each feature.</li>
+              <li>Translate requirements into clear experiences.</li>
+              <li>Evaluate journeys and identify improvements.</li>
+              <li>Apply design thinking to future product decisions.</li>
+            </ul>
+          </div>
+          <div>
+            <span class="eyebrow">03</span>
+            <h3 class="sans">From POC to MVP</h3>
+            <p>I used AI-assisted development to code the product and take it from proof of concept to a working MVP.</p>
+            <p>Rather than stopping at prototypes or design specifications, I translated the product vision and user journeys into a functional platform, accelerating the journey from concept to implementation.</p>
+            <p>The result was a working MVP delivered within the four-week engagement.</p>
+          </div>
+        </div>
+        <figure class="cs-visual">
+          <div class="lw-frame" ref="{{ lapRef }}" role="group" aria-label="Buyer and Creator journeys on two laptops">
+            <div class="lw-stage" style="transform: {{ lapTransform }}">
+              <div class="lw-glow" aria-hidden="true" style="left: -200px; top: -220px; width: 820px; height: 820px; background: #AD78FA; opacity: 0.4"></div>
+              <div class="lw-glow" aria-hidden="true" style="right: -240px; bottom: -260px; width: 860px; height: 860px; background: #FD877D; opacity: 0.34"></div>
+              <div class="lw-row">
+              <div class="lw-device">
+                <div class="lw-lid"><span class="lw-cam" aria-hidden="true"></span>
+                  <div class="lw-screen"><video class="lw-video" src="assets/5798f5ff75a38b717ed06bd98eac9bce.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" aria-label="Buyer journey walkthrough" onTimeUpdate="{{ onBuyerTime }}"></video></div>
+                </div>
+                <div class="lw-hinge"></div>
+                <div class="lw-base"><span class="lw-notch"></span></div>
+                <div class="lw-shadow"></div>
+                <div class="lw-cap"><span class="lw-t">Buyer journey</span><span class="lw-steps" aria-hidden="true"><sc-for list="{{ buyerSteps }}" as="d" hint-placeholder-count="4"><i style="background: {{ d.bg }}"></i></sc-for></span></div>
+              </div>
+              <div class="lw-device">
+                <div class="lw-lid"><span class="lw-cam" aria-hidden="true"></span>
+                  <div class="lw-screen"><video class="lw-video" src="assets/536ea702420868ba4ba3c6de53d979fe.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" aria-label="Creator journey walkthrough" onTimeUpdate="{{ onCreatorTime }}"></video></div>
+                </div>
+                <div class="lw-hinge"></div>
+                <div class="lw-base"><span class="lw-notch"></span></div>
+                <div class="lw-shadow"></div>
+                <div class="lw-cap"><span class="lw-t">Creator journey</span><span class="lw-steps" aria-hidden="true"><sc-for list="{{ creatorSteps }}" as="d" hint-placeholder-count="3"><i style="background: {{ d.bg }}"></i></sc-for></span></div>
+              </div>
+              </div>
+              <svg class="lw-grain" aria-hidden="true" width="1920" height="820" viewBox="0 0 1920 820"><filter id="lw-noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0"></feColorMatrix></filter><rect width="100%" height="100%" filter="url(#lw-noise)"></rect></svg>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cs-section sec" id="ai-in-practice" style="padding-top: 64px">
+      <div class="sec-head"><span class="cs-label eyebrow">AI in practice</span></div>
+      <div class="cs-body">
+        <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Where AI changed the work</h2>
+        <ul class="cs-rows" aria-label="Workflow stages and how AI was used in each">
+          <li><span class="cs-row-t">Product audit</span><span class="cs-row-d">I used Playwright to run an AI agent through defined Creator and Buyer tasks, identifying friction step by step. I reviewed the same journeys manually.</span><span class="cs-row-x"><span class="cs-tag ai-assisted">AI-assisted</span></span></li>
+          <li><span class="cs-row-t">Proposition &amp; brand</span><span class="cs-row-d">Interviews and brand strategy workshops with the founder shaped the product positioning, brand personality and visual identity, supported by Claude for research and synthesis.</span><span class="cs-row-x"><span class="cs-tag human">Human-led</span></span></li>
+          <li><span class="cs-row-t">Design process &amp; stack</span><span class="cs-row-d">I established an AI-first design process combining Claude, Figma and n8n, giving the founder a framework to define, build and evaluate product journeys independently.</span><span class="cs-row-x"><span class="cs-tag ai-first">AI-first</span></span></li>
+          <li><span class="cs-row-t">Journey design &amp; evaluation</span><span class="cs-row-d">Claude helped translate product requirements into user journeys and interactions, while Playwright supported end-to-end journey evaluation.</span><span class="cs-row-x"><span class="cs-tag ai-first">AI-first</span></span></li>
+          <li><span class="cs-row-t">POC to MVP</span><span class="cs-row-d">I used Cursor and Lovable for AI-assisted development to code the product, taking it from proof of concept to a working MVP.</span><span class="cs-row-x"><span class="cs-tag ai-assisted">AI-assisted</span></span></li>
+        </ul>
+        
+      </div>
+    </section>
+
+    <section class="cs-section sec" id="challenge" style="padding-top: 64px">
+      <div class="sec-head"><span class="cs-label eyebrow">Challenge</span></div>
+      <div class="cs-body">
+        <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">The gap between the technology and the product</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The client approached me at seed stage with an initial MVP and the ambition to prove product-market fit. The product connected two sides of the film and TV industry: Creators, who submit projects, and Buyers, who represent networks looking for specific types of content.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;"><span style="text-wrap-mode: initial;">My assessment showed that the challenge went well beyond a visual redesign. The MVP had gaps across both sides of the experience, from how creators submitted and protected their work to how buyers reviewed and matched projects. There were also operational and business risks behind the interface: manual processes, noisy matches, unclear project statuses, limited IP protection and transactions happening outside the platform.</span></p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.3; font-weight: 500;">Reframing the problem</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I reframed the work around making the product viable as a two-sided platform: improving the experience for both users, reducing operational friction and creating a stronger foundation for proving the business model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section sec" id="analysis" style="padding-top: 64px">
+      <div class="sec-head"><span class="cs-label eyebrow">Analysis</span></div>
+      <div class="cs-body">
+        <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Auditing the MVP</h2>
+        <div style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I audited the browser-based MVP in parallel, manually reviewing the product and using an AI agent to navigate and stress-test the same flows.<br></div><strong style="font-size: 16px; line-height: 1.6; color: #11110f;">MANUAL AUDIT —Product &amp; UX review</strong><div style="display: flex; flex-direction: column; gap: 8px;"><div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;"><div style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I walked through the Creator and Buyer journeys, annotating the live product and documenting issues across UX, operations and the business model.</div><div style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f; display: flex; flex-direction: column;"><span style="font-weight: 600; color: #11110f;">Output</span><ul style="margin: 0; padding: 0 0 0 20px;"><li>Prioritised pain points and risks</li><li>Unhappy paths and edge cases</li><li>Product risks &amp; opportunities</li></ul></div></div></div>
+        
+        <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
+          <div ref="{{ auditRef }}" style="position: relative; width: 100%; height: {{ auditHeight }}; overflow: hidden; background: var(--pill);">
+            <div style="position: absolute; left: 50%; top: 50%; width: 2564px; height: 1490px; transform-origin: 50% 50%; transform: {{ auditTransform }};">
+              <img src="assets/14ae520e357d845590b821eeaaadc6f2.webp" alt="Audit board: potential unhappy paths, user pain points and risks, and annotated usability issues on the Creator and Buyer screens" style="width: 2564px; height: 1490px; display: block;">
+            </div>
+          </div>
+          <figcaption style="font-size: 16px; color: #706f69;">Manual audit: unhappy paths, pain points, risks and usability issues</figcaption>
+        </figure>
+        <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
+          <strong style="font-size: 16px; line-height: 1.6; color: #11110f;">AI AGENT — Automated product audit</strong><div class="cs-card-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;"><p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I gave the agent defined tasks and asked it to navigate the product independently, flagging friction, unclear states, dead ends and unexpected behaviour.</p><div style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f; display: flex; flex-direction: column;"><span style="font-weight: 600; color: #11110f;">Output</span><ul style="margin: 0; padding: 0 0 0 20px;"><li>Task-level usability findings</li><li>Friction points and broken flows</li><li>Patterns to investigate further</li></ul></div></div><div data-om-raster="1" style="background: #ffffff; border: 1px solid #e2dfd9;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 28px; background: #fafbfa;">
+              <span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(107, 103, 100);">AGENT REPORT</span>
+              <span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-size: 12px; color: rgb(107, 103, 100);">Buyer journey</span>
+            </div>
+            <div style="padding: 28px; display: flex; flex-direction: column; gap: 24px;">
+              <h4 class="sans" style="margin: 0; font-size: 20px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 400; color: #11110f;">Task: Buyer reviews a matched project</h4>
+              <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #11110f;">Login → Buyer dashboard → Review matches → Open project → Review match → Explore project → Contact Creator</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 40px; padding: 16px 0;"><div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #706f69;">Task completion</span><span style="font-size: 16px; font-weight: 600; color: #11110f;">Partial</span></div><div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #706f69;">Overall friction</span><span style="font-size: 16px; font-weight: 600; color: #11110f;">Medium</span></div></div>
+              <div style="display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 16px; font-weight: 600; color: #11110f;"><span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-weight: 400; color: #706f69;">01 — </span>Dashboard</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: #d9f2e4; color: #15803d; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">✓</span><span>Matches are easy to locate</span></li><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>Match score is prominent, but its meaning is unclear</span></li></ul></div>
+              <div style="display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 16px; font-weight: 600; color: #11110f;"><span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-weight: 400; color: #706f69;">02 — </span>Project review</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>Buyer needs to move between the project summary and mandate to understand the match</span></li><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>Supporting evidence is not clearly linked to individual criteria</span></li></ul></div>
+              <div style="display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 16px; font-weight: 600; color: #11110f;"><span style="font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:'opsz' 14; font-weight: 400; color: #706f69;">03 — </span>Match evaluation</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>A 72% match suggests relevance, but does not explain what drove the score</span></li><li style="display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: #11110f;"><span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: oklch(0.94 0.07 85); color: oklch(0.45 0.11 70); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px;">!</span><span>No clear indication of missing or conflicting criteria</span></li></ul></div>
+            </div>
+          </div>
+          <figcaption style="font-size: 16px; color: #706f69;">Excerpt from the agent’s report, tracking completion and friction step by step.</figcaption><p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">AI helped me cover the surface quickly, while focused manual research helped me understand what was underneath it. The analysis revealed gaps across the product: fragmented journeys, unclear matching, inconsistent design and communication risks.</p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cs-section sec" id="strategic-design" style="padding-top: 64px">
+      <div class="sec-head"><span class="cs-label eyebrow">Strategic design</span></div>
+      <div class="cs-body">
+        <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Fixing the foundations</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Much of the MVP had been generated by AI tools, and it showed: inconsistent screens, contradictory states and nothing a network executive would trust with a slate decision. I restructured the experience around the Creator and Buyer journeys, replaced the fragmented screens with a unified design system and redesigned matching around three principles.</p>
+        <div class="cs-impact">
+          <div><span class="eyebrow">Principle 1</span><h3 class="sans">Show why</h3><p>Every match connects mandate criteria to supporting evidence, so users can understand and verify the result.</p></div>
+          <div><span class="eyebrow">Principle 2</span><h3 class="sans">Be honest about confidence</h3><p>Clear indicators distinguish strong matches from borderline ones, showing users where to look more closely.</p></div>
+          <div><span class="eyebrow">Principle 3</span><h3 class="sans">Keep people in control</h3><p>Users can challenge or reject a match. AI supports the decision; people remain accountable for it.</p></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+          <h3 class="sans" style="margin: 0; font-size: 24px; line-height: 1.3; font-weight: 500;">Building a credible brand</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The redesign went beyond the interface. Through interviews and brand strategy workshops with the client, I helped define the brand’s positioning, personality and visual direction. I translated this into a bespoke identity, including the logo, typography, colour palette and brand guidelines, bringing a more distinctive and human feel to the platform and its communications.</p>
+        </div>
+        <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
+          <div style="position: relative; width: 100%; aspect-ratio: 1680 / 952; overflow: hidden; border-radius: 16px; background: #15100A;">
+            <video class="lp-walk" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/8fa3bb84a004335ee8a331b12a7e35eb.webp" aria-label="Landing page scroll walkthrough" style="position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; display: block;"><source src="assets/fc9c29dc95fb6889d4edababa2350018.webm" type="video/webm"><source src="assets/832febb8e50cb1bc73646cd1573945cf.mp4" type="video/mp4"></video>
+          </div>
+          <figcaption style="font-size: 16px; color: #706f69;">Landing page: the new visual language in motion.</figcaption>
+        </figure>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I reviewed each step with the founder, keeping product, brand and investor materials aligned. The result gave the company a stronger foundation for conversations with investors and enterprise stakeholders.</p>
+      </div>
+    </section>
+
+    <section class="cs-section sec" id="outcomes" style="padding-top: 64px">
+      <div class="sec-head"><span class="cs-label eyebrow">Outcomes</span></div>
+      <div class="cs-body">
+        <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">A working MVP in four weeks</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">In four weeks, the founder went from a fragmented proof of concept to a working MVP, backed by a stronger product proposition that supported her successful fundraising round with a business angel. She also came away with an AI-first design process and stack to keep developing the product from a design-led perspective.</p>
+      </div>
+    </section>
+
+
+      <section class="cs-section sec cs-next" aria-labelledby="cs-next-label">
+        <div class="sec-head"><span class="cs-label eyebrow" id="cs-next-label">More case studies</span><a class="eyebrow" href="index.html#work">All work</a></div>
+        <nav aria-label="More case studies"><ul class="cs-next-list">
+          <li><a class="cs-next-item" href="digital-banking.html" style="font-size: 14px"><span class="cs-next-title serif">Digital banking strategy</span><span class="cs-next-meta"><span class="eyebrow">Retail &amp; Business Banking</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="data-capture.html"><span class="cs-next-title serif">Transforming data capture across the business</span><span class="cs-next-meta"><span class="eyebrow">Energy</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="ohai.html"><span class="cs-next-title serif">Ohai.ai · AI family assistant</span><span class="cs-next-meta"><span class="eyebrow">AI &amp; Enterprise Software</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="dsit.html"><span class="cs-next-title serif">Digital Verification Services Register · GOV.UK</span><span class="cs-next-meta"><span class="eyebrow">Public Sector</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="utopia.html"><span class="cs-next-title serif">Utopia Adventures · Brand &amp; Booking</span><span class="cs-next-meta"><span class="eyebrow">Hospitality &amp; Travel</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+        </ul></nav>
+      </section>
+
+    </main>
+
+    <aside class="side sans" aria-label="Site navigation">
+      <a class="side-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+      <nav class="side-nav" aria-label="Case study sections">
+        <a href="#key-takeaways">Key takeaways</a>
+        <a href="#ai-in-practice">AI in practice</a>
+        <a href="#challenge">Challenge</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#strategic-design">Strategic design</a>
+        <a href="#outcomes">Outcomes</a>
+      </nav>
+      <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
+        <span class="side-email-sr" id="side-email-hint">Copies my email address to your clipboard</span>
+        <span class="side-email-sr" role="status" aria-live="polite" data-copy-email-status=""></span>
+        <p class="side-email-fallback" hidden="" data-copy-email-fallback="">Couldn’t copy automatically. Select and copy:<span class="side-email-address">Anagvpersonal@gmail.com</span></p>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"auditRatio":{"editor":"enum","options":["2564:1490","21:9","16:9","3:1","4:3","3:2"],"default":"2564:1490","tsType":"string","section":"Audit board framing"},"auditZoom":{"editor":"range","min":1,"max":5,"step":0.05,"default":1,"tsType":"number","section":"Audit board framing"},"auditPanX":{"editor":"range","min":-150,"max":150,"step":1,"unit":"%","default":0,"tsType":"number","section":"Audit board framing"},"auditPanY":{"editor":"range","min":-100,"max":100,"step":1,"unit":"%","default":0,"tsType":"number","section":"Audit board framing"}}'>
+class Component extends DCLogic {
+  // Sidebar section links: underline the section currently in view as the visitor scrolls.
+  setupSectionNav() {
+    if (window.__agSectionNav) return;
+    window.__agSectionNav = true;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const links = Array.from(document.querySelectorAll('.side-nav a[href^="#"]'));
+      const items = links.map((a) => ({ a, el: document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))) })).filter((x) => x.el);
+      if (!items.length) return;
+      const line = window.innerHeight * 0.35;
+      let cur = null;
+      items.forEach((it) => { if (it.el.getBoundingClientRect().top <= line) cur = it; });
+      const doc = document.documentElement;
+      if (cur && window.innerHeight + window.scrollY >= doc.scrollHeight - 2) cur = items[items.length - 1];
+      items.forEach((it) => {
+        const on = it === cur;
+        it.a.classList.toggle('is-active', on);
+        if (on) it.a.setAttribute('aria-current', 'location'); else it.a.removeAttribute('aria-current');
+      });
+    };
+    const request = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
+  }
+  // Email me: copies the address to the clipboard, confirms for 2s, and falls back to a selectable address if copying is blocked.
+  setupEmailCopy() {
+    if (window.__agEmailCopy) return;
+    window.__agEmailCopy = true;
+    const timers = new WeakMap();
+    const setLabel = (btn, text) => { const n = btn.firstChild; if (n && n.nodeType === 3) n.nodeValue = text; else btn.textContent = text; };
+    const announce = (btn, msg) => {
+      const s = btn.parentNode.querySelector('[data-copy-email-status]');
+      if (!s) return;
+      s.textContent = '';
+      setTimeout(() => { s.textContent = msg; }, 60);
+    };
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-email]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const email = btn.getAttribute('data-copy-email');
+      const label = btn.getAttribute('data-label') || btn.textContent.trim();
+      btn.setAttribute('data-label', label);
+      const fallback = btn.parentNode.querySelector('[data-copy-email-fallback]');
+      clearTimeout(timers.get(btn));
+      copy(email).then(() => {
+        if (fallback) fallback.hidden = true;
+        setLabel(btn, 'Email copied!');
+        announce(btn, 'Email address copied to clipboard');
+        timers.set(btn, setTimeout(() => setLabel(btn, label), 2000));
+      }, () => {
+        setLabel(btn, label);
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('.side-email-address');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        announce(btn, 'Couldn’t copy automatically. The email address, ' + email + ', is shown below the button and selected, ready to copy.');
+      });
+    });
+  }
+  state = { aw: 0, lw: 0, bk: 0, ck: 0 };
+  auditRef = React.createRef();
+  lapRef = React.createRef();
+  // Laptops walkthrough: the step bar under each laptop follows its video, as in the source component.
+  stepFor(v, n) { return v && v.duration ? Math.min(n - 1, Math.floor(v.currentTime / v.duration * n)) : 0; }
+  onBuyerTime = (e) => { const k = this.stepFor(e.currentTarget, 4); if (k !== this.state.bk) this.setState({ bk: k }); };
+  onCreatorTime = (e) => { const k = this.stepFor(e.currentTarget, 3); if (k !== this.state.ck) this.setState({ ck: k }); };
+  componentDidMount() {
+    this.setupEmailCopy();
+    this.setupSectionNav();
+    document.querySelectorAll('video.lp-walk, video.lw-video').forEach(v => { v.muted = true; const p = v.play(); p && p.catch(() => {}); });
+    const a = this.auditRef.current;
+    const l = this.lapRef.current;
+    const sync = () => this.setState({ aw: a ? a.clientWidth : 0, lw: l ? l.clientWidth : 0 });
+    this.ro = new ResizeObserver(sync);
+    a && this.ro.observe(a);
+    l && this.ro.observe(l);
+    sync();
+  }
+  componentWillUnmount() { this.ro && this.ro.disconnect(); }
+  renderVals() {
+    const zoom = this.props.auditZoom ?? 1;
+    const px = this.props.auditPanX ?? 0;
+    const py = this.props.auditPanY ?? 0;
+    const [rw, rh] = (this.props.auditRatio ?? "2564:1490").split(":").map(Number);
+    const fw = this.state.aw || 920;
+    const fh = fw * rh / rw;
+    const s = Math.max(fw / 2564, fh / 1490) * zoom;
+    const dots = (n, k, c) => Array.from({ length: n }, (_, i) => ({ bg: i === k ? c : 'rgba(255,255,255,0.18)' }));
+    return {
+      lapRef: this.lapRef,
+      lapTransform: `scale(${(this.state.lw || 812) / 1920})`,
+      buyerSteps: dots(4, this.state.bk, '#AD78FA'),
+      creatorSteps: dots(3, this.state.ck, '#FD877D'),
+      onBuyerTime: this.onBuyerTime,
+      onCreatorTime: this.onCreatorTime,
+      auditRef: this.auditRef,
+      auditHeight: `${fh}px`,
+      auditTransform: `translate(-50%, -50%) translate(${(px / 100) * fw}px, ${(py / 100) * fh}px) scale(${s})`,
+    };
+  }
+}
+</script>
+</body>
+</html>

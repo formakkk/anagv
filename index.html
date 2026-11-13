@@ -4,27 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ana García · Portfolio</title>
-<link rel="stylesheet" href="assets/fonts/fonts.css">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&amp;family=Forum&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#fafafa}
+@font-face{font-family:'Univers';src:url(assets/69cf2f3ba9108901963ca83699d9c30d.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0;background:#ffffff}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
-.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#fafafa;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
-.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-style:italic}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#ffffff;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Univers',Helvetica,Arial,sans-serif;font-weight:400;font-style:normal}
 .sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
 .wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
 .main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;box-sizing:border-box}
 
 /* Desktop side navigation */
-.side{flex:0 0 208px;width:208px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24.84px 20.7px;border-left:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column}
-.side-logo{font-style:italic;font-size:32px;line-height:32px;align-self:flex-start}
-.side-nav{height:auto;box-sizing:border-box;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
-.side-nav a{font-size:20px;line-height:30px}
-.side-social{height:auto;padding-top:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px}
-.side-social a{font-size:20px;line-height:30px}
+.side{flex:0 0 160px;width:160px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24px;border-left:1px solid var(--line);background:var(--bg);display:grid;grid-template-rows:auto minmax(16px,1fr) auto minmax(48px,5fr) auto;justify-items:start}
+.side-logo{grid-row:1;font-style:normal;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{grid-row:3;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.side-nav a{font-size:16px;line-height:24px}
+.side-social{grid-row:5;align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.side-social a{font-size:16px;line-height:24px}
 /* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
-.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:20px;line-height:30px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:16px;line-height:24px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
 .side-email:hover{color:#706f69}
 .side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 .side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
@@ -32,8 +39,8 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
 
 /* Mobile / tablet header */
-.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(250,250,250,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-.mhead-logo{font-style:italic;font-size:24px;line-height:36px}
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:normal;font-size:24px;line-height:36px}
 .mnav{display:flex;gap:13.6px}
 .mnav a{font-size:12px;line-height:18px}
 
@@ -41,9 +48,14 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 
 /* Hero */
-.hero h1{margin:0;padding:24px 0;font-style:italic;font-size:100px;line-height:.75514em;letter-spacing:-.06458em;white-space:nowrap}
+/* Hero fills the first screen (capped so tall frames stay sensible); content centred with breathing room above and below */
+.hero{box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:0 0 240px;min-height:min(calc(100vh - 24px),1080px);min-height:min(calc(100svh - 24px),1080px)}
+/* Eyebrow sits at the top, on the same 32px line as the sidebar AG; the rest stays centred below it */
+.hero > .eyebrow{line-height:32px;padding-bottom:96px;margin-bottom:auto}
+.hero .avail-wrap{margin-bottom:auto}
+.hero h1{margin:0;padding:24px 0;font-style:normal;font-size:100px;line-height:.75514em;letter-spacing:-.06458em;white-space:nowrap}
 .intro{max-width:604px;padding:20px 0}
-.intro p{margin:0;font-size:20px;line-height:23.07px}
+.intro .lead{margin:0;font-size:18px;line-height:23.07px}
 .intro p + p{padding-top:20px}
 .avail-wrap{padding:24px 0}
 .avail{display:inline-flex;align-items:center;gap:8.8px;padding-bottom:2.4px;border-bottom:1px solid var(--ink);font-size:16px;line-height:24.69px}
@@ -83,7 +95,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 
 /* Experience */
 .exp{display:flex;align-items:flex-start;gap:24px;padding-top:41.4px}
-.exp-quote{margin:0;flex:0 0 185px;font-style:italic;font-size:32px;line-height:35.2px}
+.exp-quote{margin:0;flex:0 0 185px;font-style:normal;font-size:32px;line-height:35.2px}
 .exp-list{flex:1 1 auto;min-width:0}
 .exp-row{display:grid;grid-template-columns:186px 185px minmax(0,1fr);gap:24px;padding:16px 0;border-top:1px solid var(--line)}
 .exp-row:last-child{border-bottom:1px solid var(--line)}
@@ -101,14 +113,14 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .foot{padding:144px 0 16px}
 .foot-q,.foot-copy{margin:0;padding-bottom:14px;font-size:16px;line-height:20.57px;color:var(--muted)}
 .talk-wrap{height:202.5px}
-.talk{display:inline-block;font-style:italic;font-size:80px;line-height:74.52px;letter-spacing:-.0569em;white-space:nowrap}
+.talk{display:inline-block;font-style:normal;font-size:80px;line-height:74.52px;letter-spacing:-.0569em;white-space:nowrap}
 /* Let's talk: a button that copies the email address and briefly confirms */
 .talk-wrap{container-type:inline-size}
 .talk-btn{appearance:none;-webkit-appearance:none;display:block;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
 .talk-btn:hover .talk{color:#706f69}
 .talk-done{display:flex;flex-direction:column;gap:8px}
 .talk[hidden],.talk-done[hidden],.talk-fallback[hidden]{display:none}
-.talk-done-1{font-style:italic;font-size:min(32px,12.2cqw);line-height:.9315em;letter-spacing:-.0569em;white-space:nowrap}
+.talk-done-1{font-style:normal;font-size:min(32px,12.2cqw);line-height:.9315em;letter-spacing:-.0569em;white-space:nowrap}
 .talk-done-2{font-size:20px;line-height:1.2;font-weight:600;color:var(--ink)}
 .talk-fallback{margin:0;padding-top:8px;font-size:16px;line-height:1.4;color:var(--muted)}
 .talk-fallback span{color:var(--ink);-webkit-user-select:all;user-select:all;overflow-wrap:anywhere}
@@ -117,7 +129,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 @media (min-width:1600px){
 .wrap{max-width:min(92vw,1920px)}
 .main{max-width:1180px;padding-left:48px;padding-right:48px}
-.side{width:168px;flex:0 0 168px}
+.side{width:160px;flex:0 0 160px}
 /* Experience rows: share the wider list evenly across the three columns */
 .exp-row{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
@@ -128,6 +140,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .side{display:none}
 .mhead{display:flex;padding:13.6px 24px}
 .main{max-width:none}
+.hero{min-height:min(calc(100vh - 87px),1080px);min-height:min(calc(100svh - 87px),1080px)}
 }
 
 /* Experience stacks when the three-column table no longer fits */
@@ -142,11 +155,12 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 @media (max-width:767px){
 .mhead{padding:13.6px 20px}
 .main{padding:20px}
-.hero{padding:32px 0}
+.hero{padding:0 0 80px;min-height:min(calc(100vh - 83px),900px);min-height:min(calc(100svh - 83px),900px)}
 .hero .eyebrow{white-space:normal}
-.hero h1{padding:28.8px 0;font-size:clamp(48px,20vw,80px);line-height:.75931em;letter-spacing:-.062em}
+.hero > .eyebrow{line-height:17.28px;padding-bottom:64px}
+.hero h1{padding:28.8px 0;font-size:clamp(40px,18vw,80px)!important;line-height:.75931em;letter-spacing:-.05em!important}
 .intro{max-width:none}
-.intro p{font-size:20px;line-height:24px}
+.intro .lead{font-size:18px;line-height:24px}
 .avail-wrap{padding:24px 0}
 .avail{gap:9px;font-size:12px;line-height:18.48px}
 .avail-arrow{font-family:'DM Sans',system-ui,sans-serif;font-size:12px;line-height:18.48px}
@@ -177,9 +191,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .talk{line-height:74.4px}
 }
 </style>
-</head>
-<body>
-
+</helmet>
 <div class="site">
   <header class="mhead">
     <a class="mhead-logo serif" href="#top" aria-label="Ana García, home">AG</a>
@@ -193,12 +205,12 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
   <div class="wrap" id="top">
     <main class="main">
 
-      <section class="hero">
+      <section class="hero" style="padding-bottom: 0px; justify-content: flex-start">
         <p class="eyebrow">DESIGNING DIGITAL EXPERIENCES · SPAIN / UK / GLOBAL</p>
-        <h1 class="serif">Ana García</h1>
+        <h1 class="serif" style="font-style: normal; letter-spacing: -5px; font-size: 100px; font-weight: 400">Ana García</h1>
         <div class="intro">
-          <p style="line-height: 1.45">I design digital experiences that that turn ambitious ideas into useful solutions.</p>
-          <p style="line-height: 1.5">From exploring new opportunities to improving existing products, I work with teams to turn user needs and business goals into experiences that deliver.</p>
+          <p class="lead" style="line-height: 1.45">I design digital experiences that turn ambitious ideas into useful solutions.</p>
+          <p class="lead" style="line-height: 1.5">From exploring new opportunities to improving existing products, I work with teams to turn user needs and business goals into experiences that deliver.</p>
         </div>
         <div class="avail-wrap">
           <span class="avail"><span class="dot" aria-hidden="true"></span><span>Open to selected projects and collaborations</span></span>
@@ -210,11 +222,11 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
           <p class="eyebrow" id="work-label">Selected work</p>
           <p class="eyebrow work-years">(2022—26)</p>
         </div>
-        <div class="cards" style="gap: 40px">
+        <div class="cards" style="gap: 80px">
 
           <article>
-            <a class="card" href="case-study-film-tv.html">
-              <div class="card-head"><h2 class="card-title serif">AI Matching for film &amp; TV</h2></div>
+            <a class="card" href="film-tv.html">
+              <div class="card-head"><h2 class="card-title serif">Democratising the Film &amp; TV Industry</h2></div>
               <div class="media">
                 <video class="img-film" src="assets/4535732eef12e130ac1feb3e35d417fa.mp4" autoplay="" muted="" loop="" playsinline="" aria-label="Film crew silhouetted behind a camera rig on a lit stage"></video>
                 <div class="tags sans">
@@ -230,7 +242,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
           
 
           <article>
-            <a class="card" href="case-study-digital-banking.html">
+            <a class="card" href="digital-banking.html">
               <div class="card-head"><h2 class="card-title serif">Digital banking strategy</h2></div>
               <div class="media">
                 <img class="img-banking" src="assets/b52825ad929a11c8da791966712f7fba.webp" alt="Young woman smiling in the street, titled Financial wellbeing evolution" width="2752" height="1536">
@@ -241,7 +253,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
               </div>
             </a>
           </article><article>
-            <a class="card" href="case-study-data-capture.html">
+            <a class="card" href="data-capture.html">
               <div class="card-head"><h2 class="card-title serif">Transforming data capture across the business</h2></div>
               <div class="media">
                 <div class="tags sans">
@@ -251,7 +263,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
               <img src="assets/f85c31d6ba951de9bea105c1ee1f4272.jpg" alt="Two engineers reviewing a data dashboard on a monitor in an industrial plant" width="1536" height="1024" style="object-position: 50% 35%"></div>
             </a>
           </article><article>
-            <a class="card" href="case-study-ohai.html">
+            <a class="card" href="ohai.html">
               <div class="card-head"><h2 class="card-title serif">Ohai.ai · AI family assistant</h2></div>
               <div class="media">
                 <div class="phone-slot">
@@ -268,7 +280,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
           
 
           <article>
-            <a class="card" href="case-study-dsit.html">
+            <a class="card" href="dsit.html">
               <div class="card-head"><h2 class="card-title serif">Digital Verification Services Register · GOV.UK</h2></div>
               <div class="media">
                 <img src="assets/38b4631074ec528218b9f19d2753288c.webp" alt="Synthesis board comparing three iterations of the register's application flow" style="top: 0px">
@@ -279,7 +291,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
               </div>
             </a>
           </article><article>
-            <a class="card" href="case-study-utopia.html">
+            <a class="card" href="utopia.html">
               <div class="card-head"><h2 class="card-title serif">Utopia Adventures · Brand &amp; Booking</h2></div>
               <div class="media">
                 <img src="assets/bcff8757ad38916a5c79094b5ac4081d.webp" alt="Traveller stepping out of a stone house in Zanskar" style="object-position: 50% 66%">
@@ -336,7 +348,7 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
     <aside class="side sans" aria-label="Site navigation">
       <a class="side-logo serif" href="#top" aria-label="Ana García, home">AG</a>
       <nav class="side-nav" aria-label="Sections">
-        <a href="#work" style="font-size: 20px">Work</a>
+        <a href="#work">Work</a>
         <a href="#experience">Experience</a>
         <a href="#notes">Notes</a>
       </nav>
@@ -349,10 +361,8 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
     </aside>
   </div>
 </div>
-
-<script src="assets/dc-shim.js"></script>
-<script>
-
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":5600}}'>
 class Component extends DCLogic {
   // Let's talk: copies the address, shows the confirmation for 3s, then restores the CTA; falls back to a selectable address if copying is blocked.
   setupTalkCopy() {
@@ -475,8 +485,6 @@ renderVals() {
 return {};
 }
 }
-
-(function(){ var c=new Component(); function go(){ c.__mount(); } if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go(); })();
 </script>
 </body>
 </html>
