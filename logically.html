@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logically · Fact-checking App Revamp · Case Study</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preload" href="assets/69cf2f3ba9108901963ca83699d9c30d.ttf" as="font" type="font/ttf" crossorigin="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=Forum&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Univers';src:url(assets/69cf2f3ba9108901963ca83699d9c30d.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0;background:#ffffff}
+a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
+.site{--ink:#11110f;--muted:#706f69;--line:rgba(17,17,15,.22);--bg:#ffffff;--pill:#f4f1e9;--pill-dark:#2a2a28;--green:#20a75a;--panel:#efefec;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Univers',Helvetica,Arial,sans-serif;font-weight:400;font-style:normal}
+.sans{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-weight:400;font-style:normal}
+.eyebrow{margin:0;font-size:12px;line-height:17.28px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+img{display:block;width:100%;height:auto}
+strong,b{font-weight:600}
+
+/* Same page-frame rules as the homepage and the other case studies */
+.wrap{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.main{flex:1 1 auto;min-width:0;max-width:860px;padding:24px;padding-bottom:96px;box-sizing:border-box}
+
+.side{flex:0 0 160px;width:160px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:24px;border-left:1px solid var(--line);background:var(--bg);display:grid;grid-template-rows:auto minmax(16px,1fr) auto minmax(48px,5fr) auto;justify-items:start}
+.side-logo{grid-row:1;font-style:normal;font-size:32px;line-height:32px;align-self:flex-start}
+.side-nav{grid-row:3;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.side-nav a{font-size:16px;line-height:24px}
+.side-social{grid-row:5;align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.side-social a{font-size:16px;line-height:24px}
+/* Email me: a button that copies the address; reset so it looks and behaves exactly like the sidebar links */
+.side-email{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;padding:0;font:inherit;font-size:16px;line-height:24px;color:#11110f;text-align:left;cursor:pointer;align-self:flex-start}
+.side-email:hover{color:#706f69}
+.side-email-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.side-email-fallback{margin:0;font-size:12px;line-height:18px;color:var(--muted)}
+.side-email-fallback[hidden]{display:none}
+.side-email-address{display:block;color:var(--ink);overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+
+.mhead{display:none;align-items:center;justify-content:space-between;padding:13.6px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mhead-logo{font-style:normal;font-size:24px;line-height:36px}
+
+/* Back button: understated pill, reusing the site's pill token, with an intentional hover shift */
+.back-pill{display:inline-flex;align-items:center;padding:16px 36px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font-size:16px;line-height:24px;letter-spacing:.02em;transition:background .25s ease,color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1)}
+.back-pill:hover,.back-pill:focus-visible{background:var(--ink);color:var(--bg);transform:translateX(-3px)}
+.back-pill:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.back-pill:active{transform:translateX(-1px) scale(.97)}
+
+/* Shared case-study header: title and intro on the first row, project details on a second row beneath them */
+.cs-hero{display:flex;flex-direction:column;gap:56px;padding:88px 0 0}
+.cs-hero-lead{display:flex;flex-direction:column;gap:32px}
+.cs-meta{margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:24px 32px;padding-top:24px}
+.cs-meta > div{display:flex;flex-direction:column;gap:6px}
+.cs-meta dd{line-height:1.5}
+
+/* Case-study section rhythm, reusing the homepage's .sec / .sec-head components */
+.sec{padding-top:64px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--ink);padding:13.6px 0;min-height:44.5px;box-sizing:border-box}
+.cs-body{padding-top:32px;display:flex;flex-direction:column;gap:24px}
+/* Every section title, secondary heading and body block spans the full content column; no element sets its own width. */
+.cs-body > :is(h2,h3,h4,p,ul,ol),.cs-body > div > :is(h2,h3,h4,p,ul,ol){width:100%;max-width:none}
+.cs-body > h3{margin-top:16px!important}
+
+/* Case-specific: product-suite hero, visual panels, at-a-glance grids and figures */
+.dc-panel{position:relative;overflow:hidden;border-radius:16px;background:var(--panel);padding:clamp(12px,3vw,32px)}
+.dc-panel img{border-radius:8px}
+/* Sections 01–03: images sit directly on the page; the panel keeps its padding so sizing and position are unchanged */
+.dc-panel.dc-clear{background:transparent}
+.dc-suite{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.2vw,14px);align-items:start}
+.dc-suite img{border-radius:6px}
+.dc-wide{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.dc-wide img{min-width:0}
+.dc-ia{display:grid;grid-template-columns:minmax(0,.58fr) minmax(0,1fr);gap:12px;align-items:start}
+.dc-ia-col{display:flex;flex-direction:column;gap:12px}
+.dc-trio{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.dc-trio figure{margin:0;overflow:hidden;border-radius:12px;background:transparent}
+.dc-trio img{width:100%;height:auto;border-radius:0}
+.dc-cap{font-size:16px;line-height:1.5;color:var(--muted)}
+
+.dc-glance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:20px}
+.dc-glance > div{display:flex;flex-direction:column;gap:6px}
+.dc-glance-t{font-family:'DM Sans',system-ui,sans-serif;font-variation-settings:"opsz" 14;font-style:normal;font-weight:400;font-size:20px;line-height:1.25}
+.dc-glance-d{font-size:16px;line-height:1.5;color:var(--muted)}
+.dc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.dc-stats.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dc-stat{display:flex;flex-direction:column;gap:6px}
+.dc-stat-num{font-size:44px;line-height:1.05;letter-spacing:-.02em}
+.dc-stat-label{font-size:16px;line-height:1.5;color:var(--muted)}
+.dc-note{margin:0;font-size:16px;line-height:1.5;color:var(--muted)}
+.dc-learn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 40px}
+.dc-learn > div{display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.dc-learn h3{margin:0;font-size:24px;line-height:1.25;font-weight:500}
+.dc-learn p{margin:0;font-size:16px;line-height:1.6}
+
+/* Large desktop: use more of the available width, exactly as the homepage does */
+@media (min-width:1600px){
+.wrap{max-width:min(92vw,1920px)}
+.main{max-width:1180px;padding-left:48px;padding-right:48px}
+.side{width:160px;flex:0 0 160px}
+}
+
+/* Large monitors (1440px and up): section dividers and media keep the full content width; titles, body text and text-led blocks keep an 812px reading measure, and the top section keeps its standard-desktop proportions. Left alignment is unchanged. */
+@media (min-width:1440px){
+.site{--cs-measure:812px}
+.cs-hero{max-width:var(--cs-measure)}
+.cs-body > :not(figure):not(:has(img,video,iframe,figure)){max-width:var(--cs-measure)}
+}
+
+/* Tablet: header nav replaces the side column */
+@media (max-width:1079px){
+.wrap{display:block}
+.side{display:none}
+.mhead{display:flex;padding:13.6px 24px}
+.main{max-width:none}
+}
+
+/* Mobile: matches the homepage's 402px Figma frame breakpoint */
+@media (max-width:767px){
+.cs-hero{padding:56px 0 0;gap:40px}
+.cs-meta{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+.mhead{padding:13.6px 20px}
+.main{padding:20px;padding-bottom:64px}
+.sec-head{min-height:45.9px}
+.dc-suite{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:10px;margin:0 -12px;padding:0 12px 4px}
+.dc-suite img{flex:0 0 72%;scroll-snap-align:start}
+.dc-wide img{width:auto;max-width:none;height:260px}
+.dc-ia{grid-template-columns:1fr}
+.dc-ia > img{max-width:64%;margin:0 auto}
+.dc-trio{grid-template-columns:1fr}
+.dc-trio figure{aspect-ratio:auto}
+.dc-trio img{height:auto}
+.dc-glance,.dc-stats,.dc-stats.two,.dc-learn{grid-template-columns:1fr;gap:16px}
+.dc-learn{gap:24px}
+}
+
+/* Case-study storytelling kit, shared by every case study so the structure scales.
+   Page order: hero, lead visual, At a glance, AI in this project, Delivery speed, then the narrative sections.
+   .cs-tbc, .cs-tag.tbc and .cs-visual-todo mark information still to be provided: remove each one before export. */
+.cs-visual{margin:0;display:flex;flex-direction:column;gap:12px}
+.cs-visual-stage{position:relative;overflow:hidden;border-radius:16px;background:var(--pill)}
+.cs-visual-stage > img,.cs-visual-stage > video{display:block;width:100%;height:auto}
+.cs-visual-todo{display:flex;align-items:center;justify-content:center;min-height:280px;padding:32px;border:1px dashed #b45309;border-radius:16px;background:#fff7e6;color:#8a3b00;font-size:16px;line-height:1.5;text-align:center}
+.cs-cap{font-size:16px;line-height:1.5;color:var(--muted)}
+.cs-impact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.cs-impact > div{display:flex;flex-direction:column;gap:12px;padding-top:20px}
+.cs-impact h3{margin:0;font-size:24px;line-height:1.25;font-weight:500}
+.cs-impact p{margin:0;font-size:16px;line-height:1.6}
+.cs-evidence{margin:0;font-size:16px;line-height:1.6;color:var(--muted)}
+.cs-rows{list-style:none;margin:0;padding:0}
+.cs-rows li{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.8fr) minmax(120px,auto);gap:24px;align-items:start;padding:20px 0}
+.cs-row-t{font-size:16px;line-height:1.5;font-weight:600}
+.cs-row-d{font-size:16px;line-height:1.6}
+.cs-row-x{justify-self:end;text-align:right;font-size:16px;line-height:1.5}
+.cs-time{font-weight:600;white-space:nowrap}
+/* Workflow labels: one soft tint per category, with a matching dot; text passes 4.5:1 on every tint */
+.cs-tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px;line-height:18px;letter-spacing:.84px;text-transform:uppercase;white-space:nowrap;border:1px solid transparent;color:var(--ink);background:var(--pill)}
+.cs-tag::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:currentColor}
+.cs-tag.ai-first{background:#ecebfa;border-color:#dcd9f5;color:#423ca0}
+.cs-tag.ai-assisted{background:#e2f1ea;border-color:#cfe6db;color:#1d6a4c}
+.cs-tag.human{background:#f5ebe1;border-color:#ecdccd;color:#8c4a26}
+.cs-tag.tbc{border-style:dashed;border-color:#b45309;color:#8a3b00;background:#fff7e6}
+.cs-tag.tbc::before{content:none}
+.cs-ai{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.cs-ai > div{display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.cs-ai h3{margin:0;font-size:20px;line-height:1.3;font-weight:500}
+.cs-ai p{margin:0;font-size:16px;line-height:1.6}
+.cs-tbc{padding:1px 6px;border:1px dashed #b45309;border-radius:4px;background:#fff7e6;color:#8a3b00;font-size:14px;line-height:1.7;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (max-width:767px){
+.cs-impact,.cs-ai{grid-template-columns:1fr;gap:24px}
+.cs-rows li{grid-template-columns:1fr;gap:8px}
+.cs-row-x{justify-self:start;text-align:left}
+}
+
+/* Case-study sidebar: links to this page's own sections; the one in view is underlined */
+.cs-section[id]{scroll-margin-top:24px}
+.side-nav a.is-active{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+
+/* Logically: stats row, lists, framework cards, before/after journey and final-design gallery */
+.lg-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.lg-list{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;font-size:16px;line-height:1.6}
+.lg-topics{margin:0;padding-left:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:16px;line-height:1.6}
+.lg-four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.lg-four > div{display:flex;flex-direction:column;gap:8px}
+.lg-four .eyebrow{color:var(--ink)}
+.lg-four p{margin:0;font-size:16px;line-height:1.5;color:var(--muted)}
+.lg-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.lg-compare > div{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:var(--pill)}
+.lg-compare > div:last-child{background:#ecebfa}
+.lg-compare ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.5}
+.lg-ph{min-height:0;aspect-ratio:16/10}
+.lg-ph-hero{min-height:0;aspect-ratio:16/9}
+.lg-ph-wide{min-height:0;aspect-ratio:2/1}
+.lg-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.lg-shot{background:#ffffff;border:1px solid var(--line)}
+.lg-shot > img{width:100%;height:auto}
+@media (max-width:767px){
+.lg-stats,.lg-topics,.lg-four,.lg-compare,.lg-gallery{grid-template-columns:1fr}
+.lg-stats{gap:16px}
+.lg-ph,.lg-ph-hero,.lg-ph-wide{aspect-ratio:4/3}
+}
+
+/* More case studies */
+.cs-next{padding-bottom:40px}
+.cs-next-list{list-style:none;margin:0;padding:24px 0 0}
+.cs-next-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:24px;padding:28px 0;border-top:1px solid var(--line);color:var(--ink);transition:opacity .35s ease}
+.cs-next-list li:last-child .cs-next-item{border-bottom:1px solid var(--line)}
+.cs-next-item:hover,.cs-next-item:focus-visible{color:var(--ink)}
+.cs-next-title{display:inline;justify-self:start;font-size:28px;line-height:1.2;padding-bottom:2px;background:linear-gradient(currentColor,currentColor) no-repeat 0 100% / 0 1px;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-size .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-meta{display:flex;align-items:baseline;gap:24px}
+.cs-next-meta .eyebrow{white-space:nowrap}
+.cs-next-arrow{display:inline-block;font-family:'DM Sans',system-ui,sans-serif;font-size:24px;line-height:24px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.cs-next-list:hover .cs-next-item:not(:hover),.cs-next-list:focus-within .cs-next-item:not(:focus-visible):not(:hover){opacity:.35}
+.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title{transform:translateX(14px);background-size:100% 1px}
+.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:translate(4px,-4px)}
+.cs-next-item:focus-visible,.cs-next .sec-head a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media (max-width:767px){
+.cs-next-item{grid-template-columns:minmax(0,1fr) 24px;column-gap:12px;row-gap:8px;padding:22px 0;align-items:start}
+.cs-next-title{font-size:24px;grid-column:1}
+.cs-next-meta{display:contents}
+.cs-next-meta .eyebrow{grid-column:1;grid-row:2;white-space:normal}
+.cs-next-arrow{grid-column:2;grid-row:1;justify-self:end}
+}
+@media (prefers-reduced-motion:reduce){.cs-next-title,.cs-next-arrow{transition:none}.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title,.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:none}}
+
+/* Motion polish: page content fades out as you leave and settles in when the next page is ready (the sidebar stays put), gentle scrolling and one hover timing across the site; reduced motion keeps only plain fades */
+.main{animation:ag-in .4s cubic-bezier(.2,.7,.2,1) backwards}
+html.ag-leaving .main{opacity:0;transition:opacity .18s ease}
+@keyframes ag-in{from{opacity:0;transform:translateY(8px)}}
+@keyframes ag-fade{from{opacity:0}}
+:where(a){transition:color .2s ease,opacity .2s ease}
+.side-email,.talk{transition:color .2s ease}
+.side-nav a{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:5px;transition:color .2s ease,text-decoration-color .25s ease}
+.side-nav a.is-active{text-decoration-color:currentColor}
+:where(a,button):focus-visible{outline:2px solid var(--ink,#11110f);outline-offset:4px}
+@media (hover:none){
+.cs-next-list:hover .cs-next-item:not(:hover){opacity:1}
+.cs-next-item:hover .cs-next-title,.cs-next-item:hover .cs-next-arrow{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.main{animation-name:ag-fade;animation-duration:.25s}
+.back-pill,.back-pill:hover,.back-pill:focus-visible,.back-pill:active{transform:none}
+}
+</style>
+</helmet>
+<div class="site">
+  <header class="mhead">
+    <a class="mhead-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+  </header>
+
+  <div class="wrap" id="top">
+    <main class="main">
+
+      <a href="index.html" class="back-pill sans">Back</a>
+
+      <header class="cs-hero">
+        <div class="cs-hero-lead">
+          <h1 class="serif" style="margin: 0; font-style: normal; font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400">Making fact-checking clear enough to&nbsp;trust</h1>
+          <p class="lead" style="margin: 0; font-size: 18px; line-height: 1.5; color: #11110f; max-width: 48ch; text-wrap: pretty;">Logically set out to fight misinformation, but its consumer app asked people to trust a fact-checking service they couldn’t understand. I researched how people in the UK, US and India decide what to believe, then redesigned the fact-checking experience so it explains itself, shows useful evidence straight away and keeps people informed until their answer arrives.</p>
+        </div>
+        <dl class="cs-meta">
+          <div><dt class="eyebrow" style="margin:0">Client</dt><dd style="margin: 0; font-size: 16px;">Logically</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Industry</dt><dd style="margin: 0; font-size: 16px;">Media &amp; Information Integrity</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Role</dt><dd style="margin: 0; font-size: 16px;">User research &amp; product design</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Disciplines</dt><dd style="margin: 0; font-size: 16px;">User Research · UX Design · Prototyping · Usability Testing</dd></div>
+          <div><dt class="eyebrow" style="margin:0">Timeline</dt><dd style="margin: 0; font-size: 16px;">2.5 months · 2020</dd></div>
+        </dl>
+      </header>
+
+      <figure class="cs-visual" style="margin-top: 56px">
+        <div class="cs-visual-stage lg-shot"><img src="assets/ff7b0b958ad99310970bc40b6755c779.webp" alt="Redesigned Logically app: the Fact Finder home screen and the Let’s get started screen for submitting a claim" width="1800" height="2039"></div>
+      </figure>
+
+      <section class="cs-section sec" id="key-takeaways">
+        <div class="sec-head"><span class="cs-label eyebrow">Key takeaways</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Retention up 10× in a 2.5-month relaunch</h2>
+          <div class="dc-stats serif lg-stats">
+            <div class="dc-stat"><span class="dc-stat-num">10×</span><span class="dc-stat-label sans">Increase in user retention</span></div>
+            <div class="dc-stat"><span class="dc-stat-num">+13%</span><span class="dc-stat-label sans">Increase in NPS</span></div>
+            <div class="dc-stat"><span class="dc-stat-num">+18%</span><span class="dc-stat-label sans">Increase in organic adoption</span></div>
+            <div class="dc-stat"><span class="dc-stat-num">2.5 months</span><span class="dc-stat-label sans">To launch</span></div>
+          </div>
+          <p class="dc-note">The targets were a 5× increase in retention and a 10% rise in NPS, alongside growing the user base in the UK, US and India through Logically’s B2B and B2C products.</p>
+          <div class="cs-impact">
+            <div>
+              <span class="eyebrow">01</span>
+              <h3 class="sans">Understanding how people assess information</h3>
+              <p>I interviewed people across the UK, US and India and combined what I heard with product analytics, a usability assessment of the existing app and a review of competitors.</p>
+            </div>
+            <div>
+              <span class="eyebrow">02</span>
+              <h3 class="sans">A fact-checking journey that explains itself</h3>
+              <p>I redesigned the core journey so people understand the service before they use it, see relevant evidence immediately and know what happens after they submit a claim.</p>
+            </div>
+            <div>
+              <span class="eyebrow">03</span>
+              <h3 class="sans">From research to launch in 2.5 months</h3>
+              <p>I ran seven-day design sprints for each of the app’s three main functions, tested the designs with users in London and worked with front-end developers to build them.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="challenge">
+        <div class="sec-head"><span class="cs-label eyebrow">Challenge</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">A gap between the promise and the experience</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Logically wanted its app to be a tool against misinformation. In practice, the fact-checking service left people with more questions than answers, and retention was extremely low. The problems came down to three things:</p>
+          <ol class="lg-list">
+            <li><strong>People didn’t understand what fact-checking meant.</strong></li>
+            <li><strong>They didn’t know what would happen after submitting a claim,</strong> or when they would get an answer.</li>
+            <li><strong>The product offering was unclear,</strong> and so was who it was for.</li>
+          </ol>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Underneath all three was a credibility problem. Misinformation is a sensitive subject, and a product that asks people to trust its verification has to explain what it does and why its results are reliable. The original app did neither. The issue wasn’t usability alone: the experience didn’t deliver what the product promised.</p>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/87f8e1c04eba936652ae9f5bd65d3b9e.webp" alt="App health, May–June 2020: users by country, active users, daily engagement, platform split and fact-check usage" width="1800" height="2218" loading="lazy"></div></figure>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/db65bb5ddfdc67e5f69364184bcb6ec7.webp" alt="Problems identified in the original fact-checking experience" width="1800" height="2390" loading="lazy"></div></figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="research">
+        <div class="sec-head"><span class="cs-label eyebrow">Research</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">How people decide what to believe</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I ran the research during the 2020 lockdowns, interviewing people in the UK, US and India over Zoom and Google Meet. Contextual inquiry showed me how people check information within their own routines, and stakeholder interviews set out the business goals the redesign had to serve.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">To see where the existing app was failing, I assessed its usability and user journeys and analysed Google Analytics and internal product data. A competitor analysis showed me how other services handle verification. I brought everything together through affinity mapping and turned the findings into personas.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The interviews focused on the judgements people make every day:</p>
+          <ul class="lg-topics">
+            <li>Telling facts from opinions</li>
+            <li>Verifying information and judging its accuracy</li>
+            <li>Deciding which news sources to trust</li>
+            <li>Recognising bias and political influence</li>
+            <li>Understanding what makes information credible and unbiased</li>
+            <li>Finding information quickly</li>
+            <li>Verifying local news</li>
+          </ul>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">What I learned fed directly into the redesign, which focuses on making the service transparent, setting clear expectations and giving people useful information at every step.</p>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/0dd1de7e1b6faca2700bd3203482fad0.webp" alt="Research synthesis: the words and questions captured from users, from fact versus opinion to which sources to trust" width="1800" height="1924" loading="lazy"></div></figure>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/3fe707d4f36d7815bdcfdc163546115e.webp" alt="Competitor analysis: Open Secrets, PolitiFact, ProPublica, Snopes and the Sunlight Foundation" width="1800" height="2323" loading="lazy"></div></figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="framework">
+        <div class="sec-head"><span class="cs-label eyebrow">Framework</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Four questions behind every verdict</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I grounded the experience in an information-verification framework that assesses information across four dimensions:</p>
+          <div class="lg-four">
+            <div><span class="eyebrow">Authority</span><p>Who created the information and where it originated.</p></div>
+            <div><span class="eyebrow">Accuracy</span><p>Whether claims are supported by reliable evidence.</p></div>
+            <div><span class="eyebrow">Objectivity</span><p>Whether the information is presented with bias or prejudice.</p></div>
+            <div><span class="eyebrow">Timeliness</span><p>Whether the information is current and relevant.</p></div>
+          </div>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/a446d29e851398952f856f79a206c4ad.webp" alt="Information-verification framework: read, verify, ingest, spread, and the four dimensions of authority, accuracy, objectivity and timeliness" width="1800" height="2403" loading="lazy"></div></figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="journey">
+        <div class="sec-head"><span class="cs-label eyebrow">The journey</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Redesigning the fact-checking journey</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">In the original app, fact-checking meant finding the right icon, submitting a link and waiting. Once a claim was sent, people had no idea how it would be investigated or when they would hear back.</p>
+          <div class="lg-compare">
+            <div>
+              <span class="eyebrow">Before</span>
+              <ol>
+                <li>Open the app</li>
+                <li>Find the fact-checking icon</li>
+                <li>Select “Verify your Claim”</li>
+                <li>Paste a link</li>
+                <li>Choose the closest matching claim</li>
+                <li>Submit the claim to the fact-checking team</li>
+                <li>Receive a confirmation message</li>
+              </ol>
+            </div>
+            <div>
+              <span class="eyebrow">After</span>
+              <ol>
+                <li>Learn how the fact-checking service works</li>
+                <li>Paste or type a claim</li>
+                <li>See related articles, claims and sources</li>
+                <li>A loading state while the claim is processed</li>
+                <li>Get information that helps you make an informed decision</li>
+                <li>Choose: found your answer, or send the claim to the fact-checking team</li>
+                <li>Learn what to expect from the service</li>
+                <li>Receive real-time updates</li>
+              </ol>
+            </div>
+          </div>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/25777566be0b2bb3487ebec60cf844d0.webp" alt="Side by side: the original fact-checking journey and the redesigned journey" width="2171" height="1400" loading="lazy"></div></figure>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I rebuilt the journey to make the service transparent, set expectations and give people something useful at every step, instead of asking them to submit a claim and wait.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The new journey opens by explaining how the service works, answering the question the original app never did: what fact-checking actually means here. As soon as someone pastes or types a claim, the app shows related articles, claims and sources, so they can start forming an informed view straight away.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Only then does it ask whether they found what they needed or want the fact-checking team to investigate. If they submit the claim, the app explains what to expect and keeps them updated in real time.</p>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/6eef04ee0db62c8fc462783808c9e30a.webp" alt="The original fact-checking journey, from app launch to “claim submitted successfully”" width="1800" height="2332" loading="lazy"></div></figure>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/3adcde8f63c65238fb16ae33c5b061d4.webp" alt="Redesigned journey, steps 1 to 6: how it works, entering a claim, related articles and sources, loading and results" width="1800" height="2445" loading="lazy"></div></figure>
+          <figure class="cs-visual"><div class="cs-visual-stage lg-shot"><img src="assets/faa13741feb1da5ba12c37dfe64cb5ac.webp" alt="Redesigned journey, steps 7 and 8: what to expect from the service and real-time updates" width="1800" height="2337" loading="lazy"></div></figure>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="delivery">
+        <div class="sec-head"><span class="cs-label eyebrow">Delivery</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">Seven-day sprints, live in 2.5 months</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I started by defining the product and UX goals and mapping personas and user journeys, then moved into wireframes and prototypes. The app had three main functions, and I worked through each one in a seven-day design sprint.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">I tested the designs with users in London, iterated on their feedback and worked with the front-end developers as they built the screens. The app launched within 2.5 months. This case study focuses on the fact-checking service.</p>
+          <ul class="cs-rows" aria-label="Delivery stages">
+            <li><span class="cs-row-t">Goals &amp; journeys</span><span class="cs-row-d">Product and UX goals, personas and user journeys.</span><span class="cs-row-x"></span></li>
+            <li><span class="cs-row-t">Design sprints</span><span class="cs-row-d">Wireframes and prototypes for each of the three main app functions.</span><span class="cs-row-x"><span class="cs-time">3 × 7 days</span></span></li>
+            <li><span class="cs-row-t">Testing</span><span class="cs-row-d">User testing in London, then iteration on the feedback.</span><span class="cs-row-x"></span></li>
+            <li><span class="cs-row-t">Build &amp; launch</span><span class="cs-row-d">Designs developed with the front-end developers and launched.</span><span class="cs-row-x"><span class="cs-time">2.5 months in total</span></span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="final-designs">
+        <div class="sec-head"><span class="cs-label eyebrow">Final designs</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">The redesigned app</h2>
+          <div class="lg-gallery">
+            <div class="cs-visual-stage lg-shot"><img src="assets/d5989b90afe9b752c22ba5a1e6771a6f.webp" alt="Final design: entering a claim and Here’s what we found, with related claims to investigate" width="1800" height="2152" loading="lazy"></div>
+            <div class="cs-visual-stage lg-shot"><img src="assets/32cbc79e891c070f42069bda9fe1e11d.webp" alt="Final design: the results screens with context, evidence and a credibility score" width="1800" height="2094" loading="lazy"></div>
+            <div class="cs-visual-stage lg-shot"><img src="assets/019dc823c4dca9744ffd0ebc0e28b9cc.webp" alt="Final design: evidence, requesting a fact-check and real-time results" width="1800" height="2041" loading="lazy"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section sec" id="outcomes">
+        <div class="sec-head"><span class="cs-label eyebrow">Outcomes</span></div>
+        <div class="cs-body">
+          <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500;">A service people understood, and came back to</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Within 2.5 months, the redesigned app was live. Retention rose 10×, double the 5× target. NPS increased by 13% against a 10% target, and organic adoption grew by 18%. By explaining what fact-checking is, showing the evidence up front and keeping people informed, the experience began to match what the product promised.</p>
+        </div>
+      </section>
+
+      <section class="cs-section sec cs-next" aria-labelledby="cs-next-label">
+        <div class="sec-head"><span class="cs-label eyebrow" id="cs-next-label">More case studies</span><a class="eyebrow" href="index.html#work">All work</a></div>
+        <nav aria-label="More case studies"><ul class="cs-next-list">
+          <li><a class="cs-next-item" href="film-tv.html"><span class="cs-next-title serif">Democratising the Film &amp; TV Industry</span><span class="cs-next-meta"><span class="eyebrow">Film &amp; TV</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="digital-banking.html"><span class="cs-next-title serif">Digital banking strategy</span><span class="cs-next-meta"><span class="eyebrow">Retail &amp; Business Banking</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="data-capture.html"><span class="cs-next-title serif">Transforming data capture across the business</span><span class="cs-next-meta"><span class="eyebrow">Energy</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="ohai.html"><span class="cs-next-title serif">Ohai.ai · AI family assistant</span><span class="cs-next-meta"><span class="eyebrow">AI &amp; Enterprise Software</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="dsit.html"><span class="cs-next-title serif">Digital Verification Services Register · GOV.UK</span><span class="cs-next-meta"><span class="eyebrow">Public Sector</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+          <li><a class="cs-next-item" href="utopia.html"><span class="cs-next-title serif">Utopia Adventures · Brand &amp; Booking</span><span class="cs-next-meta"><span class="eyebrow">Hospitality &amp; Travel</span><span class="cs-next-arrow" aria-hidden="true">↗</span></span></a></li>
+        </ul></nav>
+      </section>
+
+    </main>
+
+    <aside class="side sans" aria-label="Site navigation">
+      <a class="side-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
+      <nav class="side-nav" aria-label="Case study sections">
+        <a href="#key-takeaways">Key takeaways</a>
+        <a href="#challenge">Challenge</a>
+        <a href="#research">Research</a>
+        <a href="#framework">Framework</a>
+        <a href="#journey">The journey</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#final-designs">Final designs</a>
+        <a href="#outcomes">Outcomes</a>
+      </nav>
+      <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
+        <span class="side-email-sr" id="side-email-hint">Copies my email address to your clipboard</span>
+        <span class="side-email-sr" role="status" aria-live="polite" data-copy-email-status=""></span>
+        <p class="side-email-fallback" hidden="" data-copy-email-fallback="">Couldn’t copy automatically. Select and copy:<span class="side-email-address">Anagvpersonal@gmail.com</span></p>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":17500}}'>
+class Component extends DCLogic {
+  // Sidebar section links: underline the section currently in view as the visitor scrolls.
+  setupSectionNav() {
+    if (window.__agSectionNav) return;
+    window.__agSectionNav = true;
+    let raf = 0, lock = false, lockTimer = 0;
+    const update = () => {
+      raf = 0;
+      if (lock) return;
+      const links = Array.from(document.querySelectorAll('.side-nav a[href^="#"]'));
+      const items = links.map((a) => ({ a, el: document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))) })).filter((x) => x.el);
+      if (!items.length) return;
+      const line = window.innerHeight * 0.35;
+      let cur = null;
+      items.forEach((it) => { if (it.el.getBoundingClientRect().top <= line) cur = it; });
+      const doc = document.documentElement;
+      if (cur && window.innerHeight + window.scrollY >= doc.scrollHeight - 2) cur = items[items.length - 1];
+      items.forEach((it) => {
+        const on = it === cur;
+        it.a.classList.toggle('is-active', on);
+        if (on) it.a.setAttribute('aria-current', 'location'); else it.a.removeAttribute('aria-current');
+      });
+    };
+    const request = () => { if (!raf) raf = requestAnimationFrame(update); };
+    // A clicked section link is underlined straight away and held while the page glides there, so the underline doesn't flicker through the sections in between.
+    const release = () => { clearTimeout(lockTimer); if (!lock) return; lock = false; request(); };
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('.side-nav a[href^="#"]') : null;
+      if (!a) return;
+      document.querySelectorAll('.side-nav a[href^="#"]').forEach((x) => {
+        const on = x === a;
+        x.classList.toggle('is-active', on);
+        if (on) x.setAttribute('aria-current', 'location'); else x.removeAttribute('aria-current');
+      });
+      lock = true;
+      clearTimeout(lockTimer);
+      lockTimer = setTimeout(release, 1200);
+      // Glide to the section without adding a history entry, so the browser's Back button returns to the previous page (same as the homepage links).
+      const id = decodeURIComponent(a.getAttribute('href').slice(1));
+      const el = id && document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'start' });
+      try { history.replaceState(null, '', '#' + id); } catch (err) {}
+    });
+    window.addEventListener('scrollend', release);
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
+  }
+  // Email me: copies the address to the clipboard, confirms for 2s, and falls back to a selectable address if copying is blocked.
+  setupEmailCopy() {
+    if (window.__agEmailCopy) return;
+    window.__agEmailCopy = true;
+    const timers = new WeakMap();
+    const setLabel = (btn, text) => { const n = btn.firstChild; if (n && n.nodeType === 3) n.nodeValue = text; else btn.textContent = text; };
+    const announce = (btn, msg) => {
+      const s = btn.parentNode.querySelector('[data-copy-email-status]');
+      if (!s) return;
+      s.textContent = '';
+      setTimeout(() => { s.textContent = msg; }, 60);
+    };
+    const legacyCopy = (text) => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = (text) => {
+      const modern = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+      return modern.catch(() => { if (!legacyCopy(text)) throw new Error('copy failed'); });
+    };
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-copy-email]') : null;
+      if (!btn) return;
+      e.preventDefault();
+      const email = btn.getAttribute('data-copy-email');
+      const label = btn.getAttribute('data-label') || btn.textContent.trim();
+      btn.setAttribute('data-label', label);
+      const fallback = btn.parentNode.querySelector('[data-copy-email-fallback]');
+      clearTimeout(timers.get(btn));
+      copy(email).then(() => {
+        if (fallback) fallback.hidden = true;
+        setLabel(btn, 'Email copied!');
+        announce(btn, 'Email address copied to clipboard');
+        timers.set(btn, setTimeout(() => setLabel(btn, label), 2000));
+      }, () => {
+        setLabel(btn, label);
+        if (fallback) {
+          fallback.hidden = false;
+          const addr = fallback.querySelector('.side-email-address');
+          if (addr) { const r = document.createRange(); r.selectNodeContents(addr); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        }
+        announce(btn, 'Couldn’t copy automatically. The email address, ' + email + ', is shown below the button and selected, ready to copy.');
+      });
+    });
+  }
+  // Motion: fade between pages, keep the homepage position when coming back from a case study, and pause card videos while they are off screen.
+  setupMotion() {
+    const isHome = !!document.querySelector('.cards .card');
+    const flag = isHome ? '__agMotionHome' : '__agMotionCase';
+    if (window[flag]) return;
+    window[flag] = true;
+    const KEY = 'ag-home-scroll', RET = 'ag-home-return';
+    const get = (k) => { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
+    const set = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} };
+    const del = (k) => { try { sessionStorage.removeItem(k); } catch (e) {} };
+    // Leaving for another page: fade the content out while the next page loads (navigation is not delayed).
+    const root = document.documentElement;
+    document.addEventListener('click', (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+      const href = a.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#') return;
+      let url;
+      try { url = new URL(a.href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin || !/(\.html|\/)$/.test(url.pathname) || url.pathname === location.pathname) return;
+      root.classList.add('ag-leaving');
+      setTimeout(() => { if (e.defaultPrevented) root.classList.remove('ag-leaving'); }, 0);
+      clearTimeout(window.__agLeaveTimer);
+      window.__agLeaveTimer = setTimeout(() => root.classList.remove('ag-leaving'), 1500);
+    });
+    window.addEventListener('pageshow', () => root.classList.remove('ag-leaving'));
+    if (!isHome) {
+      document.addEventListener('click', (e) => { if (e.target && e.target.closest && e.target.closest('a.back-pill')) set(RET, '1'); }, true);
+      return;
+    }
+    const save = () => set(KEY, String(Math.round(window.scrollY)));
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (a && (a.getAttribute('href') || '').charAt(0) !== '#') save();
+    }, true);
+    window.addEventListener('pagehide', save);
+    let type = 'navigate';
+    try { type = performance.getEntriesByType('navigation')[0].type; } catch (e) {}
+    const y = parseInt(get(KEY), 10);
+    const back = get(RET) === '1' || type === 'back_forward';
+    del(RET);
+    if (back && y > 0) {
+      try { history.scrollRestoration = 'manual'; } catch (e) {}
+      let moved = false;
+      const go = () => { if (!moved) window.scrollTo({ top: y, left: 0, behavior: 'instant' }); };
+      go();
+      requestAnimationFrame(go);
+      const stop = () => { moved = true; };
+      window.addEventListener('wheel', stop, { once: true, passive: true });
+      window.addEventListener('touchstart', stop, { once: true, passive: true });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+        const v = en.target;
+        if (en.isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause();
+      }), { rootMargin: '200px 0px' });
+      document.querySelectorAll('.cards video').forEach((v) => io.observe(v));
+    }
+  }
+  componentDidMount() {
+    this.setupMotion();
+    this.setupEmailCopy();
+    this.setupSectionNav();
+  }
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

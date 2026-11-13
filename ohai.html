@@ -9,6 +9,7 @@
 <body>
 <x-dc>
 <helmet>
+<link rel="preload" href="assets/69cf2f3ba9108901963ca83699d9c30d.ttf" as="font" type="font/ttf" crossorigin="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=Forum&amp;display=swap" rel="stylesheet">
 <style>
@@ -142,6 +143,26 @@ strong,b{font-weight:600}
 .cs-next-arrow{grid-column:2;grid-row:1;justify-self:end}
 }
 @media (prefers-reduced-motion:reduce){.cs-next-title,.cs-next-arrow{transition:none}.cs-next-item:hover .cs-next-title,.cs-next-item:focus-visible .cs-next-title,.cs-next-item:hover .cs-next-arrow,.cs-next-item:focus-visible .cs-next-arrow{transform:none}}
+
+/* Motion polish: page content fades out as you leave and settles in when the next page is ready (the sidebar stays put), gentle scrolling and one hover timing across the site; reduced motion keeps only plain fades */
+.main{animation:ag-in .4s cubic-bezier(.2,.7,.2,1) backwards}
+html.ag-leaving .main{opacity:0;transition:opacity .18s ease}
+@keyframes ag-in{from{opacity:0;transform:translateY(8px)}}
+@keyframes ag-fade{from{opacity:0}}
+:where(a){transition:color .2s ease,opacity .2s ease}
+.side-email,.talk{transition:color .2s ease}
+.side-nav a{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:5px;transition:color .2s ease,text-decoration-color .25s ease}
+.side-nav a.is-active{text-decoration-color:currentColor}
+:where(a,button):focus-visible{outline:2px solid var(--ink,#11110f);outline-offset:4px}
+@media (hover:none){
+.cs-next-list:hover .cs-next-item:not(:hover){opacity:1}
+.cs-next-item:hover .cs-next-title,.cs-next-item:hover .cs-next-arrow{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.main{animation-name:ag-fade;animation-duration:.25s}
+.back-pill,.back-pill:hover,.back-pill:focus-visible,.back-pill:active{transform:none}
+}
 </style>
 </helmet>
 <div class="site">
@@ -262,9 +283,9 @@ strong,b{font-weight:600}
     <aside class="side sans" aria-label="Site navigation">
       <a class="side-logo serif" href="index.html" aria-label="Ana García, home">AG</a>
       <nav class="side-nav" aria-label="Case study sections">
-        <a href="#challenge">01 — Challenge</a>
-        <a href="#approach">02 — Approach</a>
-        <a href="#outcome">03 — Outcome</a>
+        <a href="#challenge">Challenge</a>
+        <a href="#approach">Approach</a>
+        <a href="#outcome">Outcome</a>
       </nav>
       <div class="side-social"><a href="https://www.linkedin.com/in/ana-garcia-villanueva/">LinkedIn <span aria-hidden="true">↗</span></a>
         <button type="button" class="side-email" data-copy-email="Anagvpersonal@gmail.com" aria-describedby="side-email-hint">Email me</button>
@@ -282,9 +303,10 @@ class Component extends DCLogic {
   setupSectionNav() {
     if (window.__agSectionNav) return;
     window.__agSectionNav = true;
-    let raf = 0;
+    let raf = 0, lock = false, lockTimer = 0;
     const update = () => {
       raf = 0;
+      if (lock) return;
       const links = Array.from(document.querySelectorAll('.side-nav a[href^="#"]'));
       const items = links.map((a) => ({ a, el: document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))) })).filter((x) => x.el);
       if (!items.length) return;
@@ -300,6 +322,29 @@ class Component extends DCLogic {
       });
     };
     const request = () => { if (!raf) raf = requestAnimationFrame(update); };
+    // A clicked section link is underlined straight away and held while the page glides there, so the underline doesn't flicker through the sections in between.
+    const release = () => { clearTimeout(lockTimer); if (!lock) return; lock = false; request(); };
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('.side-nav a[href^="#"]') : null;
+      if (!a) return;
+      document.querySelectorAll('.side-nav a[href^="#"]').forEach((x) => {
+        const on = x === a;
+        x.classList.toggle('is-active', on);
+        if (on) x.setAttribute('aria-current', 'location'); else x.removeAttribute('aria-current');
+      });
+      lock = true;
+      clearTimeout(lockTimer);
+      lockTimer = setTimeout(release, 1200);
+      // Glide to the section without adding a history entry, so the browser's Back button returns to the previous page (same as the homepage links).
+      const id = decodeURIComponent(a.getAttribute('href').slice(1));
+      const el = id && document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'start' });
+      try { history.replaceState(null, '', '#' + id); } catch (err) {}
+    });
+    window.addEventListener('scrollend', release);
     window.addEventListener('scroll', request, { passive: true });
     window.addEventListener('resize', request);
     update();
@@ -355,7 +400,69 @@ class Component extends DCLogic {
       });
     });
   }
+  // Motion: fade between pages, keep the homepage position when coming back from a case study, and pause card videos while they are off screen.
+  setupMotion() {
+    const isHome = !!document.querySelector('.cards .card');
+    const flag = isHome ? '__agMotionHome' : '__agMotionCase';
+    if (window[flag]) return;
+    window[flag] = true;
+    const KEY = 'ag-home-scroll', RET = 'ag-home-return';
+    const get = (k) => { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
+    const set = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} };
+    const del = (k) => { try { sessionStorage.removeItem(k); } catch (e) {} };
+    // Leaving for another page: fade the content out while the next page loads (navigation is not delayed).
+    const root = document.documentElement;
+    document.addEventListener('click', (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+      const href = a.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#') return;
+      let url;
+      try { url = new URL(a.href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin || !/(\.html|\/)$/.test(url.pathname) || url.pathname === location.pathname) return;
+      root.classList.add('ag-leaving');
+      setTimeout(() => { if (e.defaultPrevented) root.classList.remove('ag-leaving'); }, 0);
+      clearTimeout(window.__agLeaveTimer);
+      window.__agLeaveTimer = setTimeout(() => root.classList.remove('ag-leaving'), 1500);
+    });
+    window.addEventListener('pageshow', () => root.classList.remove('ag-leaving'));
+    if (!isHome) {
+      document.addEventListener('click', (e) => { if (e.target && e.target.closest && e.target.closest('a.back-pill')) set(RET, '1'); }, true);
+      return;
+    }
+    const save = () => set(KEY, String(Math.round(window.scrollY)));
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (a && (a.getAttribute('href') || '').charAt(0) !== '#') save();
+    }, true);
+    window.addEventListener('pagehide', save);
+    let type = 'navigate';
+    try { type = performance.getEntriesByType('navigation')[0].type; } catch (e) {}
+    const y = parseInt(get(KEY), 10);
+    const back = get(RET) === '1' || type === 'back_forward';
+    del(RET);
+    if (back && y > 0) {
+      try { history.scrollRestoration = 'manual'; } catch (e) {}
+      let moved = false;
+      const go = () => { if (!moved) window.scrollTo({ top: y, left: 0, behavior: 'instant' }); };
+      go();
+      requestAnimationFrame(go);
+      const stop = () => { moved = true; };
+      window.addEventListener('wheel', stop, { once: true, passive: true });
+      window.addEventListener('touchstart', stop, { once: true, passive: true });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+        const v = en.target;
+        if (en.isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause();
+      }), { rootMargin: '200px 0px' });
+      document.querySelectorAll('.cards video').forEach((v) => io.observe(v));
+    }
+  }
   componentDidMount() {
+    this.setupMotion();
     this.setupEmailCopy();
     this.setupSectionNav();
     const v = document.querySelector('.cs-hero-media video');
