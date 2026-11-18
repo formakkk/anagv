@@ -83,8 +83,11 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 /* Large monitors: the phone sits centred and fully visible inside the card */
 @media (min-width:1600px){.phone-slot{top:50%;transform:translate(-50%,-50%);width:auto;height:88%}
 .phone-slot ~ .tags{right:calc(50% + 111px)}}
-/* Banking thumbnail: crop is expressed in percentages of the card so it scales with it, never stretched */
-.media .img-banking{inset:auto;left:-1.23%;top:-7.39%;width:135.7%;height:143.8%;max-width:none;object-fit:cover}
+/* Banking thumbnail: the attached Aisling photo as background, with the live prototype playing in its phone mockup on top */
+.media .img-youth{object-position:50% 30%}
+.bank-phone{position:absolute;right:6%;top:50%;transform:translateY(-50%);height:86%;aspect-ratio:716/1444;z-index:1;pointer-events:none}
+.media .bank-phone video{inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0.4% 1.4% 0.3% 1.8% round 15% / 7.4%);transition:none}
+.card:hover .media .bank-phone video,.card:focus-visible .media .bank-phone video{transform:none}
 .tags{position:absolute;left:24px;right:24px;top:38px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{display:inline-block;background:var(--pill);color:var(--ink);border-radius:999px;padding:4px 8px;font-size:12px;line-height:18px;letter-spacing:.84px;text-transform:uppercase;white-space:nowrap}
@@ -174,7 +177,9 @@ a{color:#11110f;text-decoration:none}a:hover{color:#706f69}
 .exp-quote{max-width:none}
 .media{aspect-ratio:auto;height:288px}
 .media .img-film{object-fit:cover;object-position:55.6% 50%}
-.media .img-banking{inset:0;left:0;top:0;width:100%;height:100%;object-position:0 50%}
+.media .img-youth{object-position:100% 50%}
+.bank-phone{height:80%}
+.bank-phone ~ .tags{right:calc(6% + 128px)}
 .phone-slot{width:auto;height:130%;border-radius:16% / 7.343%;top:33.333% !important;transform:translateX(-50%)}
 .shade{display:block;position:absolute;inset:0;background:rgba(0,0,0,.2)}
 .tags{left:16px;right:16px;top:16px;gap:12px}
@@ -281,7 +286,8 @@ html{scroll-behavior:auto}
             <a class="card" href="digital-banking.html">
               <div class="card-head"><h2 class="card-title serif">Digital banking strategy</h2></div>
               <div class="media">
-                <img class="img-banking" src="assets/b52825ad929a11c8da791966712f7fba.webp" alt="Young woman smiling in the street, titled Financial wellbeing evolution" width="2752" height="1536">
+                <img class="img-youth" src="assets/b4d7f38694349258697be2c7749e62cf.jpg" alt="Aisling checking her banking app on her phone outside a modern building" width="1376" height="768">
+                <div class="bank-phone"><video src="assets/335de9d1631604f106f988ee4c393d19.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" disableremoteplayback="" aria-label="Youth prototype walkthrough on mobile"></video></div>
                 <div class="tags sans">
                   <div class="pills"><span class="pill">Digital Strategy</span><span class="pill">Prototyping</span><span class="pill">Storytelling</span></div>
                   <span class="pill dark">Retail &amp; Business Banking</span>

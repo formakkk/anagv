@@ -117,7 +117,7 @@ strong,b{font-weight:600}
 .db-cs .hzm > div:nth-child(16)::before,.db-cs .hzm > div:nth-child(17)::before,.db-cs .hzm > div:nth-child(18)::before{content:"Business · Páraic"}
 .db-cs [data-youth-media]{aspect-ratio:4/5!important}
 .db-cs [data-youth-media] > img{object-position:100% 50%}
-.db-cs #youth-vid{right:13.33%!important}
+.db-cs #youth-vid{right:13.33%!important;padding:1.1%!important}
 .db-cs [data-everyday-media]{aspect-ratio:4/5!important}
 .db-cs [data-everyday-media] > img{object-position:36.7% 50%}
 .db-cs [data-everyday-media] > img.ev-clean{opacity:1!important}
@@ -140,6 +140,20 @@ strong,b{font-weight:600}
 .db-slides img{border-radius:8px;aspect-ratio:526/318;object-fit:cover}
 
 .db-journey{display:flex;flex-direction:column;gap:20px}
+/* Prototypes lead the case study: the mobile mockups alone, side by side right under the project details, with no backgrounds or captions */
+.db-protos{display:flex;justify-content:flex-start;align-items:center;gap:clamp(32px,9cqi,112px);margin-top:56px}
+/* One device template for both phones: thin black bezel, same proportions and radii, a dynamic island, and the screen recording clipped to the screen */
+.db-device{--h:clamp(380px,64cqi,640px);position:relative;flex:none;height:var(--h);aspect-ratio:467/1000;box-sizing:border-box;padding:calc(var(--h) * .0085);border-radius:14% / 6.6%;background:#0b0b0c}
+.db-device-screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:12.6% / 5.9%;background:#fff;isolation:isolate}
+.db-device-screen video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block;pointer-events:none}
+.db-device-screen video.db-device-crop{inset:auto;left:-7.15%;top:-2.85%;width:114.3%;height:105.7%;object-fit:fill}
+.db-device-island{position:absolute;left:50%;top:0.6%;width:29%;height:4.1%;transform:translateX(-50%);border-radius:999px;background:#000;z-index:1}
+/* Mobile: the phones keep their size in one row; the row itself scrolls sideways, the page does not */
+@media (max-width:767px){
+.db-protos{gap:24px;margin-top:40px;margin-right:-20px;padding-right:20px;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
+.db-protos::-webkit-scrollbar{display:none}
+.db-device{--h:min(125vw,520px);scroll-snap-align:start}
+}
 
 .db-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
 .db-stat{display:flex;flex-direction:column;gap:6px}
@@ -313,26 +327,16 @@ html{scroll-behavior:auto}
         </dl>
       </header>
 
-      <div class="db-row" style="margin: 0 0 8px; margin-top: 56px">
-        <div class="db-card">
-          <img src="assets/322ea09a6b3967b1ef36911c5b085d4e.webp" alt="Aisling, a young customer, smiling outdoors">
-          <div class="db-card-copy sans">
-            <span class="db-card-name">Aisling · Youth</span>
-            <p>Her first account, with her mum alongside, grows into a space that's fully her own.</p>
+      <div class="db-protos">
+        <div class="db-device">
+          <div class="db-device-screen">
+            <video class="db-device-crop" src="assets/335de9d1631604f106f988ee4c393d19.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" disableremoteplayback="" controlslist="nodownload nofullscreen noremoteplayback" aria-label="Youth prototype walkthrough on mobile" tabindex="-1"></video>
           </div>
         </div>
-        <div class="db-card">
-          <img src="assets/0bcbe4df0f119505caa57dd13de794c9.webp" alt="Ciara, an everyday customer, smiling with her chin resting on her hand">
-          <div class="db-card-copy sans">
-            <span class="db-card-name">Ciara · Everyday</span>
-            <p>From her first job to buying a car and a home, her bank keeps pace with her.</p>
-          </div>
-        </div>
-        <div class="db-card">
-          <img src="assets/94858b5c3ad6d71da48a14329a0dca21.webp" alt="Páraic, a business owner, smiling in glasses">
-          <div class="db-card-copy sans">
-            <span class="db-card-name">Páraic · Business</span>
-            <p>Fast loans, simpler payments and AI insights as his business expands abroad.</p>
+        <div class="db-device">
+          <div class="db-device-screen">
+            <video ref="{{everydayTopVideoRef}}" src="assets/ea2aa0a751d45eba7f560ed97ee95338.mp4" preload="auto" autoplay="" muted="" playsinline="" disablepictureinpicture="" disableremoteplayback="" aria-label="Everyday prototype walkthrough on mobile" tabindex="-1"></video>
+            <span class="db-device-island" aria-hidden="true"></span>
           </div>
         </div>
       </div>
@@ -351,7 +355,7 @@ html{scroll-behavior:auto}
       </section>
 
       <section class="cs-section sec" id="challenge">
-        <div class="sec-head"><span class="cs-label eyebrow">01 — Challenge</span></div>
+        <div class="sec-head"><span class="cs-label eyebrow">Challenge</span></div>
         <div class="cs-body">
           <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500; font-style: normal">From strategy to customer experience</h2>
           <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The bank had a clear vision for its digital future, but it was still a roadmap. Leadership needed to show what that future would look like for customers, and build a compelling case for it in just one month.</p>
@@ -360,7 +364,7 @@ html{scroll-behavior:auto}
       </section>
 
       <section class="cs-section sec" id="approach">
-        <div class="sec-head"><span class="cs-label eyebrow">02 — Approach</span></div>
+        <div class="sec-head"><span class="cs-label eyebrow">Approach</span></div>
         <div class="cs-body">
           <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 600;">Three customers, three horizons each</h2>
           <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">The strategy was translated into three customer journeys: a young saver gaining independence, an everyday customer facing major life decisions, and a sole trader growing a business. Each followed the same customer across all three horizons.</p>
@@ -409,10 +413,28 @@ html{scroll-behavior:auto}
             <figcaption style="font-size: 16px; line-height: 1.5; color: #706f69;">From digital foundations to hyper-personalisation.</figcaption>
           </figure>
           <figure style="margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px;">
-            <div class="db-slides">
-              <img src="assets/efc90a8afcc2c99e516b160e464a3f30.webp" alt="Aisling's roadmap: from opening her first account to independent saving to a student side hustle">
-              <img src="assets/82e36e0ec683c73a235b4b1ea7dab6dd.webp" alt="Ciara's roadmap: from a young adult getting started to settled with bigger goals to buying a home">
-              <img src="assets/819a3db996487aa1c24f7e61693569ff.webp" alt="Páraic's roadmap: from a limited company to a business with complex needs to international growth">
+            <div class="db-row">
+              <div class="db-card">
+                <img src="assets/322ea09a6b3967b1ef36911c5b085d4e.webp" alt="Aisling, a young customer, smiling outdoors">
+                <div class="db-card-copy sans">
+                  <span class="db-card-name">Aisling · Youth</span>
+                  <p>Her first account, with her mum alongside, grows into a space that's fully her own.</p>
+                </div>
+              </div>
+              <div class="db-card">
+                <img src="assets/0bcbe4df0f119505caa57dd13de794c9.webp" alt="Ciara, an everyday customer, smiling with her chin resting on her hand">
+                <div class="db-card-copy sans">
+                  <span class="db-card-name">Ciara · Everyday</span>
+                  <p>From her first job to buying a car and a home, her bank keeps pace with her.</p>
+                </div>
+              </div>
+              <div class="db-card">
+                <img src="assets/94858b5c3ad6d71da48a14329a0dca21.webp" alt="Páraic, a business owner, smiling in glasses">
+                <div class="db-card-copy sans">
+                  <span class="db-card-name">Páraic · Business</span>
+                  <p>Fast loans, simpler payments and AI insights as his business expands abroad.</p>
+                </div>
+              </div>
             </div>
             <figcaption style="font-size: 16px; line-height: 1.5; color: #706f69;">Mapping each customer's journey across the three strategic horizons.</figcaption>
           </figure>
@@ -420,7 +442,7 @@ html{scroll-behavior:auto}
       </section>
 
       <section class="cs-section sec" id="experience">
-        <div class="sec-head"><span class="cs-label eyebrow">03 — Experience</span></div>
+        <div class="sec-head"><span class="cs-label eyebrow">Experience</span></div>
         <div class="cs-body">
           <h2 class="sans" style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 600;">Three journeys through the future of banking</h2>
           <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; color: #11110f;">Three clickable prototypes, each following one customer through the three horizons, showed how the experience could evolve alongside their life rather than as three separate snapshots of the bank.</p>
@@ -433,7 +455,11 @@ html{scroll-behavior:auto}
               </div>
               <div data-youth-media="1" style="position: relative; width: 100%; aspect-ratio: 2576 / 1449; border-radius: 16px; overflow: hidden; background: #0b0d0e;">
                 <img src="assets/2dad93227b8494083ca215f4d6fe1add.webp" data-no-zoom="1" alt="Aisling using her banking app outside a modern building" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%">
-                <video id="youth-vid" src="assets/335de9d1631604f106f988ee4c393d19.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" disableremoteplayback="" controlslist="nodownload nofullscreen noremoteplayback" aria-label="Youth prototype walkthrough on mobile" tabindex="-1" style="position: absolute; right: 6%; top: 50%; transform: translateY(-50%); height: 86%; width: auto; aspect-ratio: 716 / 1444; clip-path: inset(0.4% 1.4% 0.3% 1.8% round 15% / 7.4%); pointer-events: none; display: block;"></video>
+                <div id="youth-vid" style="position: absolute; right: 6%; top: 50%; transform: translateY(-50%); height: 86%; aspect-ratio: 467 / 1000; box-sizing: border-box; padding: 0.5%; border-radius: 14% / 6.6%; background: #0b0b0c; box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 30px 60px -20px rgba(0,0,0,0.55);">
+                  <div class="db-device-screen">
+                    <video class="db-device-crop" src="assets/335de9d1631604f106f988ee4c393d19.mp4" autoplay="" muted="" loop="" playsinline="" disablepictureinpicture="" disableremoteplayback="" controlslist="nodownload nofullscreen noremoteplayback" aria-label="Youth prototype walkthrough on mobile" tabindex="-1"></video>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -684,11 +710,28 @@ class Component extends DCLogic {
       v.removeEventListener('canplay', toStart); v.removeEventListener('timeupdate', onTime); v.removeEventListener('ended', loopBack);
     };
   };
+  // The same trim-and-loop for the Everyday phone in the prototypes row at the top of the page.
+  setEverydayTopVideo = (v) => {
+    if (this._evTopStop) { this._evTopStop(); this._evTopStop = null; }
+    if (!v) return;
+    var START = 7, TRIM = 1;
+    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.loop = false;
+    var toStart = function () { if (v.readyState >= 2 && v.currentTime < START - 0.05) v.currentTime = START; };
+    var loopBack = function () { v.currentTime = START; var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    var onTime = function () { toStart(); if (v.duration && v.currentTime >= v.duration - TRIM) loopBack(); };
+    v.addEventListener('canplay', toStart); v.addEventListener('timeupdate', onTime); v.addEventListener('ended', loopBack);
+    if (v.readyState >= 1) toStart();
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    this._evTopStop = function () {
+      v.removeEventListener('canplay', toStart); v.removeEventListener('timeupdate', onTime); v.removeEventListener('ended', loopBack);
+    };
+  };
   componentWillUnmount() {
     if (this._evStop) { this._evStop(); this._evStop = null; }
+    if (this._evTopStop) { this._evTopStop(); this._evTopStop = null; }
   }
   renderVals() {
-    return { everydayVideoRef: this.setEverydayVideo };
+    return { everydayVideoRef: this.setEverydayVideo, everydayTopVideoRef: this.setEverydayTopVideo };
   }
 }
 </script>
